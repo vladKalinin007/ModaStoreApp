@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using API.Helpers;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<StoreContext>(option =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 
 var app = builder.Build();
