@@ -18,6 +18,24 @@ builder.Services.AddDbContext<StoreContext>(option =>
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddApplicationServices();
 builder.Services.AddSwaggerDocumentation();
+//
+// builder.Services.AddCors(opt =>
+// {
+//     opt.AddPolicy("CorsPolicy", policy =>
+//     {
+//         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+//     });
+// });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 
 var app = builder.Build();
@@ -52,7 +70,10 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();   
+app.UseStaticFiles();
+
+// app.UseCors("CorsPolicy");
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
