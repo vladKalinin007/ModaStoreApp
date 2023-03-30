@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class BuggyController : BaseApiController
+public class BugController : BaseApiController
 {
     private readonly StoreContext _context;
 
-    public BuggyController(StoreContext context)
+    public BugController(StoreContext context)
     {
         _context = context;
     }
