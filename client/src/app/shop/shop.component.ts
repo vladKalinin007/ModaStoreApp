@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IProduct} from "../shared/models/product";
 import {ShopService} from "./shop.service";
 import {IPagination} from "../shared/models/pagination";
@@ -11,8 +11,9 @@ import {ShopParams} from "../shared/models/shopParams";
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent {
-  @ViewChild('search', {static: true}) searchTerm: ElementRef;
+export class ShopComponent implements OnInit {
+
+  @ViewChild('search', {static: false}) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
