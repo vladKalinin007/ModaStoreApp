@@ -7,6 +7,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,17 +16,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<StoreContext>(option =>
     option.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
+{
+    var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
+builder.Services.AddSingleton<IBasketRepository, BasketRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddApplicationServices();
 builder.Services.AddSwaggerDocumentation();
-//
-// builder.Services.AddCors(opt =>
-// {
-//     opt.AddPolicy("CorsPolicy", policy =>
-//     {
-//         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-//     });
-// });
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
