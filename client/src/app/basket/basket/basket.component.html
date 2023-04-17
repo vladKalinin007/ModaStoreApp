@@ -1,0 +1,155 @@
+<!--<mat-dialog-content>
+  <section class="">
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2">
+            <div class="card-body">
+              <div class="row g-0">
+                <div class="col-lg-8">
+
+                   LEFT SIDE
+                  <div class="">
+
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                      <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                      <h6 class="mb-0 text-muted"> {{(basket$ | async).items.length}} items</h6>
+                    </div>
+                    <hr class="my-4">
+
+                     ITEM
+                    <div *ngIf="(basket$ | async)">
+                      <div *ngFor="let item of (basket$ | async).items">
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                          <div class="col-md-2 col-lg-2 col-xl-2">
+                            <a>
+                              <img
+                                src="{{item.pictureUrl}}"
+                                class="img-fluid rounded-3"
+                                alt="{{item.productName}}"
+                                routerLink="/shop/{{item.id}}"
+                              >
+                            </a>
+
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-3">
+                            <h6 class="text-muted">{{item.productName}}</h6>
+                            <h6 class="text-black mb-0">Cotton T-shirt</h6>
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <button class="btn btn-link px-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                              <i class="fa fa-minus"></i>
+                            </button>
+
+                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                   class="form-control form-control-sm"/>
+
+                            <button class="btn btn-link px-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                              <i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            <h6 class="mb-0">{{item.price}} $</h6>
+                          </div>
+                          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <a href="#!" class="text-muted"><i class="fa fa-times"></i></a>
+                          </div>
+                          <hr class="my-4">
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                     BACK TO SHOP
+
+                    <div class="pt-5">
+                      <h6 class="mb-0"><a href="#!" class="text-body"><i
+                        class="fa fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                    </div>
+                  </div>
+
+                </div>
+
+                 SUMMARY
+                <div class="col-lg-4" style="background-color: #eeeeee;">
+                  <app-order-totals></app-order-totals>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>-->
+
+<div class="main-cart-container">
+  <h4 class="cart-name"> Cart </h4>
+  <div class="items-container">
+    <div class="single-item">
+      <h5 class="seller-name"> Seller: kalinin007 </h5>
+      <div *ngFor="let item of (basket$ | async).items">
+
+        <div class="seller-product-item">
+          <div class="product-description-container">
+            <div class="the-product">
+              <a href="" class="product-item-image">
+                <img src="{{item.pictureUrl}}" alt="" class="main-product-image">
+              </a>
+              <div class="product-item-name">
+                <div class="additional-class-1"></div>
+                <a href="" class="product-name-link"> {{item.productName}} </a>
+                <div class="additional-class-2"></div>
+              </div>
+            </div>
+            <div class="quantity-item-descriptors">
+              <div class="price-container">
+                <div class="price-name"> Price</div>
+                <div class="price-quantity">
+                  {{item.price}} $
+                </div>
+              </div>
+              <div class="quantity-container">
+                <div class="quantity-stepper-name">
+                  Quantity
+                </div>
+                <div class="stepper-item">
+                  <a class="minus-btn">
+                    <i (click)="decrementItemQuantity(item)" class="pi pi-minus"></i>
+                  </a>
+                  {{item.quantity}}
+                  <a  class="plus-btn">
+                    <i (click)="incrementItemQuantity(item)" class="pi pi-plus"></i>
+                  </a>
+                </div>
+
+              </div>
+              <div class="total-sum-container">
+                <div class="sum-name"> Sum </div>
+                <div class="sum-quantity">
+                  {{item.price * item.quantity}} $
+                </div>
+              </div>
+            </div>
+              <a class="delete-icon">
+                <i (click)="removeBasketItem(item)" class="pi pi-trash"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+      <a routerLink="/checkout" class="checkout-button">
+        <button class="order-item-button">
+          Checkout order {{(basketTotal$ | async).total}} $
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="continue-shopping-wrapper">
+    <a href="" class="continue-shopping-button">
+      <i class="pi pi-times"></i>
+    </a>
+  </div>
+</div>

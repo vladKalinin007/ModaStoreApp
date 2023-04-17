@@ -10,6 +10,12 @@ import {HomeModule} from "./home/home.module";
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import {MessageService} from "primeng/api";
+import {MaterialModule} from "../material.module";
+import {MatNativeDateModule} from "@angular/material/core";
+import {DialogModule} from "@angular/cdk/dialog";
+
 
 @NgModule({
   declarations: [
@@ -22,11 +28,16 @@ import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
     HttpClientModule,
     CoreModule,
     HomeModule,
-    NgxSpinnerModule
+    MaterialModule,
+    NgxSpinnerModule,
+    MatNativeDateModule,
+    DynamicDialogModule,
+    DialogModule
   ],
+
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

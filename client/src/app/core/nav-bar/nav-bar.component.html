@@ -1,22 +1,61 @@
-<div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
-  <img src="../../../assets/images/logo.png" style="max-height: 70px" alt="logo" class="logo" routerLink="/">
-  <nav class="my-2 my-md-0 me-md-3 text-uppercase" style="font-size: larger">
-    <a class="me-3 py-2 link-body-emphasis text-decoration-none"
-       routerLink="/"
-       routerLinkActive="active"
-       [routerLinkActiveOptions]="{exact: true}"
-    >
-      Home
-    </a>
-    <a class="me-3 py-2 link-body-emphasis text-decoration-none" routerLink="/shop" routerLinkActive="active"> Shop </a>
-    <a class="me-3 py-2 link-body-emphasis text-decoration-none" routerLink="/test-error" routerLinkActive="active"> Contact </a>
-  </nav>
-  <div class="d-flex align-items-center position-relative">
-    <a class="position-relative" style="z-index: 1;">
-      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark ms-2"></i>
-      <div class="cart-no">5</div>
-    </a>
-    <a class="btn btn-outline-primary mr-2 ms-3" > Login </a>
-    <a class="btn btn-outline-primary mr-3 ms-2" > Sign Up </a>
+<nav class="back-col fixed-top">
+  <div class="header-container">
+    <div class="menu1">
+
+      <!-- Brand section -->
+      <div class="brand">
+        <a class="brand-picture" href="/">
+          <img src="https://uploads.shafastatic.net/uploads/2022/Jul/ic_shafa_logo_zDK2Rl4.svg" alt="shafa_logo"
+               title="shafa_logo" class="this-image">
+        </a>
+      </div>
+
+      <!--Search, Categories, AddProduct-->
+      <div class="central-container">
+        <div class="category-search-container">
+          <div class="dropdown-catrgories">
+            <div class="categories-and-img">
+              <div class="categories-word">
+                <div class="categories-text"> All categories </div>
+                <!--<input type="text">-->
+              </div>
+              <div class="arrow-field">
+
+              </div>
+            </div>
+          </div>
+          <form action="" class="search-item" action="/products" method="get">
+            <div class="search-field">
+              <input type="text" class="input-field" placeholder="I want to find..." value>
+            </div>
+            <button class="search-icon-btn">
+              <i class="pi pi-search this-icon"></i>
+            </button>
+          </form>
+        </div>
+        <a href="" class="add-product-button">
+          Add product
+        </a>
+      </div>
+
+      <!-- Rigth-side-container -->
+      <div class="right-side-container">
+        <div class="d-flex align-items-center justify-content-around">
+          <a routerLink="/favorites">
+            <i class="pi pi-heart mr-3 ms-2" style="font-size: 2rem"></i>
+          </a>
+          <a mat-button (click)="openDialog()" class="position-relative" style="z-index: 1;" >
+            <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+            <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
+          </a>
+          <a routerLink="/login" class="mr-2 ms-4"> Login </a>
+          <span style="margin: 0 8px">|</span>
+          <a routerLink="/login/signup" class="mr-3"> Sign Up </a>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
+</nav>
+
+

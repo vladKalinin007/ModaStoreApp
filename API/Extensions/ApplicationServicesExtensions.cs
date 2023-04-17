@@ -13,14 +13,7 @@ public static class ApplicationServicesExtensions
     {
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
-        // services.AddSingleton<IConnectionMultiplexer>(c =>
-        // {
-        //     var configuration = ConfigurationOptions.Parse(Builder.Configuration.GetConnectionString("Redis"), true);
-        //     return ConnectionMultiplexer.Connect(configuration);
-        // });
-        // services.AddSingleton<IBasketRepository, BasketRepository>();
-        
-        
+
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.InvalidModelStateResponseFactory = ActionContext =>
