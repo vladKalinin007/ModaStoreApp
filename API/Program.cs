@@ -3,7 +3,10 @@ using API.Extensions;
 using API.Helpers;
 using API.Middleware;
 using Core.Interfaces;
+using Core.Models.Identity;
 using Infrastructure.Data;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,16 +14,24 @@ using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Services
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<StoreContext>(option =>
-    option.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<StoreContext>(x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+builder.Services.AddDbContext<AppIdentityDbContext>(x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+});
 builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 {
     var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
     return ConnectionMultiplexer.Connect(configuration);
 });
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSingleton<IBasketRepository, BasketRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddApplicationServices();
@@ -49,6 +60,11 @@ using (var scope = app.Services.CreateScope ())
         var context = services.GetRequiredService<StoreContext>();
         await context.Database.MigrateAsync();
         await StoreContextSeed.SeedAsync(context, loggerFactory);
+        
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+        await identityContext.Database.MigrateAsync();
+        await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
     }
     catch (Exception ex)
     {
@@ -57,7 +73,10 @@ using (var scope = app.Services.CreateScope ())
     }
 }
 
-// Configure the HTTP request pipeline.
+#endregion
+
+#region Middleware
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -71,12 +90,21 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-// app.UseCors("CorsPolicy");
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
+#endregion
+
+#region Routing
+
 app.MapControllers();
 
+#endregion
+
+#region Endpoints
+
 app.Run();
+
+#endregion
 
