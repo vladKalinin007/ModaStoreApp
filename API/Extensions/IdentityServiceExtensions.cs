@@ -1,7 +1,10 @@
+using System.Text;
 using Core.Models.Identity;
 using Infrastructure.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace API.Extensions;
 
@@ -13,17 +16,23 @@ public static class IdentityServiceExtensions
         {
             opt.Password.RequireNonAlphanumeric = false;
         })
-            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>() 
             .AddSignInManager<SignInManager<AppUser>>();
-        
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
             {
-                opt.Cookie.Name = "Basket";
-                opt.LoginPath = "/account/login";
-                opt.AccessDeniedPath = "/account/accessdenied";
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
+                    ValidIssuer = config["Token:Issuer"],
+                    ValidateIssuer = true,
+                    ValidateAudience = false
+                    
+                };
             });
-        
+         
         services.AddAuthorization(opt =>
         {
             opt.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
