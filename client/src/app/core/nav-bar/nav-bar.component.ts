@@ -6,6 +6,8 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {BasketComponent} from "../../basket/basket/basket.component";
 import {Overlay} from "@angular/cdk/overlay";
 import {Router} from "@angular/router";
+import {IUser} from "../../shared/models/user";
+import {AccountService} from "../../account/account.service";
 
 
 @Component({
@@ -16,13 +18,30 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
 
+  //#region Properties
+
   basket$: Observable<IBasket>;
+  currentUser$: Observable<IUser>;
+  isIconRotated: boolean = false;
+
+  //#endregion
+
+  //#region Constructor
 
   constructor(private basketService: BasketService,
               public dialog: MatDialog,
               private overlay: Overlay,
-              private router: Router
+              private router: Router,
+              private accountService: AccountService
 ) {}
+
+  //#endregion
+
+  //#region Methods
+
+  toggleIconRotation(): void {
+    this.isIconRotated = !this.isIconRotated;
+  }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -39,10 +58,16 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
     this.basket$ = this.basketService.basket$;
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
+  logout() {
+    this.accountService.logout();
+    this.isIconRotated = false;
+    this.router.navigateByUrl('/');
+  }
+
+  //#endregion
 }

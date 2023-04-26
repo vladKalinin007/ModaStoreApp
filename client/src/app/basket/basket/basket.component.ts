@@ -17,9 +17,11 @@ export class BasketComponent implements OnInit {
   //endregion
 
   //region Constructor
+
   constructor(
     private basketService: BasketService
   ) {}
+
   //endregion
 
   //region Methods
@@ -28,12 +30,6 @@ export class BasketComponent implements OnInit {
     this.basket$ = this.basketService.basket$;
     /*this.calculateTotalPrice();*/
   }
-
-  /*calculateTotalPrice(): void {
-    this.basket$.subscribe(basket => {
-      this.totalPrice = basket.items.reduce((total, item) => total + (item.price * item.quantity), 0);
-    });
-  }*/
 
   removeBasketItem(item: IBasketItem): void {
     this.basketService.removeItemFromBasket(item);
