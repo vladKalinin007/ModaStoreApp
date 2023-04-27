@@ -1,13 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
+@import "assets/styles/_variables.scss";
 @import "/node_modules/bootstrap/scss/bootstrap";
-
-/* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "primeicons/primeicons.css";
-/*@use '@angular/material';*/
-
 
 .xng-breadcrumb {
   padding: 8px 16px;
@@ -38,9 +32,6 @@ body {
   background-color: #fff;
   color: #414141;
   height: 100%;
-  -webkit-text-size-adjust: 100%;
-  /*font: 14px/1.25 'PP Object Sans',Arial,Helvetica,Sans-serif*/
-
 }
 
 button,input,select {

@@ -3,21 +3,11 @@
 }
 
 .header__layout {
-  /*  display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    box-shadow: none;*/
-  /*max-width: 1180px;*/
   display: block;
   width: 100%;
   max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
-  -webkit-box-flex: 1;
-  /*z-index: 150;*/
-  /*position: fixed;*/
   vertical-align: baseline;
   background-color: #eee;
 }
@@ -28,7 +18,7 @@
   width: 18px;
   border-radius: 50%;
 /*  font-size: 1em;*/
-  background: #48d597;
+  /*background: #48d597*/;
   /*color: dark;*/
   text-align: center;
   top: -10px;
@@ -254,8 +244,8 @@ a {
   justify-content: center;
 
   &:hover {
-    border-color: #48d597;
-    color: #48d597;
+    border-color: var(--main-color);
+    color: var(--main-color);
   }
 }
 
@@ -266,42 +256,7 @@ a {
   fill: #7d7d7d;
 }
 
-/* Создаем стиль для затемнения фона */
-/*.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6); !* цвет и прозрачность фона *!
-  z-index: 9999; !* устанавливаем z-index, чтобы затемнение было поверх других элементов *!
-}
 
-!* Создаем стиль для модального окна *!
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1180px; !* ширина модального окна *!
-  max-width: 100%; !* максимальная ширина модального окна *!
-  padding: 20px;
-  background-color: #fff; !* цвет фона модального окна *!
-  z-index: 10000; !* устанавливаем z-index, чтобы модальное окно было поверх затемнения *!
-}
-
-!* Создаем стиль для заблуривания фона (можно использовать, если нужно) *!
-.modal::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.8); !* цвет и прозрачность фона *!
-  backdrop-filter: blur(5px); !* значение размытия фона *!
-  z-index: -1; !* устанавливаем z-index, чтобы размытие было под модальным окном *!
-}*/
 
 .custom-dialog ::ng-deep .p-dialog-mask {
   background-color: rgba(0, 0, 0, 0.6); /* Цвет и прозрачность затемнения фона */
