@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, of, ReplaySubject} from "rxjs";
 import {IUser} from "../shared/models/user";
 import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {IAddress} from "../shared/models/address";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class AccountService {
   //endregion
 
   //region Methods
+
   loadCurrentUser(token: string): Observable<void> {
 
     if (token === null) {
@@ -76,6 +78,17 @@ export class AccountService {
   checkEmailExists(email: string) {
     return this.httpClient.get(this.baseUrl + 'account/emailexists?email=' + email);
   }
+
+  getUserAddress(): Observable<IAddress> {
+    return this.httpClient.get<IAddress>(this.baseUrl + 'account/address');
+  }
+
+  updateUserAddress(address: IAddress): Observable<IAddress> {
+    return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address);
+  }
+
+
+
   //endregion
 
 }

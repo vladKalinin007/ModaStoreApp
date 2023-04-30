@@ -1,7 +1,9 @@
 using System.Reflection;
 using Core.Models;
+// using API.Dto.Catalog;
 using Core.Models.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Data;
 
@@ -18,13 +20,28 @@ public class StoreContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+    // public DbSet<WishlistItemDto> WishlistItems { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-    }
-    
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            // modelBuilder.Entity<Order>().Property<DateTimeOffset>(Order.OrderDate)
+            //     .HasConversion(new DateTimeOffsetToBinaryConverter());
+
+            // foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            // {
+            //     var dateTimeProperties = entityType.ClrType.GetProperties()
+            //         .Where(p => p.PropertyType == typeof(DateTimeOffset));
+            //     
+            //     foreach (var property in dateTimeProperties)
+            //     {
+            //         modelBuilder.Entity(entityType.GetType()).Property(property.Name)
+            //             .HasConversion(new DateTimeOffsetToBinaryConverter());
+            //     }
+            // }
+        }
 }
 
 // dotnet ef migrations add <MigrationName>

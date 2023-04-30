@@ -5,19 +5,23 @@ import { PagingHeaderComponent } from './components/paging-header/paging-header.
 import { PagerComponent } from './components/pager/pager.component';
 import {CarouselModule} from "ngx-bootstrap/carousel";
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
-import {RouterLink} from "@angular/router";
+import {RouterLink, RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenuModule} from "@angular/material/menu";
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
     OrderTotalsComponent,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    BasketSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterModule
   ],
   exports: [
     PaginationModule,
@@ -39,7 +44,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     MatSelectModule,
     MatFormFieldModule,
     MatMenuModule,
-    TextInputComponent
+    TextInputComponent,
+    BasketSummaryComponent
   ]
 })
 export class SharedModule { }

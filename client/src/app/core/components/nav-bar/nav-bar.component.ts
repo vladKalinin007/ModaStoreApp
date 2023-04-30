@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {BasketService} from "../../basket/basket.service";
+import {BasketService} from "../../../basket/basket.service";
 import {Observable} from "rxjs";
-import {IBasket} from "../../shared/models/basket";
+import {IBasket} from "../../../shared/models/basket";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {BasketComponent} from "../../basket/basket/basket.component";
+import {BasketComponent} from "../../../basket/basket/basket.component";
 import {Overlay} from "@angular/cdk/overlay";
 import {Router} from "@angular/router";
-import {IUser} from "../../shared/models/user";
-import {AccountService} from "../../account/account.service";
+import {IUser} from "../../../shared/models/user";
+import {AccountService} from "../../../account/account.service";
 
 
 @Component({

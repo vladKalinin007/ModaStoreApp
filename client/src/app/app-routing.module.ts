@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home/home.component";
-import {TestErrorComponent} from "./core/test-error/test-error.component";
-import {ServerErrorComponent} from "./core/server-error/server-error.component";
-import {NotFoundComponent} from "./core/not-found/not-found.component";
+import {TestErrorComponent} from "./core/components/test-error/test-error.component";
+import {ServerErrorComponent} from "./core/components/server-error/server-error.component";
+import {NotFoundComponent} from "./core/components/not-found/not-found.component";
 import {BasketComponent} from "./basket/basket/basket.component";
 import {AuthGuard} from "./core/guards/auth.guard";
 
