@@ -2,6 +2,8 @@
 @import "/node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import "primeicons/primeicons.css";
+//@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 .xng-breadcrumb {
   padding: 8px 16px;
@@ -62,8 +64,6 @@ table {
 
 a {
   color: #414141;
-  -webkit-transition: color .15s,-webkit-text-decoration-color .15s;
-  -o-transition: color .15s,text-decoration-color .15s;
   transition: color .15s,text-decoration-color .15s;
   transition: color .15s,text-decoration-color .15s,-webkit-text-decoration-color .15s;
   text-decoration: underline;
@@ -74,7 +74,6 @@ a {
 
 a:hover {
   color: #48d597;
-  -webkit-text-decoration-color: #aaa;
   text-decoration-color: #aaa
 }
 

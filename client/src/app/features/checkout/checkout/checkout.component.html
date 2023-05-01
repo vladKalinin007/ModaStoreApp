@@ -1,0 +1,31 @@
+<div class="checkout">
+  <div class="checkout__layout">
+    <div class="checkout__inner">
+      <div class="checkout__header">
+
+      </div>
+      <h3 class="checkout__heading">
+        Checkout
+      </h3>
+      <form class="checkout-form">
+        <main class="checkout-form__content">
+          <app-checkout-option-container title="Customer information" informer="1">
+            <app-checkout-user-info/>
+          </app-checkout-option-container>
+          <app-checkout-option-container title="Items" informer="2">
+            <app-checkout-review/>
+          </app-checkout-option-container>
+          <app-checkout-option-container title="Delivery" informer="3">
+            <app-checkout-delivery/>
+          </app-checkout-option-container>
+          <app-checkout-option-container title="Payment" informer="4">
+            <app-checkout-payment/>
+          </app-checkout-option-container>
+        </main>
+        <aside class="checkout-form__sidebar">
+          <app-order-totals/>
+        </aside>
+      </form>
+    </div>
+  </div>
+</div>

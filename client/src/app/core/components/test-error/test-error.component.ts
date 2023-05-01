@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {IBrand} from "../../../shared/models/brand";
+import {IBrand} from "../../models/brand";
 
 @Component({
   selector: 'app-test-error',

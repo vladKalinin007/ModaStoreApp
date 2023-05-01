@@ -13,6 +13,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { CheckoutOptionContainerComponent } from './components/checkout-option-container/checkout-option-container.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
     OrderTotalsComponent,
     TextInputComponent,
     StepperComponent,
-    BasketSummaryComponent
+    BasketSummaryComponent,
+    CheckoutOptionContainerComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
     MatSelectModule,
     MatFormFieldModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+
   ],
   exports: [
     PaginationModule,
@@ -45,7 +48,8 @@ import { BasketSummaryComponent } from './components/basket-summary/basket-summa
     MatFormFieldModule,
     MatMenuModule,
     TextInputComponent,
-    BasketSummaryComponent
+    BasketSummaryComponent,
+    CheckoutOptionContainerComponent
   ]
 })
 export class SharedModule { }

@@ -1,43 +1,79 @@
-<!--<div class="col-lg-4 bg-grey">-->
-  <div class="p-5">
-    <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-    <hr class="my-4">
-
-    <div class="d-flex justify-content-between mb-4">
-      <h5 class="text-uppercase"> Subtotal </h5>
-      <h5>{{(basketTotal$ | async).subtotal}} $</h5>
+<div class="checkout-sidebar">
+  <div class="checkout-promo">
+    <div class="checkout-promo__header">
+      <h4 class="checkout-promo__heading">
+        Promocode
+      </h4>
+      <button class="button checkout-promo__header-button button_with-icon button_link">
+        Add
+      </button>
     </div>
-
-    <!-- SHIPPING -->
-    <h5 class="text-uppercase mb-3">{{(basketTotal$ | async).shipping}}</h5>
-    <div class="mb-4 pb-2">
-      <select class="select">
-        <option value="1">Standard-Delivery</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        <option value="4">Four</option>
-      </select>
-    </div>
-
-    <h5 class="text-uppercase mb-3">Give code</h5>
-
-    <div class="mb-5">
-      <div class="form-outline">
-        <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-        <label class="form-label" for="form3Examplea2">Enter your code</label>
+    <div class="checkout-promo__form">
+      <div class="form__row">
+        <input class="form__input">
+      </div>
+      <div class="form__row mt-3">
+        <button type="button" class="button button_size_medium button_color_navy checkout-promo__submit">
+          Apply
+        </button>
       </div>
     </div>
-
-    <hr class="my-4">
-
-    <div class="d-flex justify-content-between mb-5">
-      <h5 class="text-uppercase">Total price</h5>
-      <h5>{{(basketTotal$ | async).total}} $</h5>
-    </div>
-
-    <button routerLink="/checkout" type="button" class="btn btn-primary btn-block btn-lg"  data-mdb-ripple-color="dark">
-      Checkout
-    </button>
-
   </div>
-<!--</div>-->
+  <div class="checkout-total">
+    <h4 class="checkout-total__hading">Разом</h4>
+    <dl class="checkout-total__row js-goods-info">
+      <dt class="checkout-total__label">
+        1 товар на суму
+      </dt>
+      <dd class="checkout-total__value">
+        {{(basketTotal$ | async).subtotal}}
+        <span class=" currency">$</span>
+      </dd>
+    </dl>
+    <dl class="checkout-total__row mt-3">
+      <dt class="checkout-total__label">
+        Вартість доставки
+      </dt>
+      <dd class="checkout-total__value">
+        {{(basketTotal$ | async).shipping}}
+        <span class=" currency">$</span>
+      </dd>
+    </dl>
+    <dl class="checkout-total__row checkout-total__row_type_bordered mt-3">
+      <dt class="checkout-total__label">
+        До сплати
+        <span class=" currency">$</span>
+      </dt>
+      <dd class="checkout-total__value checkout-total__value_size_large">
+        {{(basketTotal$ | async).total}}
+        <span class=" currency">$</span>
+      </dd>
+    </dl>
+    <div class="checkout-total__buttons">
+      <input type="submit" tabindex="29" class="button button_color_green button_size_large checkout-total__submit" value="Make an order">
+    </div>
+    <p class="checkout-total__caption">
+      Підтверджуючи замовлення, я приймаю умови:
+    </p>
+    <ul class="total-list">
+      <li class="total-list__item"> положення про обробку і захист персональних даних
+        <button type="button" class="button button_link">
+                    <span class="button-info">
+                      <svg width="2" height="9" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
+                      </svg>
+                    </span>
+        </button>
+      </li>
+      <li class="total-list__item"> угоди користувача
+        <button type="button" class="button button_link">
+                    <span class="button-info">
+                      <svg width="2" height="9" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use>
+                      </svg>
+                    </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
