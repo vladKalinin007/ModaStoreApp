@@ -44,18 +44,35 @@ export class NavBarComponent implements OnInit {
   }
 
   openDialog() {
+
     const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.id = 'my-dialog-id';
     dialogConfig.width = '1008px';
     dialogConfig.height = '648px';
     dialogConfig.scrollStrategy = this.overlay.scrollStrategies.noop();
     dialogConfig.hasBackdrop = true;
     dialogConfig.panelClass = 'custom-dialog-class';
+    dialogConfig.autoFocus = true;
+    dialogConfig.closeOnNavigation = true;
 
     const dialogRef = this.dialog.open(BasketComponent, dialogConfig);
+
+    // Subscribe to the closeDialog event emitted by BasketComponent
+    /*dialogRef.componentInstance.closeDialog.subscribe(() => {
+      this.closeDialog();
+    });*/
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  closeDialog(): void {
+    const dialogRef = this.dialog.getDialogById('my-dialog-id');
+    if (dialogRef) {
+      dialogRef.close();
+    }
   }
 
   ngOnInit() {

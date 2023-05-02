@@ -14,6 +14,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { CheckoutOptionContainerComponent } from './components/checkout-option-container/checkout-option-container.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CheckoutOptionContainerComponent } from './components/checkout-option-c
     MatFormFieldModule,
     MatMenuModule,
     RouterModule,
+    MatDialogModule
 
   ],
   exports: [
@@ -49,7 +51,8 @@ import { CheckoutOptionContainerComponent } from './components/checkout-option-c
     MatMenuModule,
     TextInputComponent,
     BasketSummaryComponent,
-    CheckoutOptionContainerComponent
+    CheckoutOptionContainerComponent,
+    MatDialogModule
   ]
 })
 export class SharedModule { }

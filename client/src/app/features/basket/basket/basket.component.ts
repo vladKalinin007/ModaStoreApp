@@ -11,9 +11,11 @@ import {BasketService} from "../basket.service";
 export class BasketComponent implements OnInit {
 
   //region Properties
+
   basket$: Observable<IBasket>;
   basketTotal$: Observable<IBasketTotals> = this.basketService.basketTotal$;
-  /*totalPrice: number = 0;*/
+  /*@Output() closeDialog = new EventEmitter<void>();*/
+
   //endregion
 
   //region Constructor
@@ -25,6 +27,11 @@ export class BasketComponent implements OnInit {
   //endregion
 
   //region Methods
+
+  onCloseClick() {
+    // Update the following line to emit the event
+    /*this.closeDialog.emit();*/
+  }
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
