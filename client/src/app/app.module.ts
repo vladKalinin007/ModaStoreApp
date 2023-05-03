@@ -12,10 +12,11 @@ import {NgxSpinnerModule} from "ngx-spinner";
 /*import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";*/
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MessageService} from "primeng/api";
-import {MaterialModule} from "../material.module";
+/*import {MaterialModule} from "../material.module";*/
 import {MatNativeDateModule} from "@angular/material/core";
 import {DialogModule} from "@angular/cdk/dialog";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -23,13 +24,13 @@ import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
     AppComponent,
   ],
   imports: [
+    /*CommonModule,*/
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
     HomeModule,
-    MaterialModule,
     NgxSpinnerModule,
     MatNativeDateModule,
     DynamicDialogModule,

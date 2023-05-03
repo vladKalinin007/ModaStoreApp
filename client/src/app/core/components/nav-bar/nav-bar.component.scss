@@ -1,3 +1,5 @@
+//TODO: Полностью переделать по БЭМ. Удалить весь мусор, который не используется
+
 .header {
   background-color: #eeeeee;
 }
@@ -11,6 +13,13 @@
   vertical-align: baseline;
   background-color: #eee;
 }
+
+
+:host .p-badge-success {
+  background-color: blue;
+  color: #fff;
+}
+
 
 .cart_items__quantity {
   position: absolute;

@@ -22,54 +22,16 @@
 
         <form class="mb-0">
 
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form9Example1" class="form-control input-custom" />
-                <label class="form-label" for="form9Example1">First name</label>
-              </div>
+          <!--<form class="flex flex-column gap-3" [formGroup]="formGroup">
+            <div *ngFor="let category of categories" class="field-checkbox">
+              <p-radioButton
+                [inputId]="category.key"
+                [value]="category"
+                formControlName="selectedCategory"
+              />
+              <label [for]="category.key" class="ml-2">{{ category.name }}</label>
             </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form9Example2" class="form-control input-custom" />
-                <label class="form-label" for="form9Example2">Last name</label>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form9Example3" class="form-control input-custom" />
-                <label class="form-label" for="form9Example3">City</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form9Example4" class="form-control input-custom" />
-                <label class="form-label" for="form9Example4">Zip</label>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form9Example6" class="form-control input-custom" />
-                <label class="form-label" for="form9Example6">Address</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="email" id="typeEmail" class="form-control input-custom" />
-                <label class="form-label" for="typeEmail">Email</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="float-end ">
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-rounded"
-                    style="background-color: #0062CC ;">Place order</button>
-          </div>
+          </form>-->
 
         </form>
       </div>

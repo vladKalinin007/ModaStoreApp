@@ -10,7 +10,7 @@ import {ToastrModule} from "ngx-toastr";
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import {BreadcrumbModule} from "xng-breadcrumb";
 import {SharedModule} from "../shared/shared.module";
-import {MaterialModule} from "../../material.module";
+/*import {MaterialModule} from "../../material.module";*/
 
 
 

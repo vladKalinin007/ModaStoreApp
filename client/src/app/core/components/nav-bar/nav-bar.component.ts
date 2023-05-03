@@ -63,6 +63,8 @@ export class NavBarComponent implements OnInit {
       this.closeDialog();
     });*/
 
+    //TODO: Решить проблему с модальным окном
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

@@ -1,6 +1,7 @@
 using Core.Interfaces;
 using Core.Models;
 using Core.Models.OrderAggregate;
+using Core.Specifications;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 using Product = Core.Models.Product;
@@ -24,6 +25,7 @@ public class PaymentService : IPaymentService
         StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
         
         var basket = await _basketRepository.GetBasketAsync(basketId);
+        if (basket == null) return null;
         var shippingPrice = 0m;
         
         if (basket.DeliveryMethodId.HasValue)
@@ -53,6 +55,7 @@ public class PaymentService : IPaymentService
                 Currency = "usd",
                 PaymentMethodTypes = new List<string> {"card"}
             };
+            
             intent = await service.CreateAsync(options);
             basket.PaymentIntentId = intent.Id;
             basket.ClientSecret = intent.ClientSecret;
@@ -69,5 +72,35 @@ public class PaymentService : IPaymentService
         await _basketRepository.UpdateBasketAsync(basket);
         
         return basket;
+    }
+
+    public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
+    {
+        var spec = new OrderByPaymentIntentIdWithItemsSpecification(paymentIntentId);
+        var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        
+        if (order == null) return null;
+        
+        order.Status = OrderStatus.PaymentReceived;
+        _unitOfWork.Repository<Order>().Update(order);
+        
+        await _unitOfWork.Complete();
+
+        return null;
+
+    }
+
+    public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+    {
+        var spec = new OrderByPaymentIntentIdWithItemsSpecification(paymentIntentId);
+        var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        
+        if (order == null) return null;
+        
+        order.Status = OrderStatus.PaymentFailed;
+        
+        await _unitOfWork.Complete();
+        
+        return order;
     }
 }

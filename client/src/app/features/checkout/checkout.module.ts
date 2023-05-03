@@ -13,6 +13,7 @@ import { CheckoutUserInfoComponent } from './checkout-user-info/checkout-user-in
 
 
 
+
 @NgModule({
   declarations: [
     CheckoutComponent,
@@ -21,7 +22,7 @@ import { CheckoutUserInfoComponent } from './checkout-user-info/checkout-user-in
     CheckoutPaymentComponent,
     CheckoutReviewComponent,
     CheckoutSuccessComponent,
-    CheckoutUserInfoComponent
+    CheckoutUserInfoComponent,
   ],
   imports: [
     FeaturesModule,

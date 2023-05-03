@@ -15,6 +15,12 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { CheckoutOptionContainerComponent } from './components/checkout-option-container/checkout-option-container.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {SliderModule} from "primeng/slider";
+import {RatingModule} from "primeng/rating";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {GalleriaModule} from "primeng/galleria";
+import {BadgeModule} from "primeng/badge";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -30,13 +36,20 @@ import {MatDialogModule} from "@angular/material/dialog";
     CommonModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
+    /*BrowserAnimationsModule,*/
     RouterLink,
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatMenuModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    SliderModule,
+    RatingModule,
+    RadioButtonModule,
+    CarouselModule,
+    GalleriaModule,
+    BadgeModule
 
   ],
   exports: [
@@ -52,7 +65,13 @@ import {MatDialogModule} from "@angular/material/dialog";
     TextInputComponent,
     BasketSummaryComponent,
     CheckoutOptionContainerComponent,
-    MatDialogModule
+    MatDialogModule,
+    SliderModule,
+    RatingModule,
+    RadioButtonModule,
+    CarouselModule,
+    GalleriaModule,
+    BadgeModule
   ]
 })
 export class SharedModule { }

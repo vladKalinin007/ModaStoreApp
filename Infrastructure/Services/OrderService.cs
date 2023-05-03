@@ -11,6 +11,7 @@ public class OrderService : IOrderService
 
     private readonly IUnitOfWork _unitOfWork;
     private readonly IBasketRepository _basketRepo;
+    private readonly IPaymentService _paymentService;
 
     #endregion
 
@@ -18,10 +19,13 @@ public class OrderService : IOrderService
 
     public OrderService(
         IUnitOfWork unitOfWork,
-        IBasketRepository basketRepo)
+        IBasketRepository basketRepo,
+        IPaymentService paymentService
+        )
     {
         _unitOfWork = unitOfWork;
         _basketRepo = basketRepo;
+        _paymentService = paymentService;
     }
 
     #endregion
@@ -47,16 +51,24 @@ public class OrderService : IOrderService
         
         var subtotal = items.Sum(item => item.Price * item.Quantity);
         
-        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+        var spec = new OrderByPaymentIntentIdWithItemsSpecification(basket.PaymentIntentId);
+        
+        var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        
+        if (existingOrder != null)
+        {
+            _unitOfWork.Repository<Order>().Delete(existingOrder);
+            await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+        }
+        
+        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, basket.PaymentIntentId);
         
         _unitOfWork.Repository<Order>().Add(order);
         
         var result = await _unitOfWork.Complete();
         
         if (result <= 0) return null;
-        
-        await _basketRepo.DeleteBasketAsync(basketId);
-        
+
         return order;
     }
 

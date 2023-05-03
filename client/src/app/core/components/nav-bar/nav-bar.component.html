@@ -58,20 +58,20 @@
         <!--region authorized user -->
         <ng-container *ngIf="currentUser$ | async">
           <a href="" class="header-actions__item">
-            <i class="pi pi-envelope mr-3 ms-2" style="font-size: 1.4rem"></i>
+            <i class="pi pi-envelope " pBadge value="2" severity="success" size="large" style="font-size: 1.4rem"></i>
           </a>
           <a href="" class="header-actions__item">
-            <i class="pi pi-bell mr-3 ms-2" style="font-size: 1.4rem"></i>
+            <i class="pi pi-bell mr-3 ms-2" pBadge value="2" severity="success" size="large" style="font-size: 1.4rem"></i>
           </a>
           <a href="" class="header-actions__item">
-            <i class="pi pi-heart mr-3 ms-2" style="font-size: 1.4rem"></i>
+            <i class="pi pi-heart mr-3 ms-2" pBadge value="2" severity="success" size="large" style="font-size: 1.4rem"></i>
           </a>
           <a href="" class="header-actions__item">
-            <i class="pi pi-chart-bar mr-3 ms-2" style="font-size: 1.4rem"></i>
+            <i class="pi pi-chart-bar mr-3 ms-2" pBadge value="2" severity="success" size="large" style="font-size: 1.4rem"></i>
           </a>
           <a mat-button (click)="openDialog()" class="header-actions__item-basket">
-            <i class="pi pi-shopping-cart" style="font-size: 1.4rem"></i>
-            <div *ngIf="(basket$ | async)" class="cart_items__quantity">{{(basket$ | async).items.length}}</div>
+            <i class="pi pi-shopping-bag " pBadge value="{{(basket$ | async).items.length}}" severity="success" size="large" style="font-size: 1.4rem"></i>
+            <!--<div *ngIf="(basket$ | async)" class="cart_items__quantity">{{(basket$ | async).items.length}}</div>-->
           </a>
           <div class="auth_user_icon" (mousedown)="toggleIconRotation()">
             <img class="avatar_img" src="https://avatars.shafastatic.net/6524135_new_avatar_type1682259079" alt="avatar">
