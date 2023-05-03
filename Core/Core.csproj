@@ -13,4 +13,11 @@
     <PackageReference Include="StackExchange.Redis" Version="2.6.104" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Discounts" />
+    <Folder Include="Models\Media" />
+    <Folder Include="Models\Payments" />
+    <Folder Include="Models\Security" />
+  </ItemGroup>
+
 </Project>
