@@ -17,6 +17,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {DialogModule} from "@angular/cdk/dialog";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import {CommonModule} from "@angular/common";
+import {SpeedDialModule} from "primeng/speeddial";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {CommonModule} from "@angular/common";
     NgxSpinnerModule,
     MatNativeDateModule,
     DynamicDialogModule,
-    DialogModule
+    DialogModule,
+    SpeedDialModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}

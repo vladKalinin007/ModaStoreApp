@@ -25,6 +25,8 @@ export class ShopComponent implements OnInit {
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'}
     ];
+  rangeValues: number[] = [10, 1000];
+
 
   constructor(private shopService: ShopService) { }
 

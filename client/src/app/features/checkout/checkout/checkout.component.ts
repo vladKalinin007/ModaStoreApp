@@ -66,5 +66,4 @@ export class CheckoutComponent implements OnInit {
         .patchValue(basket.deliveryMethodId.toString());
     }
   }
-
 }

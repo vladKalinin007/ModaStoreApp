@@ -1,3 +1,13 @@
+:host ::ng-deep .pslider {
+  &.p-slider-horizontal {
+    height: 0.600rem;
+  }
+  &.p-slider-range {
+    background: #48d597;
+  }
+}
+
+
 .sec-cls {
   max-width: 1180px;
 }

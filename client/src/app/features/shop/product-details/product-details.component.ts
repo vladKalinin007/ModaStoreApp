@@ -16,6 +16,17 @@ export class ProductDetailsComponent implements OnInit {
   //region Properties
 
   product: IProduct;
+  ratingValue: number;
+
+  value: number;
+
+  paymentOptions: any[] = [
+    { name: '42', value: 1 },
+    { name: '44', value: 2 },
+    { name: '46', value: 3 },
+    { name: '48', value: 4 },
+  ];
+
   /*quantity = 1;*/
 
   //endregion

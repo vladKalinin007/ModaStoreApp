@@ -1,24 +1,66 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from "./features/basket/basket.service";
 import {AccountService} from "./features/account/account.service";
+import {MenuItem, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit {
+
+  items: MenuItem[];
 
   title: string = 'Moda';
 
   constructor(
     private basketService: BasketService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
     this.loadBasket();
     this.loadCurrentUser();
+    this.addItemsToSpeedDial();
+
+  }
+
+  addItemsToSpeedDial() {
+    this.items = [
+      {
+        icon: 'pi pi-facebook',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+        }
+      },
+      {
+        icon: 'pi pi-linkedin',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Delete', detail: 'Data Deleted' });
+        }
+      },
+      {
+        icon: 'pi pi-telegram',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Help', detail: 'Data Updated' });
+        }
+      },
+      {
+        icon: 'pi pi-whatsapp',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Search', detail: 'Data Searched' });
+        }
+      },
+      {
+        icon: 'pi pi-instagram',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Save', detail: 'Data Saved' });
+        }
+      }
+    ];
   }
 
   loadCurrentUser(): void {

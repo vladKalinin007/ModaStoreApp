@@ -21,6 +21,14 @@ import {RadioButtonModule} from "primeng/radiobutton";
 import {GalleriaModule} from "primeng/galleria";
 import {BadgeModule} from "primeng/badge";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SpeedDialModule} from "primeng/speeddial";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {TabViewModule} from "primeng/tabview";
+import {InputMaskModule} from "primeng/inputmask";
+import {AccordionModule} from "primeng/accordion";
+import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
 
 @NgModule({
   declarations: [
@@ -49,7 +57,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     RadioButtonModule,
     CarouselModule,
     GalleriaModule,
-    BadgeModule
+    BadgeModule,
+    SpeedDialModule,
+    SelectButtonModule,
+    ToggleButtonModule,
+    OverlayPanelModule,
+    TabViewModule,
+    InputMaskModule,
+    AccordionModule,
+    TriStateCheckboxModule
 
   ],
   exports: [
@@ -71,7 +87,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     RadioButtonModule,
     CarouselModule,
     GalleriaModule,
-    BadgeModule
+    BadgeModule,
+    SpeedDialModule,
+    SelectButtonModule,
+    ToggleButtonModule,
+    OverlayPanelModule,
+    TabViewModule,
+    InputMaskModule,
+    AccordionModule,
+    TriStateCheckboxModule
   ]
 })
 export class SharedModule { }

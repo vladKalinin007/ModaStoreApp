@@ -2,38 +2,51 @@
   <div class="row">
 
     <ng-container *ngIf="types && brands">
+
+
       <section class="col-3">
-        <h5 class="text-warning ml-3"> Sort </h5>
+        <!--<h5 class="text-warning ml-3"> Sort </h5>
+
         <select class="custom-select" (change)="onSortSelected($event.target.value)">
           <option *ngFor="let sort of sortOptions"
                   [value]="sort.value" [selected]="sort.value === this.sortSelected"
           >
             {{sort.name}}
           </option>
-        </select>
+        </select>-->
 
-        <h5 class="text-warning ml-3"> Brands </h5>
-        <ul class="list-group my-3">
-          <li class="list-group-item" aria-current="true"
-              *ngFor="let brand of brands"
-              [class.active]="brand.id === this.shopParams.brandId"
-              [value]="brand.id"
-              (click)="onBrandSelected(brand.id)"
-          >
-            {{brand.name}}
-          </li>
-        </ul>
-        <h5 class="text-warning ml-3"> Types </h5>
-        <ul class="list-group my-3">
-          <li class="list-group-item" aria-current="true"
-              *ngFor="let type of types"
-              [class.active]="type.id === this.shopParams.typeId"
-              [value]="type.id"
-              (click)="onTypeSelected(type.id)"
-          >
-            {{type.name}}
-          </li>
-        </ul>
+        <p-accordion [multiple]="true">
+          <p-accordionTab header="Price" >
+            <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+          </p-accordionTab>
+          <p-accordionTab header="Brands">
+            <div *ngFor="let brand of brands" >
+              <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
+              {{brand.name}}
+            </div>
+
+          </p-accordionTab>
+          <p-accordionTab header="Types">
+            <!--<h5 class="text-warning ml-3"> Types </h5>
+            <ul class="list-group my-3">
+              <li class="list-group-item" aria-current="true"
+                  *ngFor="let type of types"
+                  [class.active]="type.id === this.shopParams.typeId"
+                  [value]="type.id"
+                  (click)="onTypeSelected(type.id)"
+              >
+                {{type.name}}
+              </li>
+            </ul>-->
+            <div *ngFor="let type of types" >
+              <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
+              {{type.name}}
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+
+
+
       </section>
 
       <section class="col-9">

@@ -4,6 +4,7 @@
   --backgroundColor: #eeeeee;
   --borderColor: #414141;
 
+  // PRime ng overrides
   .p-badge-success {
     background-color: var(--mainColor);
     color: #414141
@@ -15,5 +16,18 @@
     line-height: 18px;
 
     font-size: 10px;
+
+
   }
+
+/*  .p-rating .p-rating-icon {
+    color: var(--mainColor);
+    font-size: 14px;
+    fill: #bdbdbd
+  }*/
+
+
+
+
+
 }
