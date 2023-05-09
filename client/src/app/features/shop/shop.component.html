@@ -1,84 +1,60 @@
-<div class="container mt-5 sec-cls">
-  <div class="row">
+<h1 class="page-title heading">Women's clothes</h1>
+<div class="catalog">
+  <div class="layout">
+    <div class="catalog_inner">
+      <div class="catalog__main">
+        <ng-container *ngIf="types && brands">
+          <section class="catalog__aside-title"> Filter </section>
+          <section class="catalog__aside">
+            <p-accordion [multiple]="true">
+              <p-accordionTab header="Price" >
+                <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+              </p-accordionTab>
+              <p-accordionTab header="Brands">
+                <div *ngFor="let brand of brands" >
+                  <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
+                  {{brand.name}}
+                </div>
+              </p-accordionTab>
+              <p-accordionTab header="Types">
+                <div *ngFor="let type of types" >
+                  <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
+                  {{type.name}}
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </section>
+          <section class="catalog__content">
+            <div class="d-flex justify-content-between align-items-center">
 
-    <ng-container *ngIf="types && brands">
+              <!--<app-paging-header
+                [totalCount]="totalCount"
+                [pageSize]="this.shopParams.pageSize"
+                [pageNumber]=" this.shopParams.pageNumber"
+              ></app-paging-header>
 
-
-      <section class="col-3">
-        <!--<h5 class="text-warning ml-3"> Sort </h5>
-
-        <select class="custom-select" (change)="onSortSelected($event.target.value)">
-          <option *ngFor="let sort of sortOptions"
-                  [value]="sort.value" [selected]="sort.value === this.sortSelected"
-          >
-            {{sort.name}}
-          </option>
-        </select>-->
-
-        <p-accordion [multiple]="true">
-          <p-accordionTab header="Price" >
-            <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
-          </p-accordionTab>
-          <p-accordionTab header="Brands">
-            <div *ngFor="let brand of brands" >
-              <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
-              {{brand.name}}
+              <form class="d-flex" role="search" *ngIf="products">
+                <input class="form-control me-2" #search type="search" placeholder="Search" aria-label="Search">
+                <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
+                <button (click)="onReset()" class="btn btn-outline-success" type="submit">Reset</button>
+              </form>-->
             </div>
 
-          </p-accordionTab>
-          <p-accordionTab header="Types">
-            <!--<h5 class="text-warning ml-3"> Types </h5>
-            <ul class="list-group my-3">
-              <li class="list-group-item" aria-current="true"
-                  *ngFor="let type of types"
-                  [class.active]="type.id === this.shopParams.typeId"
-                  [value]="type.id"
-                  (click)="onTypeSelected(type.id)"
-              >
-                {{type.name}}
-              </li>
-            </ul>-->
-            <div *ngFor="let type of types" >
-              <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
-              {{type.name}}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col" *ngFor="let product of products">
+                <app-product-item [product]="product"></app-product-item>
+              </div>
             </div>
-          </p-accordionTab>
-        </p-accordion>
-
-
-
-      </section>
-
-      <section class="col-9">
-        <div class="d-flex justify-content-between align-items-center pb-2">
-
-          <app-paging-header
-            [totalCount]="totalCount"
-            [pageSize]="this.shopParams.pageSize"
-            [pageNumber]=" this.shopParams.pageNumber"
-          ></app-paging-header>
-
-          <form class="d-flex" role="search" *ngIf="products">
-            <input class="form-control me-2" #search type="search" placeholder="Search" aria-label="Search">
-            <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
-            <button (click)="onReset()" class="btn btn-outline-success" type="submit">Reset</button>
-          </form>
-        </div>
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col" *ngFor="let product of products">
-            <app-product-item [product]="product"></app-product-item>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center mt-5" *ngIf="totalCount > 0">
-          <app-pager
-            [pageSize]="this.shopParams.pageSize"
-            [totalCount]="this.totalCount"
-            (pageChanged)="onPageChanged($event)"
-          ></app-pager>
-        </div>
-      </section>
-    </ng-container>
-
+            <div class="d-flex justify-content-center mt-5" *ngIf="totalCount > 0">
+              <app-pager
+                [pageSize]="this.shopParams.pageSize"
+                [totalCount]="this.totalCount"
+                (pageChanged)="onPageChanged($event)"
+              ></app-pager>
+            </div>
+          </section>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>

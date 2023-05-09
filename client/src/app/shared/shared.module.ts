@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {PaginationModule} from "ngx-bootstrap/pagination";
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
-import {CarouselModule} from "ngx-bootstrap/carousel";
+import { CarouselModule } from 'primeng/carousel';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import {RouterLink, RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -29,6 +29,8 @@ import {TabViewModule} from "primeng/tabview";
 import {InputMaskModule} from "primeng/inputmask";
 import {AccordionModule} from "primeng/accordion";
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
+import {TagModule} from "primeng/tag";
+import {SidebarModule} from "primeng/sidebar";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,6 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
-    CarouselModule.forRoot(),
     /*BrowserAnimationsModule,*/
     RouterLink,
     ReactiveFormsModule,
@@ -55,7 +56,6 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     SliderModule,
     RatingModule,
     RadioButtonModule,
-    CarouselModule,
     GalleriaModule,
     BadgeModule,
     SpeedDialModule,
@@ -65,8 +65,10 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     TabViewModule,
     InputMaskModule,
     AccordionModule,
-    TriStateCheckboxModule
-
+    TriStateCheckboxModule,
+    CarouselModule,
+    TagModule,
+    SidebarModule
   ],
   exports: [
     PaginationModule,
@@ -85,7 +87,6 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     SliderModule,
     RatingModule,
     RadioButtonModule,
-    CarouselModule,
     GalleriaModule,
     BadgeModule,
     SpeedDialModule,
@@ -95,7 +96,10 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     TabViewModule,
     InputMaskModule,
     AccordionModule,
-    TriStateCheckboxModule
+    TriStateCheckboxModule,
+    CarouselModule,
+    TagModule,
+    SidebarModule
   ]
 })
 export class SharedModule { }

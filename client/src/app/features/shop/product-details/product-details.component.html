@@ -66,14 +66,38 @@
       <div class="product-about__left">
         <div class="product-slider">
           <p-galleria
-            [circular]="true"
+            [numVisible]="3"
+            [value]="images"
             [showItemNavigators]="true"
             [showThumbnails]="false"
-            [containerStyle]="{ 'max-width': '640px' }">
 
-            <img src="{{product.pictureUrl}}" style="width: 100%; display: block;" />
+            [circular]="true"
+
+          >
+
+            <ng-template pTemplate="item" let-item>
+              <img
+                [src]="item.previewImageSrc"
+                [alt]="item.alt"
+                [title]="item.title"
+                style="width: 100%;"
+              />
+            </ng-template>
+
+
+            <ng-template pTemplate="thumbnail" let-item width="50%">
+              <div class="grid  grid-nogutter justify-content-center">
+                <img
+                  [src]="item.thumbnailImageSrc"
+                  [alt]="item.alt"
+                  [title]="item.title"
+                  width=80%
+                />
+              </div>
+            </ng-template>
+
           </p-galleria>
-          <img src="{{product.pictureUrl}}" style="width: 40%; display: block;" />
+          <!--<img src="https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683010716-1.jpg" style="width: 40%; display: block;" />-->
         </div>
       </div>
       <div class="product-about__right">
@@ -101,6 +125,11 @@
               <div class="sizes">
                 <div class="sizes__title">
                   Select your size
+                </div>
+                <div>
+                  <a (click)="sidebarVisible = true">table of sizes</a>
+                  <p-sidebar [(visible)]="sidebarVisible" position="right">
+                  </p-sidebar>
                 </div>
                 <div></div>
               </div>
@@ -145,28 +174,9 @@
       <p-tabView>
         <p-tabPanel header="Details">
           <div class="product-details__description">
-            <div class="product-details__description-title">
-              Description
-            </div>
-            <div class="product-details__description-text">
-              {{product.description}}
-            </div>
-          </div>
-          <div class="product-details__composition">
-            <div class="product-details__composition-title">
-              Composition
-            </div>
-            <div class="product-details__composition-text">
-              text
-            </div>
-          </div>
-          <div class="product-details__care">
-            <div class="product-details__care-title">
-              Care
-            </div>
-            <div class="product-details__care-text">
-              text
-            </div>
+            A dress is a type of garment that is designed to be worn by women and girls. Dresses come in many different styles, lengths, colors, and materials, and they can be worn for a wide variety of occasions. From casual everyday wear to formal events, dresses are a versatile clothing item that can be dressed up or down depending on the occasion.
+            Dresses can be made from a variety of materials, including cotton, silk, chiffon, lace, and more. They can be short or long, with sleeves or without, and can be designed to flatter different body types. Some popular styles of dresses include the A-line dress, shift dress, wrap dress, maxi dress, and cocktail dress.
+            When choosing a dress, it's important to consider factors such as the occasion, the weather, and your personal style. Dresses can be accessorized with jewelry, shoes, belts, and other accessories to create a complete look that reflects your individual style and personality. Whether you prefer a classic little black dress or a bold and colorful statement piece, there is a dress out there for everyone.
           </div>
         </p-tabPanel>
         <p-tabPanel header="Delivery">
@@ -191,8 +201,27 @@
         </p-tabPanel>
       </p-tabView>
     </div>
-    <div class="product-related">
-      Product related block
+    <div class="products-related">
+      <h1 class="products-related__heading">
+        Related products
+      </h1>
+      <div class="products-related__content">
+        <div >
+          <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [circular]="true"  showIndicators="true">
+            <ng-template let-product pTemplate="item">
+              <div class="item-related">
+                <div class="item-related__picture">
+                  <img src="https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683010716-1.jpg" style="width: 100%; display: block;" />
+                </div>
+                <div class="item-related__caption">
+                  <a class="item-related__naming">{{ product.name }}</a>
+                  <h6 class="item-related__price">{{ product.price + '$' }}</h6>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
     </div>
     <div class="product-viewed">
       Product viewed block
