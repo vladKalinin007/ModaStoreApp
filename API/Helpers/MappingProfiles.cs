@@ -1,6 +1,8 @@
 using API.Dto;
+using API.Dto.Catalog;
 using AutoMapper;
 using Core.Models;
+using Core.Models.Catalog;
 using Core.Models.OrderAggregate;
 using Address = Core.Models.Identity.Address;
 
@@ -27,5 +29,6 @@ public class MappingProfiles : Profile
             .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
             .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+        CreateMap<Category, CategoryDto>();
     }
 }

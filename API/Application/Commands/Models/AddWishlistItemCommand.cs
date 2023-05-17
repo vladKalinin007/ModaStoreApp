@@ -1,7 +1,7 @@
 using API.Dto.Catalog;
 using MediatR;
 
-namespace API.Commands.Models;
+namespace API.Application.Commands.Models;
 
 
 public class AddWishlistItemCommand : IRequest<WishlistItemDto>

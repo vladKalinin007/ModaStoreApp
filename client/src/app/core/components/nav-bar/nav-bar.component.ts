@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BasketService} from "../../../features/basket/basket.service";
 import {Observable} from "rxjs";
 import {IBasket} from "../../models/basket";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {BasketComponent} from "../../../features/basket/basket/basket.component";
 import {Overlay} from "@angular/cdk/overlay";
 import {Router} from "@angular/router";
@@ -18,15 +18,10 @@ import {AccountService} from "../../../features/account/account.service";
 })
 export class NavBarComponent implements OnInit {
 
-  //#region Properties
-
   basket$: Observable<IBasket>;
   currentUser$: Observable<IUser>;
   isIconRotated: boolean = false;
-
-  //#endregion
-
-  //#region Constructor
+  dialogRef: MatDialogRef<BasketComponent>;
 
   constructor(private basketService: BasketService,
               public dialog: MatDialog,
@@ -35,9 +30,6 @@ export class NavBarComponent implements OnInit {
               private accountService: AccountService
 ) {}
 
-  //#endregion
-
-  //#region Methods
 
   toggleIconRotation(): void {
     this.isIconRotated = !this.isIconRotated;
@@ -52,20 +44,18 @@ export class NavBarComponent implements OnInit {
     dialogConfig.height = '648px';
     dialogConfig.scrollStrategy = this.overlay.scrollStrategies.noop();
     dialogConfig.hasBackdrop = true;
+    dialogConfig.disableClose = false
     dialogConfig.panelClass = 'custom-dialog-class';
-    dialogConfig.autoFocus = true;
+    dialogConfig.restoreFocus = true;
     dialogConfig.closeOnNavigation = true;
 
-    const dialogRef = this.dialog.open(BasketComponent, dialogConfig);
+    this.dialogRef = this.dialog.open(BasketComponent, dialogConfig);
 
-    // Subscribe to the closeDialog event emitted by BasketComponent
-    /*dialogRef.componentInstance.closeDialog.subscribe(() => {
-      this.closeDialog();
-    });*/
+
 
     //TODO: Решить проблему с модальным окном
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }

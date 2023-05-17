@@ -13,6 +13,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         _context = context;
     }
+    
     public async Task<T> getByIdAsync(int id)
     {
         return await _context.Set<T>().FindAsync(id);
@@ -41,6 +42,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public void Add(T entity)
     {
         _context.Set<T>().Add(entity);
+    }
+
+    public async Task<T> AddAsync(T entity)
+    {
+        var result = await _context.Set<T>().AddAsync(entity);
+        return result.Entity;
     }
 
     public void Update(T entity)

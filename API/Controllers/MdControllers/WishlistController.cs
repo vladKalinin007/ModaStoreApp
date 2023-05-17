@@ -1,4 +1,4 @@
-using API.Commands.Models;
+using API.Application.Commands.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -12,8 +12,6 @@ import {IDeliveryMethod} from "../../core/models/deliveryMethod";
 })
 export class BasketService {
 
-  //region Properties
-
   public baseUrl: string = environment.apiUrl;
   private basketSource: BehaviorSubject<IBasket> = new BehaviorSubject<IBasket>(null);
   private basketTotalSource: BehaviorSubject<IBasketTotals> = new BehaviorSubject<IBasketTotals>(null);
@@ -21,15 +19,13 @@ export class BasketService {
   public basketTotal$: Observable<IBasketTotals> = this.basketTotalSource.asObservable();
   public shipping: number = 0;
 
-  //endregion
-
-  //region Constructor
 
   constructor(private http: HttpClient) { }
 
-  //endregion
+  countBasketItems() {
+    return this.basketSource.value.items.length;
+  }
 
-  //region Methods
 
   createPaymentIntent() {
     return this.http.post(this.baseUrl + 'payment/' + this.getCurrentBasketValue().id, {})
@@ -171,7 +167,5 @@ export class BasketService {
       type: item.productType,
     }
   }
-
-  //endregion
 
 }

@@ -1,7 +1,10 @@
+using API.Application.Queries.Handlers.Common;
+using API.Application.Queries.Models.Common;
 using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +15,10 @@ public static class ApplicationServicesExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddScoped(typeof(IRequestHandler<,>), typeof(GetGenericQueryHandler<,>));
+        
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IPaymentService, PaymentService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();

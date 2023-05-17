@@ -1,10 +1,4 @@
-using API.Commands.Models;
-using API.Dto.Catalog;
-using Core.Models;
-using Infrastructure.Data;
-using MediatR;
-
-namespace API.Commands.Handlers;
+namespace API.Application.Commands.Handlers;
 
 // public class AddWishlistItemCommandHandler : IRequestHandler<AddWishlistItemCommand, WishlistItemDto>
 // {

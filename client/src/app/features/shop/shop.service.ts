@@ -12,7 +12,8 @@ import {IProduct} from "../../core/models/product";
 })
 export class ShopService {
 
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl: string = 'https://localhost:5001/api/';
+
   constructor(private http: HttpClient) { }
 
   getProducts(shopParams: ShopParams) {

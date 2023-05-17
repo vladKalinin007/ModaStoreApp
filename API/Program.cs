@@ -1,4 +1,5 @@
-﻿using API.Errors;
+﻿using System.Reflection;
+using API.Errors;
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;
@@ -6,6 +7,7 @@ using Core.Interfaces;
 using Core.Models.Identity;
 using Infrastructure.Data;
 using Infrastructure.Identity;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,9 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSingleton<IBasketRepository, BasketRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
+// builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 builder.Services.AddApplicationServices();
 builder.Services.AddSwaggerDocumentation();
 builder.Services.AddCors(options =>

@@ -1,17 +1,40 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {IProduct} from "../../../core/models/product";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  products: IProduct[];
+
+  responsiveOptions: any[];
+
+  constructor() {}
+
+  ngOnInit() {
+
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
+  }
+
 
 }
 
-/*
-TODO: Сделать презентабельную страницу Home
-- Написать полноыенный home.component.html. Пока что там только заглушка.
-- Добавить в home.component.scss стили для home.component.html по БЭМ.
-- Добавить в home.component.ts логику для home.component.html.
-*/
+

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {IBasket, IBasketItem, IBasketTotals} from "../../../core/models/basket";
 import {BasketService} from "../basket.service";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-basket',
@@ -10,32 +11,28 @@ import {BasketService} from "../basket.service";
 })
 export class BasketComponent implements OnInit {
 
-  //region Properties
-
   basket$: Observable<IBasket>;
   basketTotal$: Observable<IBasketTotals> = this.basketService.basketTotal$;
-  /*@Output() closeDialog = new EventEmitter<void>();*/
-
-  //endregion
-
-  //region Constructor
+  basketItemsCount: number;
 
   constructor(
-    private basketService: BasketService
+    private basketService: BasketService,
+    private dialogRef: MatDialogRef<BasketComponent>
   ) {}
 
-  //endregion
+  calculateBasketItems() {
+    this.basketItemsCount = this.basketService.countBasketItems()
+    console.log(this.basketItemsCount);
+  }
 
-  //region Methods
-
-  onCloseClick() {
-    // Update the following line to emit the event
-    /*this.closeDialog.emit();*/
+  closeDialog(): void {
+    this.dialogRef.close();
+    console.log('closeDialog()');
   }
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
-    /*this.calculateTotalPrice();*/
+    this.calculateBasketItems();
   }
 
   removeBasketItem(item: IBasketItem): void {
@@ -50,6 +47,5 @@ export class BasketComponent implements OnInit {
     this.basketService.decrementItemQuantity(item);
   }
 
-  //endregion
 
 }
