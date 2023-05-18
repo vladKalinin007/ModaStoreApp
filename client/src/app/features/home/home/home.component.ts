@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IProduct} from "../../../core/models/product";
+import {HomeService} from "../home.service";
+import {ICategory} from "../../../core/models/category";
 
 @Component({
   selector: 'app-home',
@@ -7,13 +9,19 @@ import {IProduct} from "../../../core/models/product";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
   products: IProduct[];
+  categories: ICategory[];
 
   responsiveOptions: any[];
 
-  constructor() {}
+  constructor(
+    private homeService: HomeService
+  ) {}
 
   ngOnInit() {
+
+    this.getCategories();
 
     this.responsiveOptions = [
       {
@@ -34,6 +42,28 @@ export class HomeComponent implements OnInit {
     ];
   }
 
+  getCategories() {
+    this.homeService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      console.log(categories);
+    });
+  }
+
+  getNewProducts() {
+
+  }
+
+  getBestSellersProducts() {
+
+  }
+
+  getRecentlyViewedProducts() {
+
+  }
+
+  getLastReviews() {
+
+  }
 
 }
 

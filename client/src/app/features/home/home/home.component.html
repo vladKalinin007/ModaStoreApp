@@ -26,42 +26,29 @@
           Categories
         </div>
         <div class="categories__list">
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
 
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
+          <ng-container *ngFor="let category of categories">
+            <div class="categories__item">
+              <!--<a href="" class="categories__item-link" >
 
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
+              </a>-->
 
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
+                <!--<img
+                src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp"
+                class="categories__item-link" alt="{{category.name}}">-->
+              <!--<a class="categories__item-link" [ngStyle]="{ 'background-image': 'url(https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp)' }">
 
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
+              </a>-->
+              <a class="categories__item-link" style="background: url(https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp) no-repeat center/cover;">
+                <span class="categories__item-caption">
+                <span class="categories__item-title">
+                  {{category.name}}
+                </span>
+              </span>
+              </a>
 
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
-          <div class="categories__item">
-            <!--<a href="" class="categories__item-link" >
-
-            </a>-->
-            <img src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp" class="categories__item-link" alt="">
-          </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
