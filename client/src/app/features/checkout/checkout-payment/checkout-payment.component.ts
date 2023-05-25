@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BasketService} from "../../basket/basket.service";
 import {CheckoutService} from "../checkout.service";
 import {ToastrService} from "ngx-toastr";
@@ -16,6 +16,16 @@ declare var Stripe;
   styleUrls: ['./checkout-payment.component.scss']
 })
 export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
+
+
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
 
   @Input() checkoutForm: FormGroup;
 
@@ -40,7 +50,9 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     private basketService: BasketService,
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private _formBuilder: FormBuilder
+  ) { }
 
   ngAfterViewInit(): void {
     this.stripe = Stripe('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh');

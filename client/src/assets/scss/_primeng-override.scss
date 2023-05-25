@@ -30,4 +30,50 @@
   .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
     box-shadow: none;
   }
+
+  .p-carousel-content {
+
+  }
+
+  .p-carousel-container {
+    position: relative;
+
+  }
+
+  .p-carousel-items-container {
+    /*display: flex;
+    flex-direction: row;*/
+    width: 1180px;
+  }
+
+  .p-carousel .p-carousel-content .p-carousel-prev {
+    position: absolute;
+    z-index: 1;
+  }
+  .p-carousel .p-carousel-content .p-carousel-next {
+    position: absolute;
+    z-index: 1;
+    right: 0px;
+    /*width: 2rem;
+    height: 2rem;
+    color: #6c757d;
+    border: 0 none;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    margin: 0.5rem;*/
+  }
+
+  .p-carousel .p-carousel-content .p-carousel-prev:enabled:hover,
+  .p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
+  /*  color: #343a40;
+    border-color: transparent;
+    background: #e9ecef;*/
+  }
+  .p-carousel .p-carousel-content .p-carousel-prev:focus,
+  .p-carousel .p-carousel-content .p-carousel-next:focus {
+/*    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #BFDBFE;*/
+  }
 }

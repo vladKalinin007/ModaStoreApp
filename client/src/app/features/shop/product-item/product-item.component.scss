@@ -25,6 +25,8 @@
   margin-top: 10px;
 }
 
+
+
 .catalog-item {
   width: 270px;
   height: 480px;
@@ -45,6 +47,13 @@
     min-height: 376px;
     overflow: hidden;
 
+  }
+
+  &__like {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
   }
 
   &__pic {

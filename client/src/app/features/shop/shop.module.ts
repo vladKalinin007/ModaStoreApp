@@ -16,6 +16,7 @@ import {FeaturesModule} from "../features.module";
         ProductDetailsComponent,
     ],
     exports: [
+        ProductItemComponent
 
     ],
     imports: [

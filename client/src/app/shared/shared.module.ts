@@ -31,6 +31,14 @@ import {AccordionModule} from "primeng/accordion";
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
 import {TagModule} from "primeng/tag";
 import {SidebarModule} from "primeng/sidebar";
+import {DropdownModule} from "primeng/dropdown";
+import {MatRadioModule} from '@angular/material/radio';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from "@angular/material/icon";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { ProductItemsCarouselComponent } from './components/product-items-carousel/product-items-carousel.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,9 @@ import {SidebarModule} from "primeng/sidebar";
     TextInputComponent,
     StepperComponent,
     BasketSummaryComponent,
-    CheckoutOptionContainerComponent
+    CheckoutOptionContainerComponent,
+    ProductItemComponent,
+    ProductItemsCarouselComponent
   ],
   imports: [
     CommonModule,
@@ -68,38 +78,51 @@ import {SidebarModule} from "primeng/sidebar";
     TriStateCheckboxModule,
     CarouselModule,
     TagModule,
-    SidebarModule
+    SidebarModule,
+    DropdownModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule
   ],
-  exports: [
-    PaginationModule,
-    PagingHeaderComponent,
-    PagerComponent,
-    CarouselModule,
-    OrderTotalsComponent,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    TextInputComponent,
-    BasketSummaryComponent,
-    CheckoutOptionContainerComponent,
-    MatDialogModule,
-    SliderModule,
-    RatingModule,
-    RadioButtonModule,
-    GalleriaModule,
-    BadgeModule,
-    SpeedDialModule,
-    SelectButtonModule,
-    ToggleButtonModule,
-    OverlayPanelModule,
-    TabViewModule,
-    InputMaskModule,
-    AccordionModule,
-    TriStateCheckboxModule,
-    CarouselModule,
-    TagModule,
-    SidebarModule
-  ]
+    exports: [
+        PaginationModule,
+        PagingHeaderComponent,
+        PagerComponent,
+        CarouselModule,
+        OrderTotalsComponent,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatMenuModule,
+        TextInputComponent,
+        BasketSummaryComponent,
+        CheckoutOptionContainerComponent,
+        MatDialogModule,
+        SliderModule,
+        RatingModule,
+        RadioButtonModule,
+        GalleriaModule,
+        BadgeModule,
+        SpeedDialModule,
+        SelectButtonModule,
+        ToggleButtonModule,
+        OverlayPanelModule,
+        TabViewModule,
+        InputMaskModule,
+        AccordionModule,
+        TriStateCheckboxModule,
+        CarouselModule,
+        TagModule,
+        SidebarModule,
+        DropdownModule,
+        MatRadioModule,
+        MatStepperModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        ProductItemsCarouselComponent
+    ]
 })
 export class SharedModule { }

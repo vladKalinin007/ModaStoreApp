@@ -1,29 +1,17 @@
-/*
-.gradient-custom {
-  background: linear-gradient(left, #3931af, #00c6ff);
+.delivery-from {
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 0 2.4rem;
+  }
+  &__body {
+
+  }
 }
 
-.card-custom {
-  border-bottom-left-radius: 10% 50%;
-  border-top-left-radius: 10% 50%;
-  background-color: #f8f9fa ;
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
 }
-
-
-.input-custom {
-  background-color: white ;
-}
-
-.white-text {
-  color: hsl(52, 0%, 98%);
-  font-weight: 100 ;
-  font-size: 14px;
-}
-
-.back-button {
-  background-color: hsl(52, 0%, 98%);
-  font-weight: 700;
-  color: black ;
-  margin-top: 50px ;
-}
-*/

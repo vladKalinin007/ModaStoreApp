@@ -1,4 +1,5 @@
 using System.Collections;
+using Core;
 using Core.Interfaces;
 using Core.Models;
 
@@ -21,6 +22,7 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+  
     {
         if (_repositories == null) _repositories = new Hashtable();
 

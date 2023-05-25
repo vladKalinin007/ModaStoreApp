@@ -1,5 +1,6 @@
 using API.Dto;
 using API.Dto.Catalog;
+using API.Dto.Customers;
 using AutoMapper;
 using Core.Models;
 using Core.Models.Catalog;
@@ -30,5 +31,8 @@ public class MappingProfiles : Profile
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
             .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
         CreateMap<Category, CategoryDto>();
+        CreateMap<Product, ProductDto>();
+        CreateMap<ProductBrand, ProductBrandDto>();
+        CreateMap<ProductType, ProductTypeDto>();
     }
 }

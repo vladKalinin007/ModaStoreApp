@@ -1,10 +1,17 @@
 //TODO: Полностью переделать по БЭМ. Удалить весь мусор, который не используется
 
 .header {
-  background-color: #eeeeee;
+  &__layout {
+    display: block;
+    width: 100%;
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: baseline;
+  }
 }
 
-.header__layout {
+/*.header__layout {
   display: block;
   width: 100%;
   max-width: 1180px;
@@ -12,7 +19,7 @@
   margin-right: auto;
   vertical-align: baseline;
   background-color: #eee;
-}
+}*/
 
 
 :host .p-badge-success {
@@ -69,13 +76,40 @@ a {
 .header__main {
   max-width: 1180px;
   display:flex;
-  padding: 19px 0;
+  /*padding: 19px 0;*/
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ececec;
+  position: relative;
+}
+
+.header__logo {
+  display: flex;
+  position: relative;
+}
+
+.header__items {
+  min-width: 19.2rem;
+  display: flex;
   align-items: center;
 }
 
-.header__main_logo {
+.header__item {
+  width: 64px;
+  height: 72px;
+  transition: .15s;
+}
+
+.header__item-icon {
+  height: 100%;
+  width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  transition: .2s;
+  fill: currentColor;
+  cursor: pointer;
 }
 
 .brand-picture {

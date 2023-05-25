@@ -2,7 +2,7 @@ using Core.Models;
 
 namespace API.Dto;
 
-public class ProductToReturnDto
+public class ProductToReturnDto 
 {
     public int Id { get; set; }
     public string Name { get; set; }

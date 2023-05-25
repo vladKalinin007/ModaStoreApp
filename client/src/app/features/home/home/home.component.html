@@ -56,19 +56,56 @@
   <section class="products">
     <div class="layout">
       <div class="products__inner">
-        <div class="products__header"></div>
-        <div class="products__body"></div>
+        <div class="products__header">
+          <div class="products__title">
+            New products
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
       </div>
     </div>
   </section>
   <section class="products">
-
+    <div class="layout">
+      <div class="products__inner">
+        <div class="products__header">
+          <div class="products__title">
+            Bestsellers
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>
   </section>
   <section class="products">
-
+    <div class="layout">
+      <div class="products__inner">
+        <div class="products__header">
+          <div class="products__title">
+            Seasonal products
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>
   </section>
   <section class="seen">
+    <div class="layout">
+      <div class="seen__inner">
+        <div class="seen__header">
 
+        </div>
+        <div class="seen__body">
+          <app-product-items-carousel />
+        </div>
+      </div>
+    </div>
   </section>
   <section class="reviews">
 

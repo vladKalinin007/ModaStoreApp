@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../account/account.service";
 import {IBasket} from "../../../core/models/basket";
 import {BasketService} from "../../basket/basket.service";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-checkout',
@@ -10,6 +11,10 @@ import {BasketService} from "../../basket/basket.service";
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+
+  color: ThemePalette = 'accent';
+  checked = false;
+  disabled = false;
 
   checkoutForm: FormGroup;
 
