@@ -5,23 +5,25 @@ import {IBasket} from "../../models/basket";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {BasketComponent} from "../../../features/basket/basket/basket.component";
 import {Overlay} from "@angular/cdk/overlay";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {IUser} from "../../models/user";
 import {AccountService} from "../../../features/account/account.service";
 
 
 @Component({
   selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NavBarComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   basket$: Observable<IBasket>;
   currentUser$: Observable<IUser>;
   isIconRotated: boolean = false;
   dialogRef: MatDialogRef<BasketComponent>;
+  isCheckoutPage: boolean = false;
+
 
   constructor(private basketService: BasketService,
               public dialog: MatDialog,
@@ -70,12 +72,21 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
     this.basket$ = this.basketService.basket$;
     this.currentUser$ = this.accountService.currentUser$;
+    this.checkIfCheckoutPage();
   }
 
   logout() {
     this.accountService.logout();
     this.isIconRotated = false;
     this.router.navigateByUrl('/');
+  }
+
+  private checkIfCheckoutPage() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isCheckoutPage = (event.urlAfterRedirects === '/checkout');
+      }
+    });
   }
 
   //#endregion

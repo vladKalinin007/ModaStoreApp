@@ -13,9 +13,10 @@
         <input class="form__input">
       </div>
       <div class="form__row mt-3">
-        <button type="button" class="button button_size_medium button_color_navy checkout-promo__submit">
+        <!--<button type="button" class="button button_size_medium button_color_navy checkout-promo__submit">
           Apply
-        </button>
+        </button>-->
+        <app-button buttonName="Apply" buttonStyle="btn btn_size_large btn_color_light btn_rd checkout-promo__submit"/>
       </div>
     </div>
   </div>
@@ -50,7 +51,10 @@
       </dd>
     </dl>
     <div class="checkout-total__buttons">
-      <input type="submit" tabindex="29" class="button button_color_green button_size_large checkout-total__submit" value="Make an order">
+      <!--<input type="submit" tabindex="29" class="button button_color_green button_size_large checkout-total__submit" value="Make an order">-->
+      <div>
+        <app-button buttonName="Checkout" buttonStyle="btn btn_color_dark btn_size_large btn_rd checkout-total__submit" />
+      </div>
     </div>
     <p class="checkout-total__caption">
       Підтверджуючи замовлення, я приймаю умови:

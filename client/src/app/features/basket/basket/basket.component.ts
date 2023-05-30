@@ -23,6 +23,7 @@ export class BasketComponent implements OnInit {
   calculateBasketItems() {
     this.basketItemsCount = this.basketService.countBasketItems()
     console.log(this.basketItemsCount);
+
   }
 
   closeDialog(): void {

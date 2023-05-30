@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BasketService} from "./features/basket/basket.service";
 import {AccountService} from "./features/account/account.service";
 import {MenuItem, MessageService} from "primeng/api";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import {MenuItem, MessageService} from "primeng/api";
 export class AppComponent implements OnInit {
 
   items: MenuItem[];
+  showNavigationBar: boolean = true;
 
   title: string = 'Moda';
 
@@ -19,13 +21,29 @@ export class AppComponent implements OnInit {
     private basketService: BasketService,
     private accountService: AccountService,
     private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.loadBasket();
     this.loadCurrentUser();
     this.addItemsToSpeedDial();
+    this.updateComponentVisibility();
 
+  }
+
+  updateComponentVisibility() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const currentRoute = event.urlAfterRedirects; // Получение текущего маршрута
+
+        // Определите условия, когда нужно скрыть компоненты
+        this.showNavigationBar = !(currentRoute === '/checkout'); // Пример: Скрыть на странице оформления заказа (checkout)
+
+        // Добавьте другие условия для скрытия компонентов
+        // this.showOtherComponent = ...;
+      }
+    });
   }
 
   addItemsToSpeedDial() {

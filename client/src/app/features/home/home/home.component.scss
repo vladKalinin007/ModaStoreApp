@@ -1,7 +1,6 @@
 .layout {
   max-width: 1180px;
-  margin: 0 124px;
-  /*padding: 0 10px;*/
+  margin: 0 100px;
 }
 
 .main {
@@ -19,7 +18,7 @@
 
   }
   &__slider-content-link {
-    width: 1160px;
+    width: 100%;
     border-radius: 12px;
   }
 }
@@ -140,6 +139,4 @@
 
 }
 
-.subscribe {
 
-}

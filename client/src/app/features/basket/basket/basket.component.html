@@ -63,11 +63,19 @@
               </div>
             </div>
           </div>
-          <a routerLink="/checkout" class="basket-list__checkout">
-            <button (click)="closeDialog()" class="basket-list__checkout-button">
+          <!--<a routerLink="/checkout" class="basket-list__checkout">-->
+            <!--<button (click)="closeDialog()" class="basket-list__checkout-button">
               Checkout order {{(basketTotal$ | async).total}} $
-            </button>
-          </a>
+            </button>-->
+            <div class="basket-list__checkout-button">
+              <app-button
+                routerLink="/checkout"
+                (click)="closeDialog()"
+                buttonName="Checkout {{(basketTotal$ | async).total}} $"
+                buttonStyle="btn btn_color_light btn_size_medium basket-list__checkout-button"
+              />
+            </div>
+          <!--</a>-->
         </div>
       </div>
     </ng-container>

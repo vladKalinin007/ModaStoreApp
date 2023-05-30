@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NavBarComponent} from "./components/nav-bar/nav-bar.component";
+import {HeaderComponent} from "./components/nav-bar/header.component";
 import { FooterComponent } from './components/footer/footer.component';
 import {RouterModule} from "@angular/router";
 import { TestErrorComponent } from './components/test-error/test-error.component';
@@ -17,7 +17,7 @@ import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
-  declarations: [NavBarComponent, FooterComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent],
+  declarations: [HeaderComponent, FooterComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -28,6 +28,6 @@ import {SharedModule} from "../shared/shared.module";
     }),
     SharedModule
   ],
-  exports: [NavBarComponent, FooterComponent, SectionHeaderComponent]
+  exports: [HeaderComponent, FooterComponent, SectionHeaderComponent]
 })
 export class CoreModule { }

@@ -39,6 +39,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ProductItemsCarouselComponent } from './components/product-items-carousel/product-items-carousel.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { SubscribeBlockComponent } from '../core/components/subscribe-block/subscribe-block.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { ProductItemsCarouselComponent } from './components/product-items-carous
     BasketSummaryComponent,
     CheckoutOptionContainerComponent,
     ProductItemComponent,
-    ProductItemsCarouselComponent
+    ProductItemsCarouselComponent,
+    NavigationBarComponent,
+    SubscribeBlockComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -86,43 +92,46 @@ import { ProductItemsCarouselComponent } from './components/product-items-carous
     MatIconModule,
     MatSlideToggleModule
   ],
-    exports: [
-        PaginationModule,
-        PagingHeaderComponent,
-        PagerComponent,
-        CarouselModule,
-        OrderTotalsComponent,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatMenuModule,
-        TextInputComponent,
-        BasketSummaryComponent,
-        CheckoutOptionContainerComponent,
-        MatDialogModule,
-        SliderModule,
-        RatingModule,
-        RadioButtonModule,
-        GalleriaModule,
-        BadgeModule,
-        SpeedDialModule,
-        SelectButtonModule,
-        ToggleButtonModule,
-        OverlayPanelModule,
-        TabViewModule,
-        InputMaskModule,
-        AccordionModule,
-        TriStateCheckboxModule,
-        CarouselModule,
-        TagModule,
-        SidebarModule,
-        DropdownModule,
-        MatRadioModule,
-        MatStepperModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSlideToggleModule,
-        ProductItemsCarouselComponent
-    ]
+  exports: [
+    PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent,
+    CarouselModule,
+    OrderTotalsComponent,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    TextInputComponent,
+    BasketSummaryComponent,
+    CheckoutOptionContainerComponent,
+    MatDialogModule,
+    SliderModule,
+    RatingModule,
+    RadioButtonModule,
+    GalleriaModule,
+    BadgeModule,
+    SpeedDialModule,
+    SelectButtonModule,
+    ToggleButtonModule,
+    OverlayPanelModule,
+    TabViewModule,
+    InputMaskModule,
+    AccordionModule,
+    TriStateCheckboxModule,
+    CarouselModule,
+    TagModule,
+    SidebarModule,
+    DropdownModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    ProductItemsCarouselComponent,
+    NavigationBarComponent,
+    SubscribeBlockComponent,
+    ButtonComponent
+  ]
 })
 export class SharedModule { }

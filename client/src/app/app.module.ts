@@ -18,26 +18,28 @@ import {DialogModule} from "@angular/cdk/dialog";
 import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import {CommonModule} from "@angular/common";
 import {SpeedDialModule} from "primeng/speeddial";
+import {SharedModule} from "./shared/shared.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
-  imports: [
-    /*CommonModule,*/
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    CoreModule,
-    HomeModule,
-    NgxSpinnerModule,
-    MatNativeDateModule,
-    DynamicDialogModule,
-    DialogModule,
-    SpeedDialModule
-  ],
+    imports: [
+        /*CommonModule,*/
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        CoreModule,
+        HomeModule,
+        NgxSpinnerModule,
+        MatNativeDateModule,
+        DynamicDialogModule,
+        DialogModule,
+        SpeedDialModule,
+        SharedModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     /*{provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}*/

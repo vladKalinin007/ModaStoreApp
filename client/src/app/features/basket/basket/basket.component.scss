@@ -73,29 +73,11 @@
   &__checkout {
     cursor: pointer;
     text-decoration: underline;
-    transition: color .15s,text-decoration-color .15s,-webkit-text-decoration-color .15s;
-    color: #48d597;
     &-button {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: auto;
-      margin-left: auto;
+      justify-content: end;
       margin-top: 16px;
-      background-color: #48d597;
-      color: #414141;
-      box-sizing: border-box;
-      padding: 0 16px;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      letter-spacing: .1px;
-      font-weight: 500;
-      height: 40px;
-      cursor: pointer;
-      transition: color .2s;
-      user-select: none;
-      pointer-events: auto;
     }
   }
 }

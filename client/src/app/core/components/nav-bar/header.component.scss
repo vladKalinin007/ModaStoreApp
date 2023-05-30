@@ -1,26 +1,129 @@
-//TODO: Полностью переделать по БЭМ. Удалить весь мусор, который не используется
+.align-r {
+  text-align: right;
+}
+
+.m-width {
+  min-width: 19.2em;
+}
 
 .header {
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  &__main {
+    max-width: 1180px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ececec;
+    position: relative;
+  }
+
+  &__logo {
+    display: flex;
+    position: relative;
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item-icon {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    position: relative;
+    transition: .2s;
+    fill: currentColor;
+    cursor: pointer;
+    /*padding-top: 25px;*/
+  }
+
+  &__icon-internal {
+    font-size: 1.6em;
+  }
+
+  &__item {
+    &_left {
+      width: 64px;
+      height: 72px;
+      transition: .15s;
+    }
+    &_right {
+      width: 64px;
+    }
+  }
+
   &__layout {
     display: block;
     width: 100%;
     max-width: 1180px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 100px;
     vertical-align: baseline;
+  }
+
+}
+
+.checkout-header {
+  background-color: #F2F2F2F2;
+  &__layout {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  &__main {
+
+  }
+
+  &__logo {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    border-bottom: 1px solid #ececec;
+  }
+
+  & .brand-picture {
+    height: 7.2rem;
   }
 }
 
-/*.header__layout {
-  display: block;
-  width: 100%;
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
-  vertical-align: baseline;
-  background-color: #eee;
-}*/
+.navigation {
 
+  &__layout {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+  }
+
+  &__item {
+
+  }
+
+
+  &__link {
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 24px 20px;
+  }
+}
 
 :host .p-badge-success {
   background-color: blue;
@@ -33,18 +136,14 @@
   height: 18px;
   width: 18px;
   border-radius: 50%;
-/*  font-size: 1em;*/
-  /*background: #48d597*/;
-  /*color: dark;*/
+
   text-align: center;
   top: -10px;
   right: -10px;
   z-index: 2;
 }
 
-/*.d-flex > a:first-child {
-  position: relative;
-}*/
+
 
 a {
   text-decoration : none;
@@ -55,12 +154,6 @@ a {
   }
 }
 
-.logo {
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-}
 
 /* Стиль для иконки корзины */
 a {
@@ -73,61 +166,32 @@ a {
   width: 250%;
 }
 
-.header__main {
-  max-width: 1180px;
-  display:flex;
-  /*padding: 19px 0;*/
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ececec;
-  position: relative;
-}
 
-.header__logo {
-  display: flex;
-  position: relative;
-}
 
-.header__items {
-  min-width: 19.2rem;
-  display: flex;
-  align-items: center;
-}
 
-.header__item {
-  width: 64px;
-  height: 72px;
-  transition: .15s;
-}
 
-.header__item-icon {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: .2s;
-  fill: currentColor;
-  cursor: pointer;
-}
 
-.brand-picture {
+
+.logo {
   cursor: pointer;
   color: #48d597;
   display: flex;
   align-items: center;
   position: relative;
   top: -2px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__image {
+    width: 200px;
+    transition: fill .2s;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+  }
 }
 
-.this-image {
-  width: 130px;
-  height: 36px;
-  transition: fill .2s;
-  overflow-clip-margin: content-box;
-  overflow: clip;
-}
 
 .central-container {
   display: flex;
@@ -135,15 +199,11 @@ a {
   margin: 0 40px;
 }
 
-.customer-section-container {
-  width: 310px;
-  position: relative;
+.header__items-right {
+  min-width: 19.2rem;
   display: flex;
-  flex-shrink: 0;
-  justify-content: space-between;
   align-items: center;
-  width: 310px;
-  /*z-index: 110;*/
+  margin: 0 -2rem;
 
 }
 
@@ -447,8 +507,7 @@ a {
 
 }
 
-.select-language-option {
-}
+
 
 .header-actions__item {
   position: relative;
@@ -465,10 +524,3 @@ a {
   z-index: 1;
 }
 
-
-
-/*.js-header::before {
-    content: '';
-    display: block;
-    height: 78px;
-}*/
