@@ -1,0 +1,42 @@
+.catalog-item {
+  width: 270px;
+  height: 480px;
+  /*box-shadow: 0 2rem 4rem rgba(97,97,97,.1);*/
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 2rem 4rem rgba(97,97,97,.2);
+  }
+
+  &__layout {
+    position: relative;
+    padding: 10px;
+
+  }
+  &__image {
+    position: relative;
+    min-height: 376px;
+    overflow: hidden;
+
+  }
+
+  &__pic {
+    max-width: 276px;
+    max-height: 414px;
+  }
+
+  &__caption {
+
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    margin-top: 1rem;
+  }
+
+  &__new-price {
+    font-weight: bold;
+    font-size: 16px;
+  }
+}

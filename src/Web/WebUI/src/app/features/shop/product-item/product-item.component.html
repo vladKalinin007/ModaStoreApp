@@ -1,0 +1,32 @@
+<div class="catalog-item">
+  <div class="catalog-item__layout">
+    <div class="catalog-item__image">
+      <a [routerLink]="'/shop/' + product.id">
+        <img [routerLink]="'/shop/' + product.id"
+             [src]="product.pictureUrl"
+             [alt]="product.name"
+             class="catalog-item__pic"
+        >
+      </a>
+    </div>
+    <div class="catalog-item__caption">
+      <a class="catalog-item__name" [routerLink]="'/shop/' + product.id">
+        <h6>{{ product.name }}</h6>
+      </a>
+      <div class="catalog-item__price">
+        <div class="catalog-item__new-price">{{ product.price }} $</div>
+      </div>
+    </div>
+    <div class="position-absolute top-0 end-0" style="margin-right: 10px;">
+      <div class="d-flex align-items-center justify-content-center rounded-circle btn btn-warning" style="width: 40px; height: 40px;">
+        <i (click)="addItemToBasket()" class="fa fa-heart fa-1.5x text-dark "></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

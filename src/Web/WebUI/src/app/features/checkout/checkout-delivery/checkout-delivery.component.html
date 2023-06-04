@@ -1,0 +1,39 @@
+<div class="delivery-form">
+  <div class="delivery-form__title"> Select your delivery method </div>
+  <div class="delivery-form__body">
+    <div class="delivery-form__tabs">
+      <mat-radio-group aria-label="Select an option" class="example-radio-group" >
+        <mat-radio-button value="1" (change)="radioButtonChange($event)">
+        Pick up from the store
+        </mat-radio-button>
+        <mat-radio-button value="2" (change)="radioButtonChange($event)">
+        Postal service
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <ng-container *ngIf="isOnlineSelected">
+      <div class="delivery-form__shipping">
+        <div class="delivery-from__labels">
+          <div class="search-select">
+            <div class="label">
+              <div class="label__body">
+                <p-accordion [activeIndex]="[0]">
+                  <p-accordionTab header="Service">
+                    <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
+                  </p-accordionTab>
+                  <p-accordionTab header="City">
+                    <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
+                  </p-accordionTab>
+                  <p-accordionTab header="Address">
+                    <app-text-input formControlName="City" [label]="'City'"/>
+                  </p-accordionTab>
+                </p-accordion>
+                <app-button buttonName="Save information" buttonStyle="btn btn_color_dark btn_size_medium"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

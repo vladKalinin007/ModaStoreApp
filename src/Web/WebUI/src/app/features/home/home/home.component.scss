@@ -1,0 +1,142 @@
+.layout {
+  max-width: 1180px;
+  margin: 0 100px;
+}
+
+.main {
+
+}
+
+.hero {
+  &__inner {
+    position: relative;
+  }
+  &__slider{
+
+  }
+  &__slider-content {
+
+  }
+  &__slider-content-link {
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+
+.categories {
+  margin: 80px 0;
+
+  &__inner {
+
+  }
+  &__title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 48px;
+    line-height: 1.33;
+    font-weight: 500;
+    font-family: "Playfair Display",sans-serif;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    justify-content: space-between;
+  }
+  &__item {
+    overflow: hidden;
+    width: 33.33%;
+    padding: 15px;
+    &:nth-child(3n) {
+      padding-right: 0;
+    }
+    &:nth-child(3n+1) {
+      padding-left: 0;
+    }
+  }
+  &__item-link {
+    position: relative;
+    display: block;
+    height: 500px;
+    padding-bottom: 135.135%;
+    overflow: hidden;
+    border-radius: 8px;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: inherit;
+      transition: .4s;
+    }
+    &:hover {
+      color: currentColor;
+      &:after {
+        transform: scale(1.1);
+      }
+    }
+  }
+  &__item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    padding: 1.6rem;
+    display: flex;
+    align-items: flex-end;
+    transition: .4s;
+  }
+  &__item-title {
+    text-align: center;
+    font-weight: bold;
+    padding: 0 3.6rem;
+    height: 4.3rem;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.8);
+    border-radius: 8px;
+  }
+}
+
+.products {
+  &__inner {
+
+  }
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  &__title {
+    font-size: 48px;
+    line-height: 1.33;
+    font-weight: 500;
+    font-family: "Playfair Display",sans-serif;
+    margin: 0;
+  }
+
+  &__all-link {
+
+  }
+  &__body {
+
+  }
+}
+
+.seen {
+
+}
+
+.reviews {
+
+}
+
+

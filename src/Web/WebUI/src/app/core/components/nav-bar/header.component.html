@@ -1,0 +1,117 @@
+<ng-container *ngIf="!isCheckoutPage; else checkoutNavBar">
+  <header class="header">
+    <div class="header__layout">
+      <div class="header__main">
+        <div class="header__items m-width">
+          <div class="header__item_left">
+            <div class="header__item-icon">
+              <div class="s-hamb">
+                <i class="pi pi-bars header__icon-internal"></i>
+              </div>
+            </div>
+          </div>
+          <div class="header__item_left">
+            <div class="header__item-icon">
+              <div class="search">
+                <i class="pi pi-search header__icon-internal"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header__logo">
+          <a class="logo" href="/">
+            <img src="assets/images/MainLogo2.png" alt="moda_logo"
+                 title="moda_logo" class="logo__image">
+          </a>
+        </div>
+        <div class="header__items">
+          <ng-container *ngIf="(currentUser$ | async) === null">
+            <div class="header__item_left">
+              <div class="header__item-icon align-r">
+                <a href="" class="s-hamb">
+                  <i class="pi pi-heart header__icon-internal" pBadge value="2" severity="success" size="large"
+                     ></i>
+                </a>
+              </div>
+            </div>
+            <div class="header__item_left">
+              <div class="header__item-icon align-r">
+                <a (click)="openDialog()">
+                  <i class="pi pi-shopping-bag header__icon-internal" pBadge value="{{(basket$ | async).items.length}}" severity="success"
+                     size="large"></i>
+                </a>
+              </div>
+            </div>
+            <div class="header__item_left">
+              <div class="header__item-icon align-r">
+                <a routerLink="/account/login" class="s-hamb">
+                  <i class="pi pi-user header__icon-internal" size="large"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="currentUser$ | async">
+            <div class="header__item_left">
+              <div class="header__item-icon ">
+                <a href="" class="s-hamb">
+                  <i class="pi pi-envelope  header__icon-internal" pBadge value="2" severity="success" size="large"
+                     ></i>
+                </a>
+              </div>
+            </div>
+            <div class="header__item_left">
+              <div class="header__item-icon ">
+                <a href="" class="s-hamb">
+                  <i class="pi pi-heart header__icon-internal" pBadge value="2" severity="success" size="large" ></i>
+                </a>
+              </div>
+            </div>
+            <div class="header__item_left">
+              <div class="header__item-icon ">
+                <a (click)="openDialog()">
+                  <i class="pi pi-shopping-bag header__icon-internal" pBadge value="{{(basket$ | async).items.length}}" severity="success"
+                     size="large"></i>
+                </a>
+              </div>
+            </div>
+            <div class="auth_user_icon" (mousedown)="toggleIconRotation()">
+              <img class="avatar_img" src="https://avatars.shafastatic.net/6524135_new_avatar_type1682259079"
+                   alt="avatar">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svg_icon"
+                   [class.rotate180]="isIconRotated">
+                <path
+                  d="M9.19 17.502a.666.666 0 1 0 .943.942l5.354-5.354a.666.666 0 0 0 0-.942l-5.354-5.353a.666.666 0 1 0-.942.942l4.883 4.882-4.883 4.883Z">
+                </path>
+              </svg>
+            </div>
+          </ng-container>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+</ng-container>
+<ng-template #checkoutNavBar>
+  <header class="checkout-header">
+    <div class="layout">
+      <div class="checkout-header__inner">
+        <div class="checkout-header__main">
+          <div class="checkout-header__logo">
+          <a class="logo" href="/">
+            <!--<img src="https://uploads.shafastatic.net/uploads/2022/Jul/ic_shafa_logo_zDK2Rl4.svg" alt="shafa_logo"
+                 title="shafa_logo" class="this-image">-->
+            <img src="assets/images/MainLogo2.png" alt="moda_logo"
+                 title="shafa_logo" class="logo__image">
+          </a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</ng-template>
+
+

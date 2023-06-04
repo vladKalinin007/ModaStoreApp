@@ -1,0 +1,59 @@
+<h1 class="page-title heading">Women's clothes</h1>
+<div class="catalog">
+  <div class="layout">
+    <div class="catalog_inner">
+      <div class="catalog__main">
+        <ng-container *ngIf="types && brands">
+          <section class="catalog__aside">
+            <p-accordion [multiple]="true">
+              <p-accordionTab header="Price" >
+                <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+              </p-accordionTab>
+              <p-accordionTab header="Brands">
+                <div *ngFor="let brand of brands" >
+                  <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
+                  {{brand.name}}
+                </div>
+              </p-accordionTab>
+              <p-accordionTab header="Types">
+                <div *ngFor="let type of types" >
+                  <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
+                  {{type.name}}
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </section>
+          <section class="catalog__content">
+            <div class="d-flex justify-content-between align-items-center">
+
+              <!--<app-paging-header
+                [totalCount]="totalCount"
+                [pageSize]="this.shopParams.pageSize"
+                [pageNumber]=" this.shopParams.pageNumber"
+              ></app-paging-header>
+
+              <form class="d-flex" role="search" *ngIf="products">
+                <input class="form-control me-2" #search type="search" placeholder="Search" aria-label="Search">
+                <button (click)="onSearch()" class="btn btn-outline-success" type="submit">Search</button>
+                <button (click)="onReset()" class="btn btn-outline-success" type="submit">Reset</button>
+              </form>-->
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col" *ngFor="let product of products">
+                <app-product-item [product]="product"></app-product-item>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center mt-5" *ngIf="totalCount > 0">
+              <app-pager
+                [pageSize]="this.shopParams.pageSize"
+                [totalCount]="this.totalCount"
+                (pageChanged)="onPageChanged($event)"
+              ></app-pager>
+            </div>
+          </section>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

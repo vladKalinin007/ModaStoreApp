@@ -1,0 +1,114 @@
+<main>
+  <section class="hero">
+    <div class="layout">
+      <div class="hero__inner">
+        <div class="hero__slider">
+          <!--<p-carousel [value]="products">
+            <ng-template>
+              <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div class="mb-3">
+                  <img src="./assets/images/hero1.jpg" class="w-6 shadow-2" />
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>-->
+          <div class="hero__slider-content">
+            <img src="./assets/images/hero1.jpg" class="hero__slider-content-link" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="categories">
+    <div class="layout">
+      <div class="categories__inner">
+        <div class="categories__title">
+          Categories
+        </div>
+        <div class="categories__list">
+
+          <ng-container *ngFor="let category of categories">
+            <div class="categories__item">
+              <!--<a href="" class="categories__item-link" >
+
+              </a>-->
+
+                <!--<img
+                src="https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp"
+                class="categories__item-link" alt="{{category.name}}">-->
+              <!--<a class="categories__item-link" [ngStyle]="{ 'background-image': 'url(https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp)' }">
+
+              </a>-->
+              <a class="categories__item-link" style="background: url(https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/414/670_759_140cd750bba9870f18aada2478b24840a/Longslivi-_1_.webp) no-repeat center/cover;">
+                <span class="categories__item-caption">
+                <span class="categories__item-title">
+                  {{category.name}}
+                </span>
+              </span>
+              </a>
+
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="products">
+    <div class="layout">
+      <div class="products__inner">
+        <div class="products__header">
+          <div class="products__title">
+            New products
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="products">
+    <div class="layout">
+      <div class="products__inner">
+        <div class="products__header">
+          <div class="products__title">
+            Bestsellers
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="products">
+    <div class="layout">
+      <div class="products__inner">
+        <div class="products__header">
+          <div class="products__title">
+            Season
+          </div>
+        </div>
+        <div class="products__body">
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="seen">
+    <div class="layout">
+      <div class="seen__inner">
+        <div class="seen__header">
+          You viwed
+        </div>
+        <div class="seen__body">
+          <app-product-items-carousel />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="reviews">
+
+  </section>
+</main>
+<app-subscribe-block/>
