@@ -35,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ModaStore.Domain\ModaStore.Domain.csproj" />
     <ProjectReference Include="..\..\Core\ModaStore.Infrastructure\ModaStore.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\ModaStore.Infrastructure\ModaStore.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Queries\Models\Customers" />
