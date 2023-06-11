@@ -11,7 +11,7 @@ using ModaStore.Infrastructure.Data;
 
 namespace ModaStore.API.Controllers.MdControllers;
 
-[Authorize]
+// [Authorize]
 public class OrderController : BaseApiController
 {
 

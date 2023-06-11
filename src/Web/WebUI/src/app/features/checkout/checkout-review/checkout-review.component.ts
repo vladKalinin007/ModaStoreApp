@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IBasket} from "../../../core/models/basket";
 import {Observable} from "rxjs";
 import {BasketService} from "../../basket/basket.service";
 import {ToastrService} from "ngx-toastr";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-checkout-review',
@@ -10,6 +11,8 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./checkout-review.component.scss']
 })
 export class CheckoutReviewComponent implements OnInit {
+
+  @Input() checkoutForm: FormGroup;
 
   basket$: Observable<IBasket>;
 

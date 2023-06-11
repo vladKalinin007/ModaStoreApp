@@ -10,26 +10,18 @@ import {BasketService} from "../../../features/basket/basket.service";
 })
 export class OrderTotalsComponent implements OnInit {
 
-  //region Properties
-
     basketTotal$: Observable<IBasketTotals> = this.basketService.basketTotal$;
-
-  //endregion
-
-  //region Constructor
+    shippingPrice$: Observable<number> = this.basketService.shipping$;
 
     constructor(
       private basketService: BasketService
     ) {}
 
-  //endregion
-
-  //region Methods
 
     ngOnInit(): void {
       this.basketTotal$ = this.basketService.basketTotal$;
+      this.shippingPrice$ = this.basketService.shipping$;
     }
 
-  //endregion
 
 }

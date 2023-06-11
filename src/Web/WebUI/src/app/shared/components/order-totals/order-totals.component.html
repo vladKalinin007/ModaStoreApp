@@ -36,7 +36,8 @@
         Вартість доставки
       </dt>
       <dd class="checkout-total__value">
-        {{(basketTotal$ | async).shipping}}
+        <!--{{(basketTotal$ | async).shipping}}-->
+        {{shippingPrice$ | async}}
         <span class=" currency">$</span>
       </dd>
     </dl>

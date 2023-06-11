@@ -40,7 +40,7 @@ public class AccountController : BaseApiController
 
     #region Methods
     
-    [Authorize]
+    // [Authorize]
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
@@ -60,7 +60,7 @@ public class AccountController : BaseApiController
         return await _userManager.FindByEmailAsync(email) != null;
     }
     
-    [Authorize]
+    
     [HttpGet("address")]
     public async Task<ActionResult<AddressDto>> GetUserAddress()
     {
@@ -69,7 +69,7 @@ public class AccountController : BaseApiController
         return _mapper.Map<Address, AddressDto>(user.Address);
     }
     
-    [Authorize]
+
     [HttpPut("address")]
     public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
     {

@@ -42,6 +42,9 @@ import { ProductItemsCarouselComponent } from './components/product-items-carous
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { SubscribeBlockComponent } from '../core/components/subscribe-block/subscribe-block.component';
 import { ButtonComponent } from './components/button/button.component';
+import { ToastModule } from 'primeng/toast';
+import { StripeModule } from "stripe-angular";
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,9 @@ import { ButtonComponent } from './components/button/button.component';
     MatStepperModule,
     MatButtonModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ToastModule,
+    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')
   ],
   exports: [
     PaginationModule,
@@ -131,7 +136,9 @@ import { ButtonComponent } from './components/button/button.component';
     ProductItemsCarouselComponent,
     NavigationBarComponent,
     SubscribeBlockComponent,
-    ButtonComponent
+    ButtonComponent,
+    ToastModule,
+    NgxStripeModule
   ]
 })
 export class SharedModule { }

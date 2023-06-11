@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Basket, IBasket, IBasketItem, IBasketTotals} from "../../core/models/basket";
 import {map} from "rxjs/operators";
 import {IProduct} from "../../core/models/product";
@@ -13,11 +13,14 @@ import {IDeliveryMethod} from "../../core/models/deliveryMethod";
 export class BasketService {
 
   public baseUrl: string = environment.apiUrl;
-  private basketSource: BehaviorSubject<IBasket> = new BehaviorSubject<IBasket>(null);
+  public basketSource: BehaviorSubject<IBasket> = new BehaviorSubject<IBasket>(null);
   private basketTotalSource: BehaviorSubject<IBasketTotals> = new BehaviorSubject<IBasketTotals>(null);
   public basket$: Observable<IBasket> = this.basketSource.asObservable();
   public basketTotal$: Observable<IBasketTotals> = this.basketTotalSource.asObservable();
   public shipping: number = 0;
+  private shippingSource: Subject<number> = new Subject<number>();
+  public shipping$ = this.shippingSource.asObservable();
+
 
 
   constructor(private http: HttpClient) { }
@@ -28,7 +31,8 @@ export class BasketService {
 
 
   createPaymentIntent() {
-    return this.http.post(this.baseUrl + 'payment/' + this.getCurrentBasketValue().id, {})
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post(this.baseUrl + 'payment/' + this.getCurrentBasketValue().id, {}, {headers})
       .pipe(
         map((basket: IBasket) => {
           this.basketSource.next(basket);
@@ -37,8 +41,9 @@ export class BasketService {
       )
   }
 
-  setShippingPrice(deliveryMethod: IDeliveryMethod) {
+    setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
+    this.shippingSource.next(this.shipping);
     const basket: IBasket = this.getCurrentBasketValue();
     basket.deliveryMethodId = deliveryMethod.id;
     basket.shippingPrice = deliveryMethod.price;
@@ -137,7 +142,7 @@ export class BasketService {
       })
   }
 
-  private calculateTotals() {
+  public calculateTotals() {
     const basket: IBasket = this.getCurrentBasketValue();
     const shipping: number = this.shipping;
     const subtotal: number = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);

@@ -16,11 +16,11 @@ export class CheckoutService {
   constructor(private httpClient: HttpClient) { }
 
   createOrder(order: IOrderToCreate) {
-    return this.httpClient.post(this.baseUrl + 'orders', order);
+    return this.httpClient.post(this.baseUrl + 'order', order);
   }
 
   getDeliveryMethods(): Observable<IDeliveryMethod[]> {
-    return this.httpClient.get(this.baseUrl + 'orders/deliveryMethods').pipe(
+    return this.httpClient.get(this.baseUrl + 'Order/deliveryMethods').pipe(
       map((dm: IDeliveryMethod[]) => {
         return dm.sort((a, b) => b.price - a.price);
       }

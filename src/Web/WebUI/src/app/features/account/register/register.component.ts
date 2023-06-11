@@ -4,11 +4,13 @@ import {AccountService} from "../account.service";
 import {Router} from "@angular/router";
 import {of, switchMap, timer} from "rxjs";
 import {map} from "rxjs/operators";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers: [MessageService]
 })
 export class RegisterComponent implements OnInit {
 
@@ -19,6 +21,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private router: Router,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -39,10 +42,12 @@ export class RegisterComponent implements OnInit {
     this.accountService.register(this.registerForm.value).subscribe({
       next: () => {
         this.router.navigateByUrl('/shop');
+        console.log("work")
       },
       error: (error) => {
         console.log(error);
         this.errors = error.errors;
+        console.log("On Submit doesn't work")
       }
     })
   }

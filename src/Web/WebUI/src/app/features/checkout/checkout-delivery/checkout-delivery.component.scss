@@ -1,6 +1,9 @@
 @import "src/app/shared/styles/common.scss";
 @import "src/app/features/checkout/checkout/checkout.component.scss";
 
+.p-dropdown-panel {
+  width: 1000px
+}
 .delivery-from {
   &__title {
     text-transform: uppercase;

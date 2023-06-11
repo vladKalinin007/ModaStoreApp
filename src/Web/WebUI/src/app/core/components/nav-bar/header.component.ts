@@ -53,10 +53,6 @@ export class HeaderComponent implements OnInit {
 
     this.dialogRef = this.dialog.open(BasketComponent, dialogConfig);
 
-
-
-    //TODO: Решить проблему с модальным окном
-
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

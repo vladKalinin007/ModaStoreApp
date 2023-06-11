@@ -1,7 +1,7 @@
 <ng-container *ngIf="(basket$ | async).items">
       <div class="basket__content">
         <div class="basket-list">
-          <h5 class="basket-list__seller-heading"> Seller: kalinin007 </h5>
+          <!--<h5 class="basket-list__seller-heading"> Seller: kalinin007 </h5>-->
           <div *ngFor="let item of (basket$ | async).items">
             <div class="basket-list__item">
               <div class="basket-product">
@@ -29,11 +29,11 @@
                       </div>
                       <div class="product-amount__value">
                         <a class="product-amount__indecrease">
-                          <i (click)="decrementItemQuantity(item)" class="pi pi-minus"></i>
+                          <i *ngIf="isBasket" (click)="decrementItemQuantity(item)" class="pi pi-minus"></i>
                         </a>
                         {{item.quantity}}
                         <a class="product-amount__indecrease">
-                          <i (click)="incrementItemQuantity(item)" class="pi pi-plus"></i>
+                          <i *ngIf="isBasket" (click)="incrementItemQuantity(item)" class="pi pi-plus"></i>
                         </a>
                       </div>
 
@@ -46,7 +46,7 @@
                     </div>
                   </div>
                   <a class="product-action__delete">
-                    <i (click)="removeBasketItem(item)" class="pi pi-trash"></i>
+                    <i *ngIf="isBasket" (click)="removeBasketItem(item)" class="pi pi-trash"></i>
                   </a>
                 </div>
               </div>

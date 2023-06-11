@@ -19,10 +19,10 @@
               <div class="label__body">
                 <p-accordion [activeIndex]="[0]">
                   <p-accordionTab header="Service">
-                    <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
+                    <p-dropdown formControlName="shortName" [options]="deliveryMethods" optionLabel="shortName" (onChange)="onSelectionChange($event.value)"/>
                   </p-accordionTab>
                   <p-accordionTab header="City">
-                    <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
+                    <p-dropdown formControlName="city" [options]="cities" optionLabel="name"/>
                   </p-accordionTab>
                   <p-accordionTab header="Address">
                     <app-text-input formControlName="City" [label]="'City'"/>

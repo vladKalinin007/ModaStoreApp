@@ -12,7 +12,6 @@ import {ThemePalette} from "@angular/material/core";
 })
 export class CheckoutComponent implements OnInit {
 
-  color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
 
@@ -24,9 +23,9 @@ export class CheckoutComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
-    /*this.createCheckoutForm();
+    this.createCheckoutForm();
     this.getDeliveryMethodValue();
-    this.getAddressFormValues();*/
+    this.getAddressFormValues();
   }
 
   createCheckoutForm() {
@@ -37,19 +36,24 @@ export class CheckoutComponent implements OnInit {
         street: [null, Validators.required],
         city: [null, Validators.required],
         state: [null, Validators.required],
-        zip: [null, Validators.required],
+        zipCode: [null, Validators.required],
       }),
       deliveryForm: this.fb.group({
         deliveryMethod: [null, Validators.required]
       }),
       paymentForm: this.fb.group({
-        nameOnCard: [null, Validators.required]
+        nameOnCard: [null, Validators.required],
+        cardNumber: [null, Validators.required],
+        cardExpiry: [null, Validators.required],
+        cardCvc: [null, Validators.required]
       })
     });
   }
 
   getAddressFormValues() {
-    this.accountService.getUserAddress().subscribe({
+    this.accountService
+      .getUserAddress()
+      .subscribe({
       next: address => {
         if (address) {
           this.checkoutForm.get('addressForm').patchValue(address);
@@ -62,6 +66,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getDeliveryMethodValue() {
+
     const basket: IBasket = this.basketService.getCurrentBasketValue();
 
     if (basket.deliveryMethodId !== null) {
@@ -71,4 +76,6 @@ export class CheckoutComponent implements OnInit {
         .patchValue(basket.deliveryMethodId.toString());
     }
   }
+
+
 }

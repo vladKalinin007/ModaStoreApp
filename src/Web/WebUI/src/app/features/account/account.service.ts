@@ -12,20 +12,14 @@ import {IAddress} from "../../core/models/address";
 })
 export class AccountService {
 
-  //region Properties
   baseUrl: string = environment.apiUrl;
   private currentUserSource: ReplaySubject<IUser> = new ReplaySubject<IUser>(1);
   currentUser$: Observable<IUser> = this.currentUserSource.asObservable();
-  //endregion
 
-  //region Constructor
   constructor(
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
-  //endregion
-
-  //region Methods
 
   loadCurrentUser(token: string): Observable<void> {
 
@@ -35,11 +29,11 @@ export class AccountService {
     }
 
     let headers = new HttpHeaders();
+
     headers = headers.set('Authorization', `Bearer ${token}`);
-    return this.httpClient
-      .get(this.baseUrl + 'account', {headers})
-      .pipe(
-      map((user: IUser) => {
+
+    return this.httpClient.get(this.baseUrl + 'account', {headers})
+      .pipe(map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
@@ -58,6 +52,12 @@ export class AccountService {
     ));
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    this.currentUserSource.next(null);
+    this.router.navigateByUrl('/');
+  }
+
   register(values: any) {
     return this.httpClient.post(this.baseUrl + 'account/register', values).pipe(
       map((user: IUser) => {
@@ -69,26 +69,25 @@ export class AccountService {
     ));
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
-  }
-
   checkEmailExists(email: string) {
     return this.httpClient.get(this.baseUrl + 'account/emailexists?email=' + email);
   }
 
   getUserAddress(): Observable<IAddress> {
-    return this.httpClient.get<IAddress>(this.baseUrl + 'account/address');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.httpClient.get<IAddress>(this.baseUrl + 'account/address', {headers});
+    /*return this.httpClient.get<IAddress>(this.baseUrl + 'account/address');*/
   }
 
   updateUserAddress(address: IAddress): Observable<IAddress> {
-    return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address, {headers});
+    /*return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address);*/
   }
 
+  createUserAddress(address: IAddress): Observable<IAddress> {
+    return this.httpClient.post<IAddress>(this.baseUrl + 'account/address', address);
+  }
 
-
-  //endregion
 
 }
