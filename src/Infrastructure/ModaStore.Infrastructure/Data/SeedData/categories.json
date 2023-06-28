@@ -1,0 +1,33 @@
+[
+  {
+    "Name": "Hats",
+    "DisplayOrder": 1,
+    "PictureUrl": "http://www.example.com/images/hats.jpg"
+
+  },
+  {
+    "Name": "Scarves",
+    "DisplayOrder": 2,
+    "PictureUrl": "http://www.example.com/images/scarves.jpg"
+  },
+  {
+    "Name": "Socks",
+    "DisplayOrder": 3,
+    "PictureUrl": "http://www.example.com/images/socks.jpg"
+  },
+  {
+    "Name": "Gloves",
+    "DisplayOrder": 4,
+    "PictureUrl": "http://www.example.com/images/gloves.jpg"
+  },
+  {
+    "Name": "Hats",
+    "DisplayOrder": 5,
+    "PictureUrl": "http://www.example.com/images/hats.jpg"
+  },
+  {
+    "Name": "Pants",
+    "DisplayOrder": 6,
+    "PictureUrl": "http://www.example.com/images/pants.jpg"
+  }
+]

@@ -9,6 +9,7 @@ import {CoreModule} from "./core/core.module";
 import {HomeModule} from "./features/home/home.module";
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {StoreModule} from "@ngrx/store";
 /*import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";*/
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MessageService} from "primeng/api";
@@ -19,6 +20,7 @@ import {JwtInterceptor} from "./core/interceptors/jwt.interceptor";
 import {CommonModule} from "@angular/common";
 import {SpeedDialModule} from "primeng/speeddial";
 import {SharedModule} from "./shared/shared.module";
+/*import {basketReducer} from "./features/basket/reducers/basket.reducer";*/
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import {SharedModule} from "./shared/shared.module";
         DynamicDialogModule,
         DialogModule,
         SpeedDialModule,
-        SharedModule
+        SharedModule,
+        /*StoreModule.forRoot({basket: basketReducer}),*/
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}

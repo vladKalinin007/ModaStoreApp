@@ -1,4 +1,4 @@
-using ModaStore.Domain.Models;
+using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.Domain.Specifications;
 
@@ -7,8 +7,8 @@ public class ProductWithFiltersForCountSpecification: BaseSpecification<Product>
     public ProductWithFiltersForCountSpecification(ProductSpecParams? productParams):
         base(x => 
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
-            (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) && 
-            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId))  
+            (string.IsNullOrEmpty(productParams.BrandId) || x.ProductBrandId == productParams.BrandId) && 
+            (string.IsNullOrEmpty(productParams.TypeId) || x.ProductTypeId == productParams.TypeId))  
     {
         
     }

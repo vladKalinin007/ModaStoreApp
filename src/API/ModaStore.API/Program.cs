@@ -9,9 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 using ModaStore.API.Extensions;
 using ModaStore.API.Helpers;
 using ModaStore.API.Middleware;
+using ModaStore.Application.Extensions;
+using ModaStore.Application.Mapping.Config;
+using ModaStore.Application.Mapping.MappingProfiles;
+using ModaStore.Domain.Entities.Identity;
 using ModaStore.Domain.Interfaces;
-using ModaStore.Domain.Models.Identity;
 using ModaStore.Infrastructure.Data;
+using ModaStore.Infrastructure.Extensions;
 using ModaStore.Infrastructure.Identity;
 using StackExchange.Redis;
 
@@ -19,39 +23,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Services
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<StoreContext>(x =>
-{
-    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services.AddDbContext<AppIdentityDbContext>(x =>
-{
-    x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
-});
-builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
-{
-    var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
-    return ConnectionMultiplexer.Connect(configuration);
-});
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddSingleton<IBasketRepository, BasketRepository>();
-builder.Services.AddAutoMapper(typeof(MappingProfiles));
-// builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
 builder.Services.AddApplicationServices();
-builder.Services.AddSwaggerDocumentation();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
+builder.Services.AddAPIServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+AutoMapperConfig.Initialize();
 
 
 var app = builder.Build();

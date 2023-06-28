@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using ModaStore.Domain.Models.Identity;
+using ModaStore.Domain.Entities.Identity;
 using ModaStore.Infrastructure.Identity;
 
 namespace ModaStore.API.Extensions;

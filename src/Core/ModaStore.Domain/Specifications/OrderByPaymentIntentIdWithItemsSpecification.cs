@@ -1,4 +1,5 @@
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Domain.Entities.Order.OrderManagement;
+
 
 namespace ModaStore.Domain.Specifications;
 

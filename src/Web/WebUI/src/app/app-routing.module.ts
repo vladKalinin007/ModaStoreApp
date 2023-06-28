@@ -4,24 +4,37 @@ import {HomeComponent} from "./features/home/home/home.component";
 import {TestErrorComponent} from "./core/components/test-error/test-error.component";
 import {ServerErrorComponent} from "./core/components/server-error/server-error.component";
 import {NotFoundComponent} from "./core/components/not-found/not-found.component";
-import {BasketComponent} from "./features/basket/basket/basket.component";
 import {AuthGuard} from "./core/guards/auth.guard";
+import {WishlistComponent} from "./features/account/wishlist/wishlist.component";
+import {BlogComponent} from "./features/blog/blog/blog.component";
+import {ChatComponent} from "./features/chat/chat/chat.component";
+import {MemberComponent} from "./features/member/member/member.component";
+import {AdminComponent} from "./features/admin/admin/admin.component";
 
 const routes: Routes = [
+
   { path: '', component: HomeComponent, data: {breadcrumb: 'Home'} },
-  { path: 'test-error', component: TestErrorComponent, data: {breadcrumb: 'Test Error'} },
-  { path: 'server-error', component: ServerErrorComponent, data : {breadcrumb: 'Server Error'} },
-  { path: 'not-found', component: NotFoundComponent, data: {breadcrumb: 'Not Found'} },
+  { path: 'admin', component: AdminComponent, data: {breadcrumb: 'Admin'} },
+  { path: 'account', loadChildren: () => import('./features/account/account.module')
+      .then(m => m.AccountModule), data: {breadcrumb: {skip: true} }, },
   { path: 'shop', loadChildren: () => import('./features/shop/shop.module')
       .then(m => m.ShopModule), data: {breadcrumb: 'Shop'} },
+  { path: 'wishlist', component: WishlistComponent, data: {breadcrumb: 'Wishlist'} },
   { path: 'basket', loadChildren: () => import('./features/basket/basket.module')
       .then(m => m.BasketModule), data: {breadcrumb: 'Basket'} },
+  { path: 'blog', component: BlogComponent, data: {breadcrumb: 'Blog'} },
+  { path: 'chat', component: ChatComponent, data: {breadcrumb: 'Chat'} },
+  { path: 'member', component: MemberComponent, data: {breadcrumb: 'Member'} },
   { path: 'checkout',
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/checkout/checkout.module')
       .then(m => m.CheckoutModule), data: {breadcrumb: 'Checkout'} },
-  { path: 'account', loadChildren: () => import('./features/account/account.module')
-      .then(m => m.AccountModule), data: {breadcrumb: {skip: true} }, },
+
+
+  { path: 'test-error', component: TestErrorComponent, data: {breadcrumb: 'Test Error'} },
+  { path: 'server-error', component: ServerErrorComponent, data : {breadcrumb: 'Server Error'} },
+  { path: 'not-found', component: NotFoundComponent, data: {breadcrumb: 'Not Found'} },
+
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 

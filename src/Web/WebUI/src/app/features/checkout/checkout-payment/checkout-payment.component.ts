@@ -4,11 +4,10 @@ import {BasketService} from "../../basket/basket.service";
 import {CheckoutService} from "../checkout.service";
 import {ToastrService} from "ngx-toastr";
 import {IBasket} from "../../../core/models/basket";
-import {IOrder} from "../../../core/models/order";
+import {IOrder, IOrderToCreate} from "../../../core/models/order";
 import {NavigationExtras, Router} from "@angular/router";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
-/*import { StripeService, StripeCardComponent } from 'ngx-stripe';*/
 
 
 declare var Stripe;
@@ -35,7 +34,6 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
   cardErrors: any;
 
   loading: boolean = false;
-/*  stripeService: StripeService;*/
 
   value: string;
   isOnlineSelected: boolean = false;
@@ -110,25 +108,19 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     this.isOnlineSelected = event.source.value === "2";
   }
 
-  /*submitOrder() {
-    const basket = this.basketService.getCurrentBasketValue();
-
-    this.createOrder(basket).then(createdOrder =>
-      {
-
-        this.confirmPaymentWithStripe(basket).then(paymentResult =>
-          {
-            if (paymentResult.paymentIntent) {
-              this.basketService.deleteBasket(basket);
-              const navigationExtras: NavigationExtras = {state: createdOrder};
-              this.router.navigate(['checkout/success'], navigationExtras);
-              this.toastr.success("Success");
-            } else {
-              this.toastr.error(paymentResult.error.message);
-            }
-          });
-      });
-  }*/
+  createPaymentIntent() {
+    return this.basketService.createPaymentIntent()
+      .subscribe({
+        next: (response) => {
+          this.toastr.success('Payment intent created');
+          this.submitOrder();
+        },
+        error: (error) => {
+          console.log(error);
+          this.toastr.error(error.message);
+        }
+      })
+  }
 
   async submitOrder() {
 
@@ -158,49 +150,17 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
 
-
-  /*  async submitOrder() {
-
-      this.loading = true;
-
-      const basket = this.basketService.getCurrentBasketValue();
-
-      try {
-
-        const createdOrder = await this.createOrder(basket);
-
-        const paymentResult = await this.confirmPaymentWithStripe(basket);
-
-        if (paymentResult.paymentIntent) {
-          this.basketService.deleteBasket(basket);
-          const navigationExtras: NavigationExtras = {state: createdOrder};
-          this.router.navigate(['checkout/success'], navigationExtras);
-        } else {
-          this.toastr.error(paymentResult.error.message);
-        }
-
-        this.loading = false;
-      } catch (e) {
-        console.log(e);
-        this.loading = false;
-        this.toastr.error(e.message);
-      }
-
-    }*/
+  private async createOrder(basket: IBasket) {
+    const orderToCreate: IOrderToCreate = this.getOrderToCreate(basket);
+    return this.checkoutService.createOrder(orderToCreate);
+  }
 
   private getOrderToCreate(basket: IBasket) {
     return {
       basketId: basket.id,
-      deliveryMethodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
+      deliveryMethodId: this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
       shipToAddress: this.checkoutForm.get('addressForm').value
     }
-
-  }
-
-
-  private async createOrder(basket: IBasket) {
-    const orderToCreate = this.getOrderToCreate(basket);
-    return this.checkoutService.createOrder(orderToCreate);
   }
 
   private async confirmPaymentWithStripe(basket: IBasket) {
@@ -214,16 +174,4 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
-  createPaymentIntent() {
-    return this.basketService.createPaymentIntent()
-      .subscribe({
-        next: (response) => {
-          this.toastr.success('Payment intent created');
-        },
-        error: (error) => {
-          console.log(error);
-          this.toastr.error(error.message);
-        }
-      })
-  }
 }

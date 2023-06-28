@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ModaStore.Domain.Models;
+using ModaStore.Domain.Entities.Common;
 using ModaStore.Domain.Specifications;
 
 namespace ModaStore.Infrastructure.Data;

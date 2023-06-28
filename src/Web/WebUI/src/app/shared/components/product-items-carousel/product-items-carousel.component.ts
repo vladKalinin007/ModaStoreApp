@@ -31,6 +31,7 @@ export class ProductItemsCarouselComponent implements OnInit {
       .subscribe({
         next: (response: IPagination) => {
           this.products = response.data;
+
         },
         error: (error) => {
           console.log(error);

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ModaStore.Domain.Models.Identity;
+using ModaStore.Domain.Entities.Identity;
 
 namespace ModaStore.Infrastructure.Identity;
 

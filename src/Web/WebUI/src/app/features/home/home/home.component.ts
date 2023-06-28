@@ -60,10 +60,13 @@ export class HomeComponent implements OnInit {
   getProducts() {
     this.productService.getProducts(this.shopParams)
       .subscribe({
-        next: (response: IPagination) => {
+        next: (response) => {
           this.products = response.data;
+          console.log("Response.data: ", response.data);
+
         },
         error: (error) => {
+          console.log("NO PRODUCT FOR CAROUSEL");
           console.log(error);
         }
       });

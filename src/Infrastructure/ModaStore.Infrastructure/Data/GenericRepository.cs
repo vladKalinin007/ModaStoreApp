@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using ModaStore.Domain.Entities.Common;
 using ModaStore.Domain.Interfaces;
-using ModaStore.Domain.Models;
+using ModaStore.Domain.Interfaces.Common;
 using ModaStore.Domain.Specifications;
 
 namespace ModaStore.Infrastructure.Data;
@@ -14,7 +15,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context = context;
     }
     
-    public async Task<T> getByIdAsync(int id)
+    public async Task<T> getByIdAsync(string id)
     {
         return await _context.Set<T>().FindAsync(id);
     }
@@ -54,6 +55,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         _context.Set<T>().Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
+    public Task<T> UpdateAsync(T entity)
+    {
+        _context.Set<T>().Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+        _context.SaveChanges();
+        return Task.FromResult(entity);
     }
 
     public void Delete(T entity)

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ModaStore.Domain.Models;
+using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.Infrastructure.Data.Config;
 

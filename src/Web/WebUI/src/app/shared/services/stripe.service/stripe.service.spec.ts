@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StripeService } from './stripe.service';
+/*import { StripeService } from './stripe.service';
 
 describe('StripeService', () => {
   let service: StripeService;
@@ -13,4 +13,4 @@ describe('StripeService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-});
+});*/

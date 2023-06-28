@@ -1,12 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Domain.Entities.Order.OrderManagement;
+using OrderEntity = ModaStore.Domain.Entities.Order.OrderManagement.Order;
+
 
 namespace ModaStore.Infrastructure.Data.Config;
 
-public class OrderConfiguration : IEntityTypeConfiguration<Order>
+public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 {
-    public void Configure(EntityTypeBuilder<Order> builder)
+    public void Configure(EntityTypeBuilder<OrderEntity> builder)
     {
         builder.OwnsOne(o => o.ShipToAddress, a =>
         {

@@ -1,7 +1,8 @@
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using ModaStore.Domain.Models;
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Domain.Entities.Catalog;
+using ModaStore.Domain.Entities.Order.OrderManagement;
+
 
 namespace ModaStore.Infrastructure.Data;
 
@@ -13,7 +14,7 @@ public class StoreContextSeed
         {
             if (!context.ProductBrands.Any())
             {
-                var brandsData = File.ReadAllText("../ModaStore.Infrastructure/Data/SeedData/brands.json");
+                var brandsData = File.ReadAllText("/Users/vladislavkalinin/Projects/API/src/Infrastructure/ModaStore.Infrastructure/Data/SeedData/brands.json");
                 var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
                 foreach (var item in brands)
@@ -22,11 +23,12 @@ public class StoreContextSeed
                 }
 
                 await context.SaveChangesAsync();
+                
             }
 
             if (!context.ProductTypes.Any())
             {
-                var typesData = File.ReadAllText("../ModaStore.Infrastructure/Data/SeedData/types.json");
+                var typesData = File.ReadAllText("/Users/vladislavkalinin/Projects/API/src/Infrastructure/ModaStore.Infrastructure/Data/SeedData/types.json");
                 var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
                 foreach (var item in types)
@@ -39,7 +41,7 @@ public class StoreContextSeed
 
             if (!context.Products.Any())
             {
-                var productsData = File.ReadAllText("../ModaStore.Infrastructure/Data/SeedData/products.json");
+                var productsData = File.ReadAllText("/Users/vladislavkalinin/Projects/API/src/Infrastructure/ModaStore.Infrastructure/Data/SeedData/products.json");
                 var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
                 foreach (var item in products)
@@ -52,7 +54,7 @@ public class StoreContextSeed
             
             if (!context.DeliveryMethods.Any())
             {
-                var dmData = File.ReadAllText("../ModaStore.Infrastructure/Data/SeedData/delivery.json");
+                var dmData = File.ReadAllText("/Users/vladislavkalinin/Projects/API/src/Infrastructure/ModaStore.Infrastructure/Data/SeedData/delivery.json");
                 var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
 
                 foreach (var item in methods)
@@ -60,6 +62,19 @@ public class StoreContextSeed
                     context.DeliveryMethods.Add(item);
                 }
 
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.Categories.Any())
+            {
+                var categoriesData = File.ReadAllText("/Users/vladislavkalinin/Projects/API/src/Infrastructure/ModaStore.Infrastructure/Data/SeedData/categories.json");
+                var categories = JsonSerializer.Deserialize<List<Category>>(categoriesData);
+                
+                foreach (var item in categories)
+                {
+                    context.Categories.Add(item);
+                }
+                
                 await context.SaveChangesAsync();
             }
         }

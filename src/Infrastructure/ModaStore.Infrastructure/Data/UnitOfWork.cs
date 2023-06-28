@@ -1,6 +1,6 @@
 using System.Collections;
-using ModaStore.Domain.Interfaces;
-using ModaStore.Domain.Models;
+using ModaStore.Domain.Entities.Common;
+using ModaStore.Domain.Interfaces.Common;
 
 namespace ModaStore.Infrastructure.Data;
 

@@ -32,7 +32,7 @@ describe('CheckoutService', () => {
       // create some mock order data
       const order: IOrderToCreate = {
         basketId: 'basket1',
-        deliveryMethodId: 1,
+        deliveryMethodId: "1",
         shipToAddress: {
           firstName: 'John',
           lastName: 'Johnson',
@@ -55,9 +55,9 @@ describe('CheckoutService', () => {
 
     it('should send a GET request to fetch delivery methods', () => {
       const mockDeliveryMethods: IDeliveryMethod[] = [
-        { id: 1, shortName: 'test1', deliveryTime: '1', description: 'test1', price: 5 },
-        { id: 2, shortName: 'test2', deliveryTime: '2', description: 'test2', price: 10 },
-        { id: 3, shortName: 'test3', deliveryTime: '3', description: 'test3', price: 15 },
+        { id: "1", shortName: 'test1', deliveryTime: '1', description: 'test1', price: 5 },
+        { id: "2", shortName: 'test2', deliveryTime: '2', description: 'test2', price: 10 },
+        { id: "3", shortName: 'test3', deliveryTime: '3', description: 'test3', price: 15 },
       ];
       service.getDeliveryMethods().subscribe(deliveryMethods => {
         expect(deliveryMethods).toEqual(mockDeliveryMethods);
@@ -69,9 +69,9 @@ describe('CheckoutService', () => {
 
     it('should sort delivery methods by price in descending order', () => {
       const mockDeliveryMethods: IDeliveryMethod[] = [
-        { id: 1, shortName: 'test1', deliveryTime: '1', description: 'test1', price: 5 },
-        { id: 2, shortName: 'test2', deliveryTime: '2', description: 'test2', price: 10 },
-        { id: 3, shortName: 'test3', deliveryTime: '3', description: 'test3', price: 15 },
+        { id: "1", shortName: 'test1', deliveryTime: '1', description: 'test1', price: 5 },
+        { id: "2", shortName: 'test2', deliveryTime: '2', description: 'test2', price: 10 },
+        { id: "3", shortName: 'test3', deliveryTime: '3', description: 'test3', price: 15 },
       ];
       const sortedDeliveryMethods = mockDeliveryMethods.slice().sort((a, b) => b.price - a.price);
       service.getDeliveryMethods().subscribe(deliveryMethods => {

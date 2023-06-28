@@ -1,6 +1,8 @@
 using AutoMapper;
-using ModaStore.API.Dto;
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Application.DTOs.Order.OrderManagement;
+using ModaStore.Domain.Entities.Order.OrderManagement;
+
+
 
 namespace ModaStore.API.Helpers;
 

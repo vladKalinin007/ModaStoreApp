@@ -16,6 +16,28 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.29.0" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Folder Include="Configuration" />
+    <Folder Include="Data\Migrations" />
+    <Folder Include="Events" />
+    <Folder Include="Services\Common" />
+    <Folder Include="Services\Content" />
+    <Folder Include="Services\Identity\AuthenticationProviders" />
+    <Folder Include="Services\Identity\Claims" />
+    <Folder Include="Services\Identity\Roles" />
+    <Folder Include="Services\Identity\UserManagement" />
+    <Folder Include="Services\Catalog\Brand" />
+    <Folder Include="Services\Catalog\Category" />
+    <Folder Include="Services\Catalog\Inventory" />
+    <Folder Include="Services\Catalog\Pricing" />
+    <Folder Include="Services\Catalog\Recommendation" />
+    <Folder Include="Services\Catalog\Review" />
+    <Folder Include="Services\Catalog\Search" />
+    <Folder Include="Services\Customer\Billing" />
+    <Folder Include="Services\Customer\CustomerManagement" />
+    <Folder Include="Services\Customer\Messaging" />
+  </ItemGroup>
+  
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>

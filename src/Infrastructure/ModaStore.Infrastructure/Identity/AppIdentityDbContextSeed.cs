@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using ModaStore.Domain.Models.Identity;
+using ModaStore.Domain.Entities.Identity;
+using ModaStore.Domain.Entities.Order.OrderManagement;
 
 namespace ModaStore.Infrastructure.Identity;
 
@@ -21,7 +22,7 @@ public class AppIdentityDbContextSeed
                     Street = "10 The Street",
                     City = "New York",
                     State = "NY",
-                    ZipCode = "90210"
+                    Zipcode = "90210"
                 }
             };
             

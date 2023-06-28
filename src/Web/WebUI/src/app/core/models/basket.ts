@@ -5,12 +5,12 @@ export interface IBasket {
   items: IBasketItem[]
   clientSecret?: string
   paymentIntentId?: string
-  deliveryMethodId?: number
+  deliveryMethodId?: string
   shippingPrice?: number
 }
 
 export interface IBasketItem {
-  id: number
+  id: string
   productName: string
   price: number
   quantity: number

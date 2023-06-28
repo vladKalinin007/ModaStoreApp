@@ -1,6 +1,8 @@
-using ModaStore.API.Dto.Catalog;
-using ModaStore.Domain.Models.Catalog;
-using ModaStore.Infrastructure.Mapper;
+
+using ModaStore.Application.DTOs.Catalog;
+using ModaStore.Application.Extensions.Mapper;
+using ModaStore.Domain.Entities.Catalog;
+
 
 namespace ModaStore.API.Extensions;
 

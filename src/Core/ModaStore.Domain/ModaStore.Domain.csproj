@@ -15,10 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Discounts" />
-    <Folder Include="Models\Media" />
-    <Folder Include="Models\Payments" />
-    <Folder Include="Models\Security" />
+    <Folder Include="Entities\Customer\CustomerAuthentication" />
+    <Folder Include="Entities\Customer\CustomerManagement" />
+    <Folder Include="Entities\Customer\CustomerPreferences" />
+    <Folder Include="Entities\Customer\Messaging" />
+    <Folder Include="Entities\Data" />
+    <Folder Include="Entities\Identity\Security" />
+    <Folder Include="Entities\Identity\UserManagement" />
+    <Folder Include="Entities\Order\Billing" />
+    <Folder Include="Entities\Order\Payment" />
+    <Folder Include="Extensions" />
+    <Folder Include="Interfaces\Identity\Claims" />
+    <Folder Include="Interfaces\Identity\ExternalProviders" />
+    <Folder Include="Interfaces\Identity\UserProfiles" />
   </ItemGroup>
 
 </Project>

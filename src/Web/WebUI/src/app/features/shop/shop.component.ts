@@ -55,7 +55,13 @@ export class ShopComponent implements OnInit {
     this.shopService.getBrands()
       .subscribe({
         next: (response: IBrand[]) => {
-          this.brands = [{id: 0, name: 'All'}, ...response];
+          this.brands = [
+            {
+              id: "0",
+              name: 'All'
+            },
+            ...response
+          ];
         },
         error: (error) => {
           console.log(error);
@@ -75,13 +81,13 @@ export class ShopComponent implements OnInit {
       });
   }
 
-  onBrandSelected(brandId: number) {
+  onBrandSelected(brandId: string) {
     this.shopParams.brandId = brandId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
-  onTypeSelected(typeId: number) {
+  onTypeSelected(typeId: string) {
     this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1;
     this.getProducts();

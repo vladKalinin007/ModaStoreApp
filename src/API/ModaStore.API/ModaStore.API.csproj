@@ -33,15 +33,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\ModaStore.Application\ModaStore.Application.csproj" />
     <ProjectReference Include="..\..\Core\ModaStore.Domain\ModaStore.Domain.csproj" />
 <!--    <ProjectReference Include="..\..\Core\ModaStore.Infrastructure\ModaStore.Infrastructure.csproj" />-->
     <ProjectReference Include="..\..\Infrastructure\ModaStore.Infrastructure\ModaStore.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\Queries\Models\Customers" />
-    <Folder Include="Dto\Common" />
-    <Folder Include="Dto\Shipping" />
-    <Folder Include="Filters" />
     <Folder Include="wwwroot" />
   </ItemGroup>
 

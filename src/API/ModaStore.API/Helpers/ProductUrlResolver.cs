@@ -1,10 +1,10 @@
 using AutoMapper;
-using ModaStore.API.Dto;
-using ModaStore.Domain.Models;
+using ModaStore.Application.DTOs.Catalog;
+using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.API.Helpers;
 
-public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, string>
+public class ProductUrlResolver : IValueResolver<Product, ProductDto, string>
 {
     private readonly IConfiguration _config;
 
@@ -12,7 +12,7 @@ public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, st
     {
         _config = config;
     }
-    public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
+    public string Resolve(Product source, ProductDto destination, string destMember, ResolutionContext context)
     {
         if (!string.IsNullOrEmpty(source.PictureUrl))
         {

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Domain.Entities.Order.OrderManagement;
+
 
 namespace ModaStore.Infrastructure.Data.Config;
 

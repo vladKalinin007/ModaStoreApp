@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ModaStore.Domain.Models.Identity;
+using ModaStore.Domain.Entities.Identity;
 
 namespace ModaStore.API.Extensions;
 

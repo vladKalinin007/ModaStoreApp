@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {ShopParams} from "../../core/models/shopParams";
 import {IProduct} from "../../core/models/product";
 import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,16 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(shopParams: ShopParams) {
-    let params = new HttpParams();
+  getProducts(shopParams: ShopParams): Observable<IPagination> {
 
-    if (shopParams.brandId !== 0) {
-      params = params.append('brandId', shopParams.brandId.toString());
+    let params: HttpParams = new HttpParams();
+
+    if (shopParams.brandId) {
+      params = params.append('brandId', shopParams.brandId);
     }
 
-
-    if (shopParams.typeId !== 0) {
-      params = params.append('typeId', shopParams.typeId.toString());
+    if (shopParams.typeId) {
+      params = params.append('typeId', shopParams.typeId);
     }
 
     if (shopParams.search) {
@@ -37,24 +38,29 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params}).pipe(
+    return this.http.get<IPagination>(this.baseUrl + 'product', {observe: 'response', params})
+      .pipe(
       map(response => {
         return response.body;
       })
     );
   }
 
-  getProduct(id: number)
+  getProduct(id: string): Observable<IProduct>
   {
-    return this.http.get<IProduct>(this.baseUrl + 'products/' + id); // returns an observable'
+    return this.http.get<IProduct>(this.baseUrl + 'product/' + id); // returns an observable'
   }
 
-  getBrands() {
-    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands'); // returns an observable
+  getBrands(): Observable<IBrand[]> {
+    return this.http.get<IBrand[]>(this.baseUrl + 'productBrand'); // returns an observable
   }
 
-  getTypes() {
-    return this.http.get<IType[]>(this.baseUrl + 'products/types'); // returns an observable
+  getTypes(): Observable<IType[]> {
+    return this.http.get<IType[]>(this.baseUrl + 'productType'); // returns an observable
+  }
+
+  getCategories() {
+    return this.http.get<IType[]>(this.baseUrl + 'category'); // returns an observable
   }
 
 }

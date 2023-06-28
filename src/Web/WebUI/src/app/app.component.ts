@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadBasket();
-    this.loadCurrentUser();
+    /*this.loadBasket();*/
+   /* this.loadCurrentUser();*/
     this.addItemsToSpeedDial();
     this.updateComponentVisibility();
 

@@ -1,4 +1,4 @@
-using ModaStore.Domain.Models.OrderAggregate;
+using ModaStore.Domain.Entities.Order.OrderManagement;
 
 namespace ModaStore.Domain.Specifications;
 
@@ -13,7 +13,7 @@ public class OrdersWithItemsAndOrderingSpecification : BaseSpecification<Order>
     }
 
     
-    public OrdersWithItemsAndOrderingSpecification(int id, string email) : base(o => o.Id == id && o.BuyerEmail == email)
+    public OrdersWithItemsAndOrderingSpecification(string id, string email) : base(o => o.Id == id && o.BuyerEmail == email)
     {
         AddInclude(o => o.OrderItems);
         AddInclude(o => o.DeliveryMethod);
