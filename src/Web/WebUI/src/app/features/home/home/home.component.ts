@@ -14,6 +14,7 @@ import {ShopParams} from "../../../core/models/shopParams";
 export class HomeComponent implements OnInit {
 
   products: IProduct[];
+  product: IProduct;
   categories: ICategory[];
   shopParams: ShopParams = new ShopParams();
 
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
     this.getProducts();
+    this.loadProduct();
 
     this.getCategories();
 
@@ -49,6 +51,8 @@ export class HomeComponent implements OnInit {
     ];
   }
 
+  p
+
   getCategories() {
     this.homeService.getCategories()
       .subscribe(categories => {
@@ -62,7 +66,7 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.products = response.data;
-          console.log("Response.data: ", response.data);
+          console.log("HomeComponent.getProducts.RESPONSE", response.data);
 
         },
         error: (error) => {
@@ -70,6 +74,19 @@ export class HomeComponent implements OnInit {
           console.log(error);
         }
       });
+  }
+
+  loadProduct() {
+    this.productService.getProduct("87c12f75-8176-4ea9-8ee4-a117a2a27d1e").subscribe({
+      next: (response) => {
+        console.log(`HomeComponent.loadProduct.RESPONSE: ${response}`)
+        this.product = response;
+        /*this.bcService.set('@productDetails', this.product.name);*/
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   getNewProducts() {

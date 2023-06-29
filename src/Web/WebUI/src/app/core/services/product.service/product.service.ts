@@ -20,41 +20,34 @@ export class ProductService {
 
   getProducts(shopParams?: ShopParams) {
 
+    const url: string = `${this.baseUrl}product`;
     let params = new HttpParams();
 
-    if (shopParams.brandId) {
-      params = params.append('brandId', shopParams.brandId);
-    }
+    shopParams.brandId ? params = params.append('brandId', shopParams.brandId) : null;
 
+    shopParams.typeId ? params = params.append('typeId', shopParams.typeId) : null;
 
-    if (shopParams.typeId) {
-      params = params.append('typeId', shopParams.typeId);
-    }
-
-    if (shopParams.search) {
-      params = params.append('search', shopParams.search);
-    }
+    shopParams.search ? params = params.append('search', shopParams.search) : null;
 
     params = params.append('sort', shopParams.sort);
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(this.baseUrl + 'product', {observe: 'response', params})
-      .pipe(
-      map(response => {
-        console.log("RESPONSE: ", response);
-        return response.body;
-      })
+    return this.http.get<IPagination>(url, {observe: 'response', params}).pipe(
+      map(response => response.body)
     );
   }
 
-  getProduct(id: number)
-  {
-    return this.http.get<IProduct>(this.baseUrl + 'product/' + id); // returns an observable'
+  getProduct(id: string) {
+    const url: string = `${this.baseUrl}product/${id}`;
+
+    return this.http.get<IProduct>(url).pipe(
+      map(response => response[0])
+    );
   }
 
   getBrands() {
-    return this.http.get<IBrand[]>(this.baseUrl + 'productBrand/'); // returns an observable
+    return this.http.get<IBrand[]>(this.baseUrl + 'productBrand/');
   }
 
   getTypes() {

@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {BreadcrumbService} from "xng-breadcrumb";
 import {BasketService} from "../../basket/basket.service";
 import {ShopParams} from "../../../core/models/shopParams";
+import {ProductService} from "../../../core/services/product.service/product.service";
 
 @Component({
   selector: 'app-product-details',
@@ -14,10 +15,9 @@ import {ShopParams} from "../../../core/models/shopParams";
 })
 export class ProductDetailsComponent implements OnInit {
 
-
-
   product: IProduct;
   products: IProduct[];
+
   shopParams: ShopParams = new ShopParams();
   responsiveOptions: any[];
   ratingValue: number;
@@ -74,6 +74,7 @@ export class ProductDetailsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private bcService: BreadcrumbService,
     private basketService: BasketService,
+    private productService: ProductService,
   ) {
     this.bcService.set('@productDetails', '');
   }
@@ -98,10 +99,11 @@ export class ProductDetailsComponent implements OnInit {
   }*/
 
   loadProduct() {
-    this.shopService.getProduct(this.activateRoute.snapshot.paramMap.get('id'))
-      .subscribe({
-        next: (response: IProduct) => {
+    this.productService.getProduct(this.activateRoute.snapshot.paramMap.get('id')).subscribe({
+        next: (response) => {
+          /*console.log("Details.loadProduct.RESPONSE", response);*/
           this.product = response;
+          console.log("Details.product =", this.product);
           this.bcService.set('@productDetails', this.product.name);
         },
         error: (error) => {
@@ -110,11 +112,11 @@ export class ProductDetailsComponent implements OnInit {
       });
   }
 
-  getProducts() {
-    this.shopService.getProducts(this.shopParams)
-      .subscribe({
-        next: (response: IPagination) => {
+  /*getProducts() {
+    this.productService.getProducts(this.shopParams).subscribe({
+        next: (response) => {
           this.products = response.data;
+          console.log(`ProductDetailsComponent.getProducts.RESPONSE: ${response.data}`);
           this.shopParams.pageNumber = response.pageIndex;
           this.shopParams.pageSize = response.pageSize;
           this.totalCount = response.count;
@@ -123,8 +125,21 @@ export class ProductDetailsComponent implements OnInit {
           console.log(error);
         }
       });
-  }
+  }*/
 
-  //endregion
+  getProducts() {
+    this.productService.getProducts(this.shopParams)
+      .subscribe({
+        next: (response) => {
+          this.products = response.data;
+          /*console.log("Details.getProducts.RESPONSE", response.data);*/
+          console.log("Details.products =", this.products);
+
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
 
 }

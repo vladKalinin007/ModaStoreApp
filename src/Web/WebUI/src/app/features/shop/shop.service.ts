@@ -38,9 +38,7 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(this.baseUrl + 'product', {observe: 'response', params})
-      .pipe(
-      map(response => {
+    return this.http.get<IPagination>(this.baseUrl + 'product', {observe: 'response', params}).pipe(map(response => {
         return response.body;
       })
     );
@@ -48,7 +46,7 @@ export class ShopService {
 
   getProduct(id: string): Observable<IProduct>
   {
-    return this.http.get<IProduct>(this.baseUrl + 'product/' + id); // returns an observable'
+    return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
   }
 
   getBrands(): Observable<IBrand[]> {
