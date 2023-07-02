@@ -9,21 +9,42 @@
         >
       </a>
       <div class="catalog-item__like" >
-        <i (click)="addItemToBasket()" class="fa fa-heart fa-1.5x text-dark "></i>
+        <i (click)="addItemToBasket()" class="pi pi-heart catalog-item__like-icon"></i>
       </div>
     </div>
     <div class="catalog-item__caption">
       <a class="catalog-item__name" routerLink="/shop/{{product.id}}">
-        <h6 >{{product.name}}</h6>
+        {{product.name}}
       </a>
+      <div class="detail-palette">
+        <div class="detail-palette__links">
+          <span class="detail-palette__link">
+
+          </span>
+          <span class="detail-palette__link">
+
+          </span>
+          <span class="detail-palette__link">
+
+          </span>
+        </div>
+      </div>
       <div class="catalog-item__price">
         <div class="catalog-item__new-price">{{product.price}} $</div>
+        <div class="catalog-item__old-price">{{product.price}} $</div>
+      </div>
+      <div class="catalog-item__sizes-btn">
+        <div class="catalog-item__sizes">
+        </div>
+        <div class="catalog-item__button">
+          <app-button
+            showIcon="true"
+            iconClass="pi pi-shopping-bag"
+            buttonName="Add to basket"
+            buttonStyle="btn btn_color_dark btn_size_large basket-list__checkout-button"
+          />
+        </div>
       </div>
     </div>
-    <!--<div class="catalog-tem__" >
-      <div class="d-flex align-items-center justify-content-center rounded-circle btn btn-warning" style="width: 40px; height: 40px;">
-        <i (click)="addItemToBasket()" class="fa fa-heart fa-1.5x text-dark "></i>
-      </div>
-    </div>-->
   </div>
 </div>

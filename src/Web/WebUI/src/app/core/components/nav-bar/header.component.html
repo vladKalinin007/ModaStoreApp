@@ -1,6 +1,6 @@
 <ng-container *ngIf="!isCheckoutPage; else checkoutNavBar">
   <header class="header">
-    <div class="header__layout">
+    <div class="layout">
       <div class="header__main">
         <div class="header__items m-width">
           <div class="header__item_left">
@@ -31,7 +31,7 @@
           <ng-container *ngIf="(currentUser$ | async) === null">
             <div class="header__item_left">
               <div class="header__item-icon align-r">
-                <a href="" class="s-hamb">
+                <a routerLink="/wishlist" class="s-hamb">
                   <i class="pi pi-heart header__icon-internal" pBadge value="2" severity="success" size="large"
                      ></i>
                 </a>

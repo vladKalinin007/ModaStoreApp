@@ -7,6 +7,9 @@ import {BreadcrumbService} from "xng-breadcrumb";
 import {BasketService} from "../../basket/basket.service";
 import {ShopParams} from "../../../core/models/shopParams";
 import {ProductService} from "../../../core/services/product.service/product.service";
+import {HistoryService} from "../../../shared/services/history.service";
+import {IViewedProductList} from "../../../core/models/customer/viewedProductList";
+import {WishlistService} from "../../wishlist/wishlist.service";
 
 @Component({
   selector: 'app-product-details',
@@ -17,6 +20,8 @@ export class ProductDetailsComponent implements OnInit {
 
   product: IProduct;
   products: IProduct[];
+  viewedProductList: IViewedProductList;
+
 
   shopParams: ShopParams = new ShopParams();
   responsiveOptions: any[];
@@ -68,42 +73,61 @@ export class ProductDetailsComponent implements OnInit {
   ];
 
 
-
   constructor(
     private shopService: ShopService,
     private activateRoute: ActivatedRoute,
     private bcService: BreadcrumbService,
     private basketService: BasketService,
     private productService: ProductService,
+    private historyService: HistoryService,
+    private wishlistService: WishlistService,
   ) {
     this.bcService.set('@productDetails', '');
   }
 
   ngOnInit(): void {
-    this.loadProduct();
-    this.getProducts();
+    this.getProductById();
+    this.getProductList();
+    this.addProductToViewsHistory(this.product);
   }
 
-  addItemToBasket() {
+  addProductToViewsHistory(product: IProduct) {
+    this.historyService.addItemToProductsViewsHistory(product.id).subscribe({
+      next: (response) => {
+        console.log("addProductToViewsHistory.response =", response);
+      },
+      error: (error) => {
+        console.log("addProductToViewsHistory.error =", error);
+      }
+    });
+  }
+
+  addProductToBasket() {
     this.basketService.addItemToBasket(this.product);
   }
 
-  /*incrementQuantity() {
-    this.quantity++;
-  }
-
-  decrementQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
+  /*addProductToWishList() {
+    this.wishlistService.
   }*/
 
-  loadProduct() {
+  getProductsFromViewsHistory(id: string) {
+    this.historyService.getItemsFromProductsViewsHistory(id).subscribe({
+      next: (response) => {
+        console.log("getProductsFromViewsHistory.response =", response);
+      },
+      error: (error) => {
+        console.log("getProductsFromViewsHistory.error =", error);
+      }
+    })
+
+  }
+
+
+  getProductById() {
     this.productService.getProduct(this.activateRoute.snapshot.paramMap.get('id')).subscribe({
         next: (response) => {
-          /*console.log("Details.loadProduct.RESPONSE", response);*/
           this.product = response;
-          console.log("Details.product =", this.product);
+          /*console.log("Details.product =", this.product);*/
           this.bcService.set('@productDetails', this.product.name);
         },
         error: (error) => {
@@ -112,27 +136,12 @@ export class ProductDetailsComponent implements OnInit {
       });
   }
 
-  /*getProducts() {
-    this.productService.getProducts(this.shopParams).subscribe({
-        next: (response) => {
-          this.products = response.data;
-          console.log(`ProductDetailsComponent.getProducts.RESPONSE: ${response.data}`);
-          this.shopParams.pageNumber = response.pageIndex;
-          this.shopParams.pageSize = response.pageSize;
-          this.totalCount = response.count;
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
-  }*/
-
-  getProducts() {
-    this.productService.getProducts(this.shopParams)
+  getProductList() {
+    this.productService
+      .getProducts(this.shopParams)
       .subscribe({
         next: (response) => {
           this.products = response.data;
-          /*console.log("Details.getProducts.RESPONSE", response.data);*/
           console.log("Details.products =", this.products);
 
         },

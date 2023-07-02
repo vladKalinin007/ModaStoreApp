@@ -1,0 +1,8 @@
+@import "src/app/shared/styles/common.scss";
+.wishlist {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -4rem -.5rem 0;
+  }
+}

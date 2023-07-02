@@ -23,17 +23,17 @@ export class ProductService {
     const url: string = `${this.baseUrl}product`;
     let params = new HttpParams();
 
-    shopParams.brandId ? params = params.append('brandId', shopParams.brandId) : null;
-
-    shopParams.typeId ? params = params.append('typeId', shopParams.typeId) : null;
-
-    shopParams.search ? params = params.append('search', shopParams.search) : null;
+    params = shopParams?.brandId ? params.append('brandId', shopParams.brandId) : params;
+    params = shopParams?.typeId ? params.append('typeId', shopParams.typeId) : params;
+    params = shopParams?.search ? params.append('search', shopParams.search) : params;
 
     params = params.append('sort', shopParams.sort);
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(url, {observe: 'response', params}).pipe(
+    const options = { observe: 'response' as const, params };
+
+    return this.http.get<IPagination>(url, options).pipe(
       map(response => response.body)
     );
   }

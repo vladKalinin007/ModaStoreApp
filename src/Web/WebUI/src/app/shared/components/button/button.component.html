@@ -1,6 +1,7 @@
-<!--<button class="subscribe-block__form-submit btn -dark">
-  Subscribe
-</button>-->
+
 <button [class]="buttonStyle" (click)="buttonClicked.emit()">
+  <ng-container *ngIf="showIcon">
+    <i class="icon" [ngClass]="iconClass"></i>
+  </ng-container>
   {{ buttonName }}
 </button>

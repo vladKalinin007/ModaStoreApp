@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {IWishlist, Wishlist} from "../../core/models/customer/wishlist";
 import {BehaviorSubject} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -31,15 +32,14 @@ export class WishlistService {
   }
 
   getWishlist(id: string) {
-    return this.http.get(this.baseUrl + 'wishlist?id=' + id)
-      .subscribe({
-      next: (response: IWishlist) => {
-        this.wishlistSource.next(response);
-      },
-      error: (error: any) => {
-        console.log(error);
+    const url: string = this.baseUrl + 'wishlist/' + id;
+    return this.http.get(url).pipe(
+      map((wishlist: IWishlist) => {
+        this.wishlistSource.next(wishlist);
       }
-    })
+    ));
+
+
   }
 
   setWishlist(wishlist: IWishlist) {

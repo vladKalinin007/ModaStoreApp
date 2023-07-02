@@ -40,75 +40,228 @@
       </div>
       <div class="product-about__right">
       <div class="product-card">
-          <div class="product-card__header">
-            <h1 class="product-card__title">
-              {{product.name}}
-            </h1>
+          <div class="product-card__description">
+            <div class="product-card__header">
+              <h1 class="product-card__title">
+                {{product.name}}
+              </h1>
+            </div>
             <div class="product-card__panel">
               <div class="product-card__panel-article"> Article: 20296-87 </div>
               <div class="product-card__rating">
                 <p-rating [(ngModel)]="ratingValue" [cancel]="false"/>
               </div>
+              <div class="product-card__reviews">
+                <a href="#" class="product-card__reviews-count"> 0 reviews </a>
+              </div>
             </div>
-          </div>
-          <div class="product-card__price">
-            <div class="product-card__price-value">
-              Price: {{product.price}}$
+            <div class="product-card__price">
+              <div class="product-card__current-price">
+                Price: {{product.price}}$
+              </div>
+              <div class="product-card__old-price">
+                230 $
+              </div>
             </div>
-          </div>
-          <div class="product-card__sizes">
-            <div id="bodyfit-button"></div>
-
-            <div class="product-info__offers-sizes">
-              <div class="sizes">
-                <div class="sizes__title">
-                  Select your size
-                </div>
-                <div>
-                  <a (click)="sidebarVisible = true">table of sizes</a>
+            <div class="product-card__color">
+              <div class="product-card__color-title">
+                Select color:
+              </div>
+              <div class="color-palette">
+                <a href="" class="color-palette__link"></a>
+              </div>
+            </div>
+            <div class="product-card__sizes">
+                <div class="product-card__sizes-title">
+                  Select your size:
+                  <a (click)="sidebarVisible = true" class="product-card__sizes-link">table of sizes</a>
                   <p-sidebar [(visible)]="sidebarVisible" position="right">
                   </p-sidebar>
                 </div>
+              <div class="product-card__sizes-options">
+                <label class="product-card__sizes-option">
+                  <input type="radio" name="size" class="product-card__sizes-option-input" value="S">
+                  <span class="product-card__sizes-option-box">S</span>
+                </label>
+                <label class="product-card__sizes-option">
+                  <input type="radio" name="size" class="product-card__sizes-option-input"  value="X">
+                  <span class="product-card__sizes-option-box">X</span>
+                </label>
+                <label class="product-card__sizes-option">
+                  <input type="radio" name="size" class="product-card__sizes-option-input"  value="XS">
+                  <span class="product-card__sizes-option-box">XS</span>
+                </label>
+              </div>
                 <div></div>
               </div>
-              <div>
-                <p-toggleButton onIcon="pi pi-tag" offIcon="pi pi-tag" onLabel="44" offLabel="44"/>
-                <p-toggleButton onIcon="pi pi-tag" offIcon="pi pi-tag" onLabel="46" offLabel="46"/>
-                <p-toggleButton onIcon="pi pi-tag" offIcon="pi pi-tag" onLabel="48" offLabel="48"/>
-                <p-toggleButton onIcon="pi pi-tag" offIcon="pi pi-tag" onLabel="50" offLabel="50"/>
-              </div>
             </div>
-          </div>
-          <div class="product-sale">
-            <div class="product-sale__container">
-            <div class="product-sale__buy-button">
-              <app-button buttonName="Add to basket" buttonStyle="btn btn_color_dark btn_size_large basket-list__checkout-button"/>
-            </div>
+            <div class="product-sale">
+              <div class="product-sale__container">
               <div class="product-sale__buy-button">
-                <app-button buttonName="Fast purchase" buttonStyle="btn btn_color_light btn_size_large"/>
+                <app-button
+                  buttonName="Add to basket"
+                  buttonStyle="btn btn_color_dark btn_size_large basket-list__checkout-button"
+                  showIcon="true"
+                  iconClass="pi pi-shopping-bag"
+                />
               </div>
+                <div class="product-sale__buy-button">
+                  <app-button
+                    buttonName="Fast purchase"
+                    buttonStyle="btn btn_color_light btn_size_large"
+                    showIcon="true"
+                    iconClass="fa fa-light fa-phone"
+                  />
+                </div>
+              </div>
+              <i class="fa-sharp fa-light fa-bag-shopping"></i>
             </div>
-          </div>
-          <div class="callback"> </div>
+            <div class="product-card__warehouse">
+              <a class="product-card__warehouse-link">
+                Availability in stores
+              </a>
+            </div>
       </div>
       </div>
     </div>
     <div class="product-details">
       <p-tabView>
-        <p-tabPanel header="Details">
+        <p-tabPanel header="Description">
           <div class="product-details__description">
             A dress is a type of garment that is designed to be worn by women and girls. Dresses come in many different styles, lengths, colors, and materials, and they can be worn for a wide variety of occasions. From casual everyday wear to formal events, dresses are a versatile clothing item that can be dressed up or down depending on the occasion.
             Dresses can be made from a variety of materials, including cotton, silk, chiffon, lace, and more. They can be short or long, with sleeves or without, and can be designed to flatter different body types. Some popular styles of dresses include the A-line dress, shift dress, wrap dress, maxi dress, and cocktail dress.
             When choosing a dress, it's important to consider factors such as the occasion, the weather, and your personal style. Dresses can be accessorized with jewelry, shoes, belts, and other accessories to create a complete look that reflects your individual style and personality. Whether you prefer a classic little black dress or a bold and colorful statement piece, there is a dress out there for everyone.
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Delivery">
-          <div class="product-details__delivery">
-            <div class="product-details__delivery-title">
-              Delivery
+        <p-tabPanel header="Details">
+          <div class="props">
+            <div class="props__group">
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
             </div>
-            <div class="product-details__delivery-text">
-              text
+            <div class="props__group">
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+              <div class="props__row">
+                <div class="props__cell">
+                  Brand
+                </div>
+                <div class="props__cell">
+                  Prada
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Delivery">
+          <div class="delivery">
+            <div class="delivery__internal">
+              <div class="delivery__rows">
+                <div class="delivery__row">
+                  <div class="delivery__title">Delivery methods</div>
+                  <div class="delivery__text">
+                    <div class="delivery__icon">
+                      <svg class="svg-icon -courier" viewBox="0 0 24 22" width="2.4rem" height="2.2rem"><use xlink:href="/local/templates/theme_2021/static/img/icons/sprite.svg#courier"></use></svg>
+                    </div>
+                  </div>
+                  <div class="delivery__text">
+                    <div class="delivery__icon">
+                      <svg class="svg-icon -courier" viewBox="0 0 24 22" width="2.4rem" height="2.2rem"><use xlink:href="/local/templates/theme_2021/static/img/icons/sprite.svg#courier"></use></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery__row">
+                  <div class="delivery__title">Delivery methods</div>
+                  <div class="delivery__text">
+                    <div class="delivery__icon">
+                      <svg class="svg-icon -courier" viewBox="0 0 24 22" width="2.4rem" height="2.2rem"><use xlink:href="/local/templates/theme_2021/static/img/icons/sprite.svg#courier"></use></svg>
+                    </div>
+                  </div>
+                  <div class="delivery__text">
+                    <div class="delivery__icon">
+                      <svg class="svg-icon -courier" viewBox="0 0 24 22" width="2.4rem" height="2.2rem"><use xlink:href="/local/templates/theme_2021/static/img/icons/sprite.svg#courier"></use></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </p-tabPanel>
@@ -124,34 +277,28 @@
         </p-tabPanel>
       </p-tabView>
     </div>
-    <div class="products-related">
+    <!--<div class="products-related">
       <h1 class="products-related__heading">
         Related products
       </h1>
       <div class="products-related__content">
-        <div >
-          <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [circular]="true"  showIndicators="true">
-            <ng-template let-product pTemplate="item">
-              <div class="item-related">
-                <div class="item-related__picture">
-                  <img src="https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683010716-1.jpg" style="width: 100%; display: block;" />
-                </div>
-                <div class="item-related__caption">
-                  <a class="item-related__naming">{{ product.name }}</a>
-                  <h6 class="item-related__price">{{ product.price + '$' }}</h6>
-                </div>
-              </div>
-            </ng-template>
-          </p-carousel>
+        <div>
+          <app-product-items-carousel [products]="products"/>
         </div>
       </div>
     </div>
-    <div class="product-viewed">
-      Product viewed block
-    </div>
-    <div class="newsletter">
-      Newsletter block
-    </div>
+    <div class="products-related">
+      <h1 class="products-related__heading">
+        Viewed products
+      </h1>
+      <div class="products-related__content">
+        <div>
+          <app-product-items-carousel [products]="products"/>
+        </div>
+      </div>
+    </div>-->
+    <app-related-products title="Related products" />
+    <app-related-products title="Related products" />
   </div>
 </div>
 

@@ -3,6 +3,8 @@ import {BasketService} from "./features/basket/basket.service";
 import {AccountService} from "./features/account/account.service";
 import {MenuItem, MessageService} from "primeng/api";
 import {NavigationEnd, Router} from "@angular/router";
+import {WishlistService} from "./features/wishlist/wishlist.service";
+import {HistoryService} from "./shared/services/history.service";
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,8 @@ export class AppComponent implements OnInit {
   constructor(
     private basketService: BasketService,
     private accountService: AccountService,
+    private wishlistService: WishlistService,
+    private historyService: HistoryService,
     private messageService: MessageService,
     private router: Router
   ) { }
@@ -27,6 +31,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     /*this.loadBasket();*/
    /* this.loadCurrentUser();*/
+/*    this.loadWishlist();
+    this.loadProductViewsHistory();*/
     this.addItemsToSpeedDial();
     this.updateComponentVisibility();
 
@@ -35,13 +41,10 @@ export class AppComponent implements OnInit {
   updateComponentVisibility() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const currentRoute = event.urlAfterRedirects; // Получение текущего маршрута
+        const currentRoute = event.urlAfterRedirects;
 
-        // Определите условия, когда нужно скрыть компоненты
-        this.showNavigationBar = !(currentRoute === '/checkout'); // Пример: Скрыть на странице оформления заказа (checkout)
+        this.showNavigationBar = !(currentRoute === '/checkout');
 
-        // Добавьте другие условия для скрытия компонентов
-        // this.showOtherComponent = ...;
       }
     });
   }
@@ -101,20 +104,25 @@ export class AppComponent implements OnInit {
     }
   }
 
+  loadWishlist(): void {
+    const wishlistId = localStorage.getItem('wishlist_id');
+    if (wishlistId) {
+      this.wishlistService.getWishlist(wishlistId).subscribe({
+        next: () => console.log('initialized wishlist'),
+        error: error => console.log('LoadWishlistError: ', error)
+      })
+    }
+  }
+
+  loadProductViewsHistory(): void {
+    const viewsHistoryId = localStorage.getItem('views_history_id');
+    if (viewsHistoryId) {
+      this.historyService.getItemsFromProductsViewsHistory(viewsHistoryId).subscribe({
+        next: () => console.log('initialized history'),
+        error: error => console.log(error)
+      })
+    }
+  }
+
 }
 
-/*
-TODO: Решить первостепенные задчаи по заданным правилам:
-1. Выстроить цепочку от покупки товара до получения оплаты.
-2. Делать только те части логики и представлений, которые для этого нужны
-3. Решать задачи параллельно. Не ждать, пока одна задача будет решена, чтобы начать решать другую.
-4. Не делать ничего, что не нужно для решения задач, которые решают основную - создаение цепочки.
-5. Очень медленно по шагам реализовывать логику, создавать коммиты и проверять, работает ли проект.
-
-6. При добавление нового, проверять,
-a) не сломал ли это то, что уже работает.
-b) не добавил ли я лишнего, что не нужно для решения задачи.
-с) делать коммит, только проверив, что все работает.
-d) делать коммит, даже если функционал минимален.
-
-*/

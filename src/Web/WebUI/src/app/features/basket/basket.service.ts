@@ -22,7 +22,6 @@ export class BasketService {
   public shipping$ = this.shippingSource.asObservable();
 
 
-
   constructor(private http: HttpClient) { }
 
   countBasketItems() {
@@ -56,7 +55,9 @@ export class BasketService {
   }
 
   getBasket(id: string) {
-    return this.http.get(this.baseUrl + 'basket?id=' + id)
+    const url: string = this.baseUrl + 'basket/' + id;
+
+    return this.http.get(url)
       .pipe(
         map((basket: IBasket) => {
           this.basketSource.next(basket);

@@ -1,7 +1,4 @@
-.layout {
-  max-width: 1180px;
-  margin: 0 100px;
-}
+@import "src/app/shared/styles/common.scss";
 
 .main {
 
@@ -104,32 +101,6 @@
   }
 }
 
-.products {
-  &__inner {
-
-  }
-  &__header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 50px;
-  }
-
-  &__title {
-    font-size: 48px;
-    line-height: 1.33;
-    font-weight: 500;
-    font-family: "Playfair Display",sans-serif;
-    margin: 0;
-  }
-
-  &__all-link {
-
-  }
-  &__body {
-
-  }
-}
 
 .seen {
 
