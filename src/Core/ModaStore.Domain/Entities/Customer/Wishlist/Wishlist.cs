@@ -9,14 +9,8 @@ public class Wishlist : BaseEntity
         
     }
     
-    // public Wishlist(string userId)
-    // {
-    //     UserId = userId;
-    // }
     
-    // public string UserId { get; set; }
-    
-    public List<WishlistItem> Items { get; set; } = new List<WishlistItem>();
+    public List<WishlistItem> WishlistItems { get; set; }
     
 
 }

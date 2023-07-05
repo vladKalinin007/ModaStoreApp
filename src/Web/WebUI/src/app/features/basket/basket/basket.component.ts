@@ -6,6 +6,8 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {BasketState} from "../reducers/basket.state";
 import {Store} from "@ngrx/store";
 import {BasketActions} from "../basket.actions";
+import {WishlistService} from "../../wishlist/wishlist.service";
+import {IWishlist} from "../../../core/models/customer/wishlist";
 
 @Component({
   selector: 'app-basket',
@@ -15,20 +17,20 @@ import {BasketActions} from "../basket.actions";
 export class BasketComponent implements OnInit {
 
   basket$: Observable<IBasket>;
+  wishlist$: Observable<IWishlist>;
   basketTotal$: Observable<IBasketTotals> = this.basketService.basketTotal$;
   basketItemsCount: number;
   count$: Observable<number>;
 
   constructor(
     private basketService: BasketService,
+    private wishlistService: WishlistService,
     private dialogRef: MatDialogRef<BasketComponent>,
-    private store$: Store<BasketState>,
   ) {}
 
   calculateBasketItems() {
     this.basketItemsCount = this.basketService.countBasketItems()
-    console.log(this.basketItemsCount);
-
+    console.log("BASKET =", this.basket$)
   }
 
   closeDialog(): void {
@@ -38,22 +40,24 @@ export class BasketComponent implements OnInit {
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
+    this.wishlist$ = this.wishlistService.wishlist$;
     this.calculateBasketItems();
+    console.log(this.basket$);
   }
 
   removeBasketItem(item: IBasketItem): void {
     this.basketService.removeItemFromBasket(item);
   }
 
-/*  incrementItemQuantity(item: IBasketItem): void {
+  incrementItemQuantity(item: IBasketItem): void {
     this.basketService.incrementItemQuantity(item);
   }
 
   decrementItemQuantity(item: IBasketItem): void {
     this.basketService.decrementItemQuantity(item);
-  }*/
+  }
 
-  /*incrementItemQuantity(item: IBasketItem): void {
+ /* incrementItemQuantity(item: IBasketItem): void {
     this.store$.dispatch(BasketActions.incrementItemQuantity())
   }
 

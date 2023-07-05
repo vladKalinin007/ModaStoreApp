@@ -76,6 +76,7 @@ public static class AutoMapperConfig
             #endregion
             
             cfg.CreateMap<Wishlist, WishlistDto>().ReverseMap();
+            cfg.CreateMap<WishlistItem, WishlistItemDto>().ReverseMap();
         });
 
         Mapper = configuration.CreateMapper();

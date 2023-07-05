@@ -13,11 +13,15 @@ import {IDeliveryMethod} from "../../core/models/deliveryMethod";
 export class BasketService {
 
   public baseUrl: string = environment.apiUrl;
+
   public basketSource: BehaviorSubject<IBasket> = new BehaviorSubject<IBasket>(null);
-  private basketTotalSource: BehaviorSubject<IBasketTotals> = new BehaviorSubject<IBasketTotals>(null);
   public basket$: Observable<IBasket> = this.basketSource.asObservable();
+
+  private basketTotalSource: BehaviorSubject<IBasketTotals> = new BehaviorSubject<IBasketTotals>(null);
   public basketTotal$: Observable<IBasketTotals> = this.basketTotalSource.asObservable();
+
   public shipping: number = 0;
+  
   private shippingSource: Subject<number> = new Subject<number>();
   public shipping$ = this.shippingSource.asObservable();
 
@@ -50,9 +54,9 @@ export class BasketService {
     this.setBasket(basket);
   }
 
-  getCurrentBasketValue() {
-    return this.basketSource.value;
-  }
+  getCurrentBasketValue(): IBasket {
+  return this.basketSource.value;
+}
 
   getBasket(id: string) {
     const url: string = this.baseUrl + 'basket/' + id;

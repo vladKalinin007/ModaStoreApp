@@ -103,12 +103,14 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addProductToBasket() {
+    console.log("clicked")
     this.basketService.addItemToBasket(this.product);
   }
 
-  /*addProductToWishList() {
-    this.wishlistService.
-  }*/
+  addItemToWishList() {
+    console.log("clicked")
+    this.wishlistService.addItemToWishlist(this.product);
+  }
 
   getProductsFromViewsHistory(id: string) {
     this.historyService.getItemsFromProductsViewsHistory(id).subscribe({

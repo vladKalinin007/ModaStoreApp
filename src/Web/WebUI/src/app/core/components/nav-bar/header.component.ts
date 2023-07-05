@@ -8,6 +8,8 @@ import {Overlay} from "@angular/cdk/overlay";
 import {NavigationEnd, Router} from "@angular/router";
 import {IUser} from "../../models/user";
 import {AccountService} from "../../../features/account/account.service";
+import {WishlistService} from "../../../features/wishlist/wishlist.service";
+import {IWishlist} from "../../models/customer/wishlist";
 
 
 @Component({
@@ -19,7 +21,9 @@ import {AccountService} from "../../../features/account/account.service";
 export class HeaderComponent implements OnInit {
 
   basket$: Observable<IBasket>;
+  wishlist$: Observable<IWishlist>;
   currentUser$: Observable<IUser>;
+
   isIconRotated: boolean = false;
   dialogRef: MatDialogRef<BasketComponent>;
   isCheckoutPage: boolean = false;
@@ -29,7 +33,8 @@ export class HeaderComponent implements OnInit {
               public dialog: MatDialog,
               private overlay: Overlay,
               private router: Router,
-              private accountService: AccountService
+              private accountService: AccountService,
+              private wishlistService: WishlistService,
 ) {}
 
 
@@ -68,6 +73,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.basket$ = this.basketService.basket$;
     this.currentUser$ = this.accountService.currentUser$;
+    this.wishlist$ = this.wishlistService.wishlist$;
     this.checkIfCheckoutPage();
   }
 
@@ -85,5 +91,4 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  //#endregion
 }

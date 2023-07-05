@@ -9,7 +9,10 @@
         >
       </a>
       <div class="catalog-item__like" >
-        <i (click)="addItemToBasket()" class="pi pi-heart catalog-item__like-icon"></i>
+        <i *ngIf="isFavoritesIconVisible; else notVisible"  (click)="addItemToWishlist()" class="pi pi-heart catalog-item__like-icon"></i>
+        <ng-template #notVisible>
+          <i (click)="removeItemFromWishlist()" class="pi pi-times catalog-item__like-icon"></i>
+        </ng-template>
       </div>
     </div>
     <div class="catalog-item__caption">
@@ -19,13 +22,10 @@
       <div class="detail-palette">
         <div class="detail-palette__links">
           <span class="detail-palette__link">
-
           </span>
           <span class="detail-palette__link">
-
           </span>
           <span class="detail-palette__link">
-
           </span>
         </div>
       </div>
@@ -38,6 +38,7 @@
         </div>
         <div class="catalog-item__button">
           <app-button
+            (click)="addItemToBasket()"
             showIcon="true"
             iconClass="pi pi-shopping-bag"
             buttonName="Add to basket"

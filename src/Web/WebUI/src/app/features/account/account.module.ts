@@ -8,7 +8,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { OrdersComponent } from './orders/orders.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
 import {FeaturesModule} from "../features.module";
 
 
@@ -21,7 +20,6 @@ import {FeaturesModule} from "../features.module";
     ReviewsComponent,
     WalletComponent,
     OrdersComponent,
-    WishlistComponent
   ],
   imports: [
     FeaturesModule,

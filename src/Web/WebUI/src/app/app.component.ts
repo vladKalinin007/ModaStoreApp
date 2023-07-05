@@ -29,10 +29,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    /*this.loadBasket();*/
-   /* this.loadCurrentUser();*/
-/*    this.loadWishlist();
-    this.loadProductViewsHistory();*/
+    this.loadBasket();
+    this.loadWishlist();
     this.addItemsToSpeedDial();
     this.updateComponentVisibility();
 
@@ -106,6 +104,7 @@ export class AppComponent implements OnInit {
 
   loadWishlist(): void {
     const wishlistId = localStorage.getItem('wishlist_id');
+    console.log('wishlistId: ', wishlistId)
     if (wishlistId) {
       this.wishlistService.getWishlist(wishlistId).subscribe({
         next: () => console.log('initialized wishlist'),

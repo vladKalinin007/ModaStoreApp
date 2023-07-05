@@ -32,7 +32,7 @@
             <div class="header__item_left">
               <div class="header__item-icon align-r">
                 <a routerLink="/wishlist" class="s-hamb">
-                  <i class="pi pi-heart header__icon-internal" pBadge value="2" severity="success" size="large"
+                  <i class="pi pi-heart header__icon-internal" pBadge value="" severity="success" size="large"
                      ></i>
                 </a>
               </div>
@@ -66,7 +66,7 @@
             <div class="header__item_left">
               <div class="header__item-icon ">
                 <a href="" class="s-hamb">
-                  <i class="pi pi-heart header__icon-internal" pBadge value="2" severity="success" size="large" ></i>
+                  <i class="pi pi-heart header__icon-internal" pBadge value="{{(wishlist$ | async).wishlistItems.length}}" severity="success" size="large" ></i>
                 </a>
               </div>
             </div>

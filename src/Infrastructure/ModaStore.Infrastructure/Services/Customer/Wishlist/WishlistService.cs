@@ -38,27 +38,27 @@ public class WishlistService : IWishlistService
     public async Task<bool> AddItemToWishlist(string userId, WishlistItem item)
     {
         var wishlist = await GetWishlist(userId);
-        wishlist.Items.Add(item);
+        wishlist.WishlistItems.Add(item);
         return await UpdateWishlist(userId, wishlist);
     }
 
     public async Task<bool> RemoveItemFromWishlist(string userId, WishlistItem item)
     {
         var wishlist = await GetWishlist(userId);
-        wishlist.Items.Remove(item);
+        wishlist.WishlistItems.Remove(item);
         return await UpdateWishlist(userId, wishlist);
     }
 
     public async Task<IEnumerable<WishlistItem>> GetWishlistItems(string userId)
     {
         var wishlist = await GetWishlist(userId);
-        return wishlist.Items;
+        return wishlist.WishlistItems;
     }
     
     public async Task<bool> IsItemInWishlist(string userId, WishlistItem item)
     {
         var wishlist = await GetWishlist(userId);
-        return wishlist.Items.Contains(item);
+        return wishlist.WishlistItems.Contains(item);
     }
 
     private async Task<WishlistEntity> GetWishlist(string userId)

@@ -7,13 +7,6 @@ export interface IWishlist {
 }
 
 export class Wishlist implements IWishlist {
-
-  id: string;
-
-  constructor() {
-    this.id = uuidv4();
-    this.wishlistItems = [];
-  }
-
+  id = uuidv4();
   wishlistItems: IWishlistItem[] = [];
 }

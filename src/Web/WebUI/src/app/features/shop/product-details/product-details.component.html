@@ -99,6 +99,7 @@
               <div class="product-sale__container">
               <div class="product-sale__buy-button">
                 <app-button
+                  (click)="addItemToWishList()"
                   buttonName="Add to basket"
                   buttonStyle="btn btn_color_dark btn_size_large basket-list__checkout-button"
                   showIcon="true"
@@ -107,6 +108,7 @@
               </div>
                 <div class="product-sale__buy-button">
                   <app-button
+                    (click)="addProductToBasket()"
                     buttonName="Fast purchase"
                     buttonStyle="btn btn_color_light btn_size_large"
                     showIcon="true"

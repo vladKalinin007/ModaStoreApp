@@ -3,8 +3,39 @@
     <div class="wishlist__inner">
       <div class="wishlist__clear-all"></div>
       <div class="wishlist__list">
-        <app-product-item />
+        <div *ngFor="let product of products$ | async">
+          <app-product-item
+            [product]="product"
+            [isFavoritesIconVisible]="false">
+          </app-product-item>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<!--<div>
+  <ng-container *ngIf="(basket$ | async).items">
+    <div *ngFor="let item of (basket$ | async).items">
+      <div>
+        {{item.pictureUrl}}
+        {{item.productName}}
+        {{item.price}}
+        {{item.quantity}}
+        {{item.id}}
+        text
+      </div>
+    </div>
+  </ng-container>
+</div>-->
+<!--<div>
+  <ng-container *ngIf="(wishlist$ | async).wishlistItems">
+    <ng-container *ngFor="let item of (wishlist$ | async).wishlistItems">
+      {{item.id}}
+      {{item.price}}
+      {{item.name}}
+      {{item.pictureUrl}}
+      {{item.description}}
+    </ng-container>
+  </ng-container>
+</div>-->
+

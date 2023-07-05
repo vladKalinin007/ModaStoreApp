@@ -1,7 +1,6 @@
 <div class="basket">
   <div class="basket__header">
     <h4 class="basket__heading"> Basket </h4>
-    <button (click)="calculateBasketItems()">Calc</button>
     <div class="basket__close">
       <a (click)="closeDialog()" class="basket__close-tab">
         <i class="pi pi-times"></i>
@@ -77,6 +76,17 @@
             </div>
           <!--</a>-->
         </div>
+      </div>
+      <div>
+        <ng-container *ngIf="(wishlist$ | async).wishlistItems">
+          <ng-container *ngFor="let item of (wishlist$ | async).wishlistItems">
+            {{item.id}}
+            {{item.price}}
+            {{item.name}}
+            {{item.pictureUrl}}
+            {{item.description}}
+          </ng-container>
+        </ng-container>
       </div>
     </ng-container>
     <ng-container *ngIf="(basket$ | async).items.length === 0">
