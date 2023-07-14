@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     this.loadWishlist();
     this.addItemsToSpeedDial();
     this.updateComponentVisibility();
-
+    this.loadProductViewsHistory();
   }
 
   updateComponentVisibility() {
@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
   }
 
   loadBasket(): void {
-    const basketId = localStorage.getItem('basket_id');
+    const basketId: string = localStorage.getItem('basket_id');
     if (basketId) {
       this.basketService.getBasket(basketId).subscribe({
         next: () => console.log('initialized basket'),
@@ -114,7 +114,7 @@ export class AppComponent implements OnInit {
   }
 
   loadProductViewsHistory(): void {
-    const viewsHistoryId = localStorage.getItem('views_history_id');
+    const viewsHistoryId: string = localStorage.getItem('views_history_id');
     if (viewsHistoryId) {
       this.historyService.getItemsFromProductsViewsHistory(viewsHistoryId).subscribe({
         next: () => console.log('initialized history'),

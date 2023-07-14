@@ -39,6 +39,7 @@ public static class AutoMapperConfig
 
             #endregion
 
+            
             cfg.CreateMap<ProductBrand, ProductBrandDto>();
             cfg.CreateMap<ProductType, ProductTypeDto>();
             cfg.CreateMap<Category, CategoryDto>();
@@ -77,6 +78,11 @@ public static class AutoMapperConfig
             
             cfg.CreateMap<Wishlist, WishlistDto>().ReverseMap();
             cfg.CreateMap<WishlistItem, WishlistItemDto>().ReverseMap();
+            
+            cfg.CreateMap<SeenProductsList, SeenProductsListDto>().ReverseMap();
+            cfg.CreateMap<SeenProduct, SeenProductDto>().ReverseMap();
+            
+            
         });
 
         Mapper = configuration.CreateMapper();

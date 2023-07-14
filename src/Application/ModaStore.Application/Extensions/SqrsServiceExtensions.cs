@@ -10,6 +10,8 @@ using ModaStore.Application.Features.Catalog.Category.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Category.Commands.Models;
 using ModaStore.Application.Features.Catalog.Product.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Product.Commands.Models;
+using ModaStore.Application.Features.Catalog.Product.Queries.Handlers;
+using ModaStore.Application.Features.Catalog.Product.Queries.Models;
 using ModaStore.Application.Features.Common.Queries.Handlers;
 using ModaStore.Application.Features.Common.Queries.Models;
 using ModaStore.Application.Features.Customer.Commands.Handlers;
@@ -202,6 +204,30 @@ public static class SqrsServiceExtensions
         services.AddScoped(
             typeof(IRequestHandler<LoginCommand, UserDto>), 
             typeof(LoginCommandHandler)
+        );
+        
+        #endregion
+        
+        #region SeenProducts
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetAllSeenProductsQuery, SeenProductsListDto>), 
+            typeof(GetAllSeenProductsQueryHandler)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<CreateSeenProductsCommand, SeenProductsListDto>), 
+            typeof(CreateSeenProductsCommandHandler)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<UpdateSeenProductsCommand, SeenProductsListDto>), 
+            typeof(UpdateSeenProductsCommandHandler)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<DeleteSeenProductsCommand, bool>), 
+            typeof(DeleteSeenProductsCommandHandler)
         );
         
         #endregion

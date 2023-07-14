@@ -177,4 +177,23 @@ public static class MappingExtensions
     }
     
     #endregion
+    
+    #region SeenProducts
+    
+    public static SeenProductsListDto ToDto(this SeenProductsList entity)
+    {
+        return entity.MapTo<SeenProductsList, SeenProductsListDto>();
+    }
+    
+    public static SeenProductsList ToEntity(this SeenProductsListDto dto)
+    {
+        return dto.MapTo<SeenProductsListDto, SeenProductsList>();
+    }
+    
+    public static SeenProductsList ToEntity(this SeenProductsListDto dto, SeenProductsList destination)
+    {
+        return dto.MapTo(destination);
+    }
+    
+    #endregion
 }

@@ -8,8 +8,10 @@ import {BasketService} from "../../basket/basket.service";
 import {ShopParams} from "../../../core/models/shopParams";
 import {ProductService} from "../../../core/services/product.service/product.service";
 import {HistoryService} from "../../../shared/services/history.service";
-import {IViewedProductList} from "../../../core/models/customer/viewedProductList";
+
 import {WishlistService} from "../../wishlist/wishlist.service";
+import {Observable} from "rxjs";
+import {ISeenProductList} from "../../../core/models/customer/seenProductList";
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
 
   product: IProduct;
   products: IProduct[];
-  viewedProductList: IViewedProductList;
+  history$: Observable<ISeenProductList>
 
 
   shopParams: ShopParams = new ShopParams();
@@ -88,18 +90,29 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getProductById();
     this.getProductList();
-    this.addProductToViewsHistory(this.product);
+    this.history$ = this.historyService.history$;
   }
 
-  addProductToViewsHistory(product: IProduct) {
-    this.historyService.addItemToProductsViewsHistory(product.id).subscribe({
+  getProductById() {
+    this.productService.getProduct(this.activateRoute.snapshot.paramMap.get('id')).subscribe({
       next: (response) => {
-        console.log("addProductToViewsHistory.response =", response);
+        this.product = response;
+        console.log("THIS PRODUCT (DETAILS): ", this.product);
+        console.log("RESPONSE (DETAILS): ", response);
+        this.addProductToViewsHistory(response)
+        this.bcService.set('@productDetails', this.product.name);
       },
       error: (error) => {
-        console.log("addProductToViewsHistory.error =", error);
+        console.log(error);
       }
     });
+  }
+
+
+
+  addProductToViewsHistory(response: IProduct) {
+    console.log("HISTORY RESPONSE: ", response);
+    this.historyService.addItemToProductsViewsHistory(response);
   }
 
   addProductToBasket() {
@@ -125,18 +138,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-  getProductById() {
-    this.productService.getProduct(this.activateRoute.snapshot.paramMap.get('id')).subscribe({
-        next: (response) => {
-          this.product = response;
-          /*console.log("Details.product =", this.product);*/
-          this.bcService.set('@productDetails', this.product.name);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
-  }
 
   getProductList() {
     this.productService

@@ -300,7 +300,15 @@
       </div>
     </div>-->
     <app-related-products title="Related products" />
-    <app-related-products title="Related products" />
+
+    <ng-container *ngIf="(history$ | async).seenProducts">
+      <app-seen-items
+        [history$]="history$"
+        title="Seen products"
+      />
+    </ng-container>
+
+
   </div>
 </div>
 

@@ -24,7 +24,6 @@
       <Folder Include="Features\Catalog\ProductBrand\Commands\Handlers" />
       <Folder Include="Features\Catalog\ProductType" />
       <Folder Include="Features\Catalog\Product\Commands\Validators" />
-      <Folder Include="Features\Catalog\Product\Queries" />
       <Folder Include="Features\Common\Commands" />
       <Folder Include="Features\Customer\Validators" />
       <Folder Include="Features\Order\Payment\Queries" />

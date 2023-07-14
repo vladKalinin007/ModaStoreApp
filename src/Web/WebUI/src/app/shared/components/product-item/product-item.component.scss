@@ -24,12 +24,18 @@
     position: relative;
     min-height: 376px;
     overflow: hidden;
-
+    &:hover {
+      color: currentColor;
+      &:after {
+        transform: scale(1.1);
+      }
+    }
   }
 
   &__pic {
     max-width: 276px;
     max-height: 414px;
+
   }
 
   &__like {
