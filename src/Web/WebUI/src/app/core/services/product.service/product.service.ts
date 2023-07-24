@@ -53,4 +53,10 @@ export class ProductService {
   getTypes() {
     return this.http.get<IType[]>(this.baseUrl + 'productType/');
   }
+
+  getProductsByCategory(categoryName: string): Observable<IProduct[]> {
+    const url: string = `${this.baseUrl}Product?categoryName=${categoryName}`;
+    console.log("it works")
+    return this.http.get<IProduct[]>(url);
+  }
 }

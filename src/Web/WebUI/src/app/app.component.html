@@ -5,19 +5,27 @@
   </h3>
 </ngx-spinner>
 
-<app-nav-bar></app-nav-bar>
-<!--<app-navigation-bar *ngIf="showNavigationBar" style="height: auto"/>-->
+<app-nav-bar/>
+<!--<app-nav-modal/>-->
 
 <div class="main-content">
   <app-navigation-bar *ngIf="showNavigationBar" style="height: auto"/>
-  <app-section-header></app-section-header>
-  <router-outlet></router-outlet>
+  <app-section-header/>
+  <router-outlet/>
 </div>
 
 <div class="speedDial">
-  <p-speedDial [model]="items" direction="up" transitionDelay="60" showIcon="pi pi-comments" hideIcon="pi pi-times"></p-speedDial>
+  <p-speedDial
+    [model]="items"
+    direction="up"
+    transitionDelay="60"
+    showIcon="pi pi-comments"
+    hideIcon="pi pi-times"
+  />
 </div>
 
-<app-subscribe-block/>
-<app-footer></app-footer>
+<!--<app-subscribe-block/>-->
+<app-footer/>
+<!--<app-modal/>
+<app-search-modal/>-->
 

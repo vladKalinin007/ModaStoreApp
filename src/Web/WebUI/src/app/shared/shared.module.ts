@@ -48,6 +48,10 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { RelatedProductsComponent } from './components/related-products/related-products/related-products.component';
 import { SeenItemsComponent } from './components/seen-items/seen-items.component';
 import {SeenItemComponent} from './components/seen-items/seen-item/seen-item.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MaterialModule} from "../../material.module";
+import { ProductListItemComponent } from './components/product-list-item/product-list-item.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +72,7 @@ import {SeenItemComponent} from './components/seen-items/seen-item/seen-item.com
     RelatedProductsComponent,
     SeenItemsComponent,
     SeenItemComponent,
+    ProductListItemComponent,
   ],
   imports: [
     CommonModule,
@@ -103,54 +108,59 @@ import {SeenItemComponent} from './components/seen-items/seen-item/seen-item.com
     MatIconModule,
     MatSlideToggleModule,
     ToastModule,
-    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')
+    MatSidenavModule,
+    MatListModule,
+    MaterialModule
+/*    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')*/
   ],
-  exports: [
-    PaginationModule,
-    PagingHeaderComponent,
-    PagerComponent,
-    CarouselModule,
-    OrderTotalsComponent,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    TextInputComponent,
-    BasketSummaryComponent,
-    CheckoutOptionContainerComponent,
-    MatDialogModule,
-    SliderModule,
-    RatingModule,
-    RadioButtonModule,
-    GalleriaModule,
-    BadgeModule,
-    SpeedDialModule,
-    SelectButtonModule,
-    ToggleButtonModule,
-    OverlayPanelModule,
-    TabViewModule,
-    InputMaskModule,
-    AccordionModule,
-    TriStateCheckboxModule,
-    CarouselModule,
-    TagModule,
-    SidebarModule,
-    DropdownModule,
-    MatRadioModule,
-    MatStepperModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    ProductItemsCarouselComponent,
-    NavigationBarComponent,
-    SubscribeBlockComponent,
-    ButtonComponent,
-    ToastModule,
-    NgxStripeModule,
-    ProductItemComponent,
-    RelatedProductsComponent,
-    SeenItemsComponent,
-
-  ]
+    exports: [
+        PaginationModule,
+        PagingHeaderComponent,
+        PagerComponent,
+        CarouselModule,
+        OrderTotalsComponent,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatMenuModule,
+        TextInputComponent,
+        BasketSummaryComponent,
+        CheckoutOptionContainerComponent,
+        MatDialogModule,
+        SliderModule,
+        RatingModule,
+        RadioButtonModule,
+        GalleriaModule,
+        BadgeModule,
+        SpeedDialModule,
+        SelectButtonModule,
+        ToggleButtonModule,
+        OverlayPanelModule,
+        TabViewModule,
+        InputMaskModule,
+        AccordionModule,
+        TriStateCheckboxModule,
+        CarouselModule,
+        TagModule,
+        SidebarModule,
+        DropdownModule,
+        MatRadioModule,
+        MatStepperModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        ProductItemsCarouselComponent,
+        NavigationBarComponent,
+        SubscribeBlockComponent,
+        ButtonComponent,
+        ToastModule,
+        /*    NgxStripeModule,*/
+        ProductItemComponent,
+        RelatedProductsComponent,
+        SeenItemsComponent,
+        MatSidenavModule,
+        MatListModule,
+        ProductListItemComponent
+    ]
 })
 export class SharedModule { }

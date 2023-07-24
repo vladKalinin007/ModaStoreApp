@@ -11,12 +11,19 @@
       <div class="catalog-item__like" >
         <i *ngIf="isFavoritesIconVisible; else notVisible"  (click)="addItemToWishlist()" class="pi pi-heart catalog-item__like-icon"></i>
         <ng-template #notVisible>
-          <i (click)="removeItemFromWishlist()" class="pi pi-times catalog-item__like-icon"></i>
+          <i (click)="removeItemFromWishlist()" class="pi pi-times catalog-item__times-icon"></i>
         </ng-template>
+      </div>
+      <div class="catalog-item__labels">
+        <div class="item-label item-label_blue"> New </div>
+        <div class="item-label item-label_orange"> Bestseller </div>
+        <div class="item-label item-label_red"> -40% </div>
       </div>
     </div>
     <div class="catalog-item__caption">
-      <a class="catalog-item__name" routerLink="/shop/{{product.id}}">
+      <a class="catalog-item__name"
+         (click)="onProductClicked(product.id)"
+      >
         {{product.name}}
       </a>
       <div class="detail-palette">

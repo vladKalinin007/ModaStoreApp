@@ -5,6 +5,8 @@ import {IPagination} from "../../core/models/pagination";
 import {IBrand} from "../../core/models/brand";
 import {IType} from "../../core/models/productType";
 import {ShopParams} from "../../core/models/shopParams";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ProductService} from "../../core/services/product.service/product.service";
 
 @Component({
   selector: 'app-shop',
@@ -17,23 +19,37 @@ export class ShopComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
-  shopParams = new ShopParams();
-  sortSelected = 'name';
+  headerTitle: string;
+  shopParams: ShopParams = new ShopParams();
    totalCount: number;
-  sortOptions = [
-    {name: 'Alphabetical', value: 'name'},
-    {name: 'Price: Low to High', value: 'priceAsc'},
-    {name: 'Price: High to Low', value: 'priceDesc'}
-    ];
   rangeValues: number[] = [0, 1000];
 
 
-  constructor(private shopService: ShopService) { }
+  constructor(
+    private shopService: ShopService,
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.loadProducts()
     this.getProducts();
     this.getBrands();
     this.getTypes();
+  }
+
+  loadProducts() {
+    let query: string = this.activatedRoute.snapshot.paramMap.get('categoryName') ?? '';
+
+    if (query) {
+      this.headerTitle = this.activatedRoute.snapshot.paramMap.get('categoryName');
+      this.productService.getProductsByCategory(query)
+    }
+    else {
+      this.headerTitle = 'All Products';
+      this.productService.getProducts()
+    }
   }
 
   getProducts() {
@@ -82,9 +98,15 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: string) {
+    console.log(brandId);
     this.shopParams.brandId = brandId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
+  }
+
+  onProductClicked(productId: string) {
+    const categoryName: string = this.activatedRoute.snapshot.paramMap.get('categoryName');
+    this.router.navigate(['shop', categoryName, productId]);
   }
 
   onTypeSelected(typeId: string) {

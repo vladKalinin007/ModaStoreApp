@@ -9,6 +9,10 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { OrdersComponent } from './orders/orders.component';
 import {FeaturesModule} from "../features.module";
+import { AccountComponent } from './account/account.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import {MatSliderModule} from "@angular/material/slider";
+import {MaterialModule} from "../../../material.module";
 
 
 
@@ -20,11 +24,15 @@ import {FeaturesModule} from "../features.module";
     ReviewsComponent,
     WalletComponent,
     OrdersComponent,
+    AccountComponent,
+    UserInfoComponent,
   ],
   imports: [
     FeaturesModule,
     /*CommonModule,*/
     AccountRoutingModule,
+    MatSliderModule,
+    MaterialModule,
     /*SharedModule*/
   ]
 })

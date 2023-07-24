@@ -6,16 +6,43 @@ import {SettingsComponent} from "./settings/settings.component";
 import {OrdersComponent} from "./orders/orders.component";
 import {WalletComponent} from "./wallet/wallet.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
+import {UserInfoComponent} from "./user-info/user-info.component";
+import {AccountComponent} from "./account/account.component";
 
 const routes: Routes = [
-/*  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },*/
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent },
-  {path: 'orders', component: OrdersComponent},
-  {path: 'wallet', component: WalletComponent},
-  {path: 'reviews', component: ReviewsComponent},
+  {
+    path: '',
+    component: AccountComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register', component: RegisterComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent
+      },
+      {
+        path: 'user-information',
+        component: UserInfoComponent
+      },
+      {
+        path: 'wallet',
+        component: WalletComponent
+      },
+      {
+        path: 'reviews',
+        component: ReviewsComponent
+      },
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,28 +1,61 @@
-<h1 class="page-title heading">Women's clothes</h1>
+<h1 class="page-title heading">{{headerTitle | titlecase}}</h1>
 <div class="catalog">
   <div class="layout">
     <div class="catalog_inner">
       <div class="catalog__main">
         <ng-container *ngIf="types && brands">
           <section class="catalog__aside">
-            <p-accordion [multiple]="true">
-              <p-accordionTab header="Price" >
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Categories </mat-panel-title>
+              </mat-expansion-panel-header>
                 <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
-              </p-accordionTab>
-              <p-accordionTab header="Brands">
-                <div class="catalog__checkbox-item" *ngFor="let brand of brands" >
-                  <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
-                  {{brand.name}}
+                <div class="price-slider__inputs">
+                  <input type="number" value="0" pInputText [(ngModel)]="rangeValues[0]" class="price-slider__from">
+                  <input type="number" value="1000" pInputText [(ngModel)]="rangeValues[1]" class="price-slider__to">
                 </div>
-              </p-accordionTab>
-              <p-accordionTab header="Types">
-                <div class="catalog__checkbox-item" *ngFor="let type of types" >
-                  <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
-                  {{type.name}}
-                </div>
-              </p-accordionTab>
-            </p-accordion>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Brands </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="catalog__checkbox-item" *ngFor="let brand of brands" >
+                <p-triStateCheckbox (click)="onBrandSelected(brand.id)"/>
+                {{brand.name}}
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Categories </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="catalog__checkbox-item" *ngFor="let type of types" >
+                <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
+                {{type.name}}
+              </div>
+            </mat-expansion-panel>
+            <mat-chip-listbox aria-label="Fish selection" multiple>
+              <mat-chip-option color="accent">One fish</mat-chip-option>
+              <mat-chip-option color="accent">Two fish</mat-chip-option>
+              <mat-chip-option color="accent">Accent fish</mat-chip-option>
+              <mat-chip-option color="accent">Warn fish</mat-chip-option>
+              <mat-chip-option color="accent">One fish</mat-chip-option>
+              <mat-chip-option color="accent">Two fish</mat-chip-option>
+              <mat-chip-option color="accent">Accent fish</mat-chip-option>
+              <mat-chip-option color="accent">Warn fish</mat-chip-option>
+              <mat-chip-option color="accent">One fish</mat-chip-option>
+              <mat-chip-option color="accent">Two fish</mat-chip-option>
+              <mat-chip-option color="accent">Accent fish</mat-chip-option>
+              <mat-chip-option color="accent">Warn fish</mat-chip-option>
+              <mat-chip-option color="accent">One fish</mat-chip-option>
+              <mat-chip-option color="accent">Two fish</mat-chip-option>
+              <mat-chip-option color="accent">Accent fish</mat-chip-option>
+              <mat-chip-option color="accent">Warn fish</mat-chip-option>
+            </mat-chip-listbox>
           </section>
+
           <section class="catalog__content">
             <div class="d-flex justify-content-between align-items-center">
 
@@ -41,16 +74,20 @@
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               <div class="col" *ngFor="let product of products">
-                <!--<app-product-item [product]="product"></app-product-item>-->
                 <app-product-item [product]="product"/>
               </div>
             </div>
             <div class="d-flex justify-content-center mt-5" *ngIf="totalCount > 0">
-              <app-pager
+              <!--<app-pager
                 [pageSize]="this.shopParams.pageSize"
                 [totalCount]="this.totalCount"
                 (pageChanged)="onPageChanged($event)"
-              ></app-pager>
+              ></app-pager>-->
+              <mat-paginator [length]="100"
+                             [pageSize]="this.shopParams.pageSize"
+                             [pageSizeOptions]="[5, 10, 25, 100]"
+                             aria-label="Select page">
+              </mat-paginator>
             </div>
           </section>
         </ng-container>

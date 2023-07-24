@@ -1,4 +1,115 @@
 @import "src/app/shared/styles/common.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_breakpoints.scss";
+
+:root  {
+  .p {
+    &-component {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+
+    &-badge {
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 1rem;
+      font-weight: bold;
+
+      &-success {
+        background-color: #ec5c5d;
+        color: white;
+      }
+    }
+
+
+  }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 5.2rem;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 2;
+  box-shadow: 2rem 0 0 0 #fff;
+  opacity: 0;
+  transition: .15s;
+  &:not(.is-active) {
+    pointer-events: none;
+  }
+  &.is-active {
+    opacity: 1;
+  }
+
+  &__submit,
+  &__reset,
+  &__input {
+    appearance: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+  }
+
+  &__input {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  &__submit,
+  &__reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 4.8rem;
+    height: 100%;
+    transition: .2s;
+    cursor: pointer;
+  }
+
+  &__submit {
+    fill: currentColor;
+    @include sm {
+      transform: scale(.85);
+    }
+  }
+
+  &__reset {
+    stroke: #bdbdbd;
+    margin-right: -1.2rem;
+    &:hover {
+      stroke: #212121;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    display: block;
+    appearance: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    &::placeholder {
+      color: currentColor;
+      opacity: .5;
+    }
+  }
+
+  @include sm {
+    left: 3.7rem;
+  }
+}
 
 .align-r {
   text-align: right;
@@ -46,6 +157,10 @@
     cursor: pointer;
   }
 
+  &__item-body {
+
+  }
+
   &__icon-internal {
     font-size: 1.6em;
   }
@@ -55,19 +170,73 @@
       width: 64px;
       height: 72px;
       transition: .15s;
+      &:hover .header__item-menu .user-nav {
+        visibility: visible;
+        opacity: 1;
+      }
     }
     &_right {
       width: 64px;
     }
   }
 
-  /*&__layout {
-    display: block;
+  &__item-menu {
+
+  }
+
+}
+
+
+
+.user-nav {
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+  transition-delay: .2s;
+  width: 25rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+
+  &__body {
+    background: #f2f2f2;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__body-item {
+    display: flex;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    color: currentColor;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed #ccc;
     width: 100%;
-    max-width: 1180px;
-    margin: 0 100px;
-    vertical-align: baseline;
-  }*/
+    padding-bottom: 1.2rem;
+    cursor: default;
+  }
+
+  &__icon {
+    font-size: 1.4rem;
+    margin-right: 1.4rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    color: currentColor;
+    text-decoration: none;
+    margin-top: 1.6rem;
+  }
+
 
 }
 
@@ -528,5 +697,16 @@ a {
   align-items: center;
   margin-right: 16px;
   z-index: 1;
+}
+
+:root {
+  [contenteditable].form-control:focus, [type=email].form-control:focus, [type=password].form-control:focus, [type=tel].form-control:focus, [type=text].form-control:focus, input.form-control:focus, input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, input[type=text]:focus, textarea.form-control:focus, textarea:focus {
+    box-shadow: none;
+  }
+
+  [contenteditable].form-control, [type=email].form-control, [type=password].form-control, [type=tel].form-control, [type=text].form-control, input.form-control, input[type=email], input[type=number], input[type=password], input[type=text], textarea, textarea.form-control {
+     box-shadow: none;
+    transition: none;
+  }
 }
 

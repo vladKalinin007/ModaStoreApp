@@ -20,15 +20,15 @@ import {ISeenProductList} from "../../../core/models/customer/seenProductList";
 })
 export class ProductDetailsComponent implements OnInit {
 
+  id: string;
+  categoryName: string;
   product: IProduct;
   products: IProduct[];
   history$: Observable<ISeenProductList>
 
 
   shopParams: ShopParams = new ShopParams();
-  responsiveOptions: any[];
   ratingValue: number;
-  totalCount: number;
   sidebarVisible: boolean;
   images: any[] = [
     {
@@ -94,11 +94,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProductById() {
-    this.productService.getProduct(this.activateRoute.snapshot.paramMap.get('id')).subscribe({
+    const id : string = this.activateRoute.snapshot.paramMap.get('id');
+    console.log("id =", id);
+    this.productService.getProduct(id).subscribe({
       next: (response) => {
         this.product = response;
-        console.log("THIS PRODUCT (DETAILS): ", this.product);
-        console.log("RESPONSE (DETAILS): ", response);
+        console.log("response =", response);
         this.addProductToViewsHistory(response)
         this.bcService.set('@productDetails', this.product.name);
       },
@@ -136,8 +137,6 @@ export class ProductDetailsComponent implements OnInit {
     })
 
   }
-
-
 
   getProductList() {
     this.productService

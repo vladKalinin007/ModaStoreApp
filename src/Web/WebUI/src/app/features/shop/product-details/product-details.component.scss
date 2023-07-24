@@ -101,7 +101,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 42px;
+  margin-bottom: 4.2rem;
 
   &__left {
     width: 710px;
@@ -120,6 +120,7 @@
 }
 
 .product-details {
+  margin-bottom: 4.2rem;
   &__description {
     line-hight: 25px;
     font-weight: 300;

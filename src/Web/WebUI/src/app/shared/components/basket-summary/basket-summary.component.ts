@@ -27,11 +27,11 @@ export class BasketSummaryComponent implements OnInit {
     this.basket$ = this.basketService.basket$;
   }
 
-  decrementItemQuantity(item: IBasketItem) {
+  public decrementItemQuantity(item: IBasketItem) {
     this.decrement.emit(item);
   }
 
-  incrementItemQuantity(item: IBasketItem) {
+  public incrementItemQuantity(item: IBasketItem) {
     this.increment.emit(item);
   }
 

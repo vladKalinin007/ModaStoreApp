@@ -10,6 +10,10 @@ import {ToastrModule} from "ngx-toastr";
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import {BreadcrumbModule} from "xng-breadcrumb";
 import {SharedModule} from "../shared/shared.module";
+import { NavModalComponent } from './components/nav-modal/nav-modal/nav-modal.component';
+import { SearchModalComponent } from './components/search-modal/search-modal.component';
+import {ModalComponent} from "./components/modal/modal.component";
+import { ComponentComponent } from './components/component/component.component';
 /*import {MaterialModule} from "../../material.module";*/
 
 
@@ -17,7 +21,17 @@ import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, SectionHeaderComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    TestErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    SectionHeaderComponent,
+    NavModalComponent,
+    ModalComponent,
+    SearchModalComponent,
+    ComponentComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -28,6 +42,12 @@ import {SharedModule} from "../shared/shared.module";
     }),
     SharedModule
   ],
-  exports: [HeaderComponent, FooterComponent, SectionHeaderComponent]
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SectionHeaderComponent,
+    NavModalComponent,
+    ModalComponent,
+    SearchModalComponent]
 })
 export class CoreModule { }

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BasketService} from "../../../features/basket/basket.service";
-import {Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, Observable, of, switchMap} from "rxjs";
 import {IBasket} from "../../models/basket";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {BasketComponent} from "../../../features/basket/basket/basket.component";
@@ -10,6 +10,13 @@ import {IUser} from "../../models/user";
 import {AccountService} from "../../../features/account/account.service";
 import {WishlistService} from "../../../features/wishlist/wishlist.service";
 import {IWishlist} from "../../models/customer/wishlist";
+import {LoginComponent} from "../../../features/account/login/login.component";
+import {WishlistComponent} from "../../../features/wishlist/wishlist/wishlist.component";
+import {NavModalComponent} from "../nav-modal/nav-modal/nav-modal.component";
+import {SearchService} from "../../services/search.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {IProduct} from "../../models/product";
+import {IPagination} from "../../models/pagination";
 
 
 @Component({
@@ -23,23 +30,82 @@ export class HeaderComponent implements OnInit {
   basket$: Observable<IBasket>;
   wishlist$: Observable<IWishlist>;
   currentUser$: Observable<IUser>;
+  searchResults$: Observable<IPagination>;
 
-  isIconRotated: boolean = false;
+
+  isMenuActive: boolean = false;
+  isSearchActive: boolean = false;
   dialogRef: MatDialogRef<BasketComponent>;
   isCheckoutPage: boolean = false;
 
-
-  constructor(private basketService: BasketService,
-              public dialog: MatDialog,
-              private overlay: Overlay,
-              private router: Router,
-              private accountService: AccountService,
-              private wishlistService: WishlistService,
-) {}
+  searchForm: FormGroup;
 
 
-  toggleIconRotation(): void {
-    this.isIconRotated = !this.isIconRotated;
+  constructor(
+    private basketService: BasketService,
+    public dialog: MatDialog,
+    private overlay: Overlay,
+    private router: Router,
+    private accountService: AccountService,
+    private wishlistService: WishlistService,
+    private searchService: SearchService,
+    private formBuilder: FormBuilder
+  ) {
+    this.searchForm = this.formBuilder.group({
+      search: ['']
+    });
+  }
+
+  ngOnInit() {
+    this.basket$ = this.basketService.basket$;
+    this.currentUser$ = this.accountService.currentUser$;
+    this.wishlist$ = this.wishlistService.wishlist$;
+    this.checkIfCheckoutPage();
+
+    this.searchResults$ = this.searchForm.get('search').valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((searchValue: string) => {
+        if (searchValue.trim() === '') {
+          return of({ pageIndex: 0, pageSize: 0, count: 0, data: [] });
+        } else {
+          return this.searchService.search(searchValue);
+        }
+      })
+    );
+  }
+
+
+  openLoginModal() {
+    this.dialog.open(LoginComponent, {
+      width: '415px',
+      height: '570px',
+    })
+  }
+
+  openWishlistModal()  {
+    this.dialog.open(WishlistComponent, {
+      width: '1180px',
+      height: '675px',
+    })
+  }
+
+  openMenuModal () {
+    this.dialog.open(NavModalComponent, {
+      width: '1180px',
+      height: '715px',
+      hasBackdrop: false
+    })
+  }
+
+  toggleSearch() {
+    this.isSearchActive = !this.isSearchActive;
+    if (!this.isSearchActive) this.searchForm.patchValue({ search: '' });
+  }
+
+  toggleMenu() {
+    this.isMenuActive = !this.isMenuActive;
+    console.log("toggled");
   }
 
   openDialog() {
@@ -70,16 +136,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.basket$ = this.basketService.basket$;
-    this.currentUser$ = this.accountService.currentUser$;
-    this.wishlist$ = this.wishlistService.wishlist$;
-    this.checkIfCheckoutPage();
-  }
+
 
   logout() {
     this.accountService.logout();
-    this.isIconRotated = false;
     this.router.navigateByUrl('/');
   }
 
