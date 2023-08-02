@@ -10,10 +10,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 {
     public void Configure(EntityTypeBuilder<OrderEntity> builder)
     {
-        builder.OwnsOne(o => o.ShipToAddress, a =>
-        {
-            a.WithOwner();
-        });
+        // builder.OwnsOne(o => o.ShipToAddress, a =>
+        // {
+        //     a.WithOwner();
+        // });
 
         builder.Property(s => s.Status)
             .HasConversion(

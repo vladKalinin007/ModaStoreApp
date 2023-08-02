@@ -3,7 +3,7 @@ using ModaStore.Application.DTOs.Catalog;
 
 namespace ModaStore.Application.Features.Catalog.Product.Commands.Models;
 
-public class AddProductCommand : IRequest<ProductDto>
+public class AddProductCommand : IRequest<ProductToPublishDto>
 {
-    public ProductDto Model { get; set; }
+    public ProductToPublishDto Model { get; set; }
 }

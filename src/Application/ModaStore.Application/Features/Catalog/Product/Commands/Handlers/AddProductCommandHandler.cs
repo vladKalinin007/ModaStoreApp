@@ -7,7 +7,7 @@ using ModaStore.Domain.Interfaces.Catalog;
 
 namespace ModaStore.Application.Features.Catalog.Product.Commands.Handlers;
 
-public class AddProductCommandHandler : IRequestHandler<AddProductCommand, ProductDto>
+public class AddProductCommandHandler : IRequestHandler<AddProductCommand, ProductToPublishDto>
 {
    private readonly IProductService _productService;
    private readonly IMapper _mapper;
@@ -18,13 +18,13 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Produ
        _mapper = mapper;
    }
 
-    public async Task<ProductDto> Handle(AddProductCommand request, CancellationToken cancellationToken)
+    public async Task<ProductToPublishDto> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
         var product = request.Model.ToEntity();
         
         await _productService.InsertProduct(product);
 
-        return product.ToDto();
+        return product.ToPDto();
         
     }
 }

@@ -22,30 +22,10 @@ namespace ModaStore.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ModaStore.Domain.Common.UserField", b =>
-                {
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("UserField");
-                });
-
             modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Category", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,9 +35,70 @@ namespace ModaStore.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("ShowOnHomePage")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.CategoryProductType", b =>
+                {
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId", "ProductTypeId");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.ToTable("CategoryProductType");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Color", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ColorCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Picture", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PictureType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureTypeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Product", b =>
@@ -65,15 +106,128 @@ namespace ModaStore.Infrastructure.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("AllowCustomerReviews")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClosureType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Decoration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(180)
-                        .HasColumnType("nvarchar(180)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("DisableBuyButton")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DisableCompareButton")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DisableWishlistButton")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("DiscountPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DressLength")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FitType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsBestSeller")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCallForPricing")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDownload")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFreeShipping")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsGiftCard")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnHomePage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnSale")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnSalePage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecurring")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsShipEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Neckline")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occasion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("OldPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PantClosureType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PantLength")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PantStyle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pattern")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PictureUrl")
                         .IsRequired()
@@ -90,7 +244,55 @@ namespace ModaStore.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("Published")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Season")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ShowOnHomePage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowOnSalePage")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Silhouette")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sleeve")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SpecialPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Style")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Waistline")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductBrandId");
 
@@ -104,7 +306,15 @@ namespace ModaStore.Infrastructure.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -113,7 +323,130 @@ namespace ModaStore.Infrastructure.Data.Migrations
                     b.ToTable("ProductBrands");
                 });
 
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductColor", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ColorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId", "ColorId");
+
+                    b.HasIndex("ColorId");
+
+                    b.ToTable("ProductColors");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductReview", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductReviews");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductSize", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SizeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId", "SizeId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSizes");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductTag", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TagId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProductTags");
+                });
+
             modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductType", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTypes");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.RelatedProducts", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RelatedProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RelatedProductId");
+
+                    b.ToTable("RelatedProducts");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Size", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -124,7 +457,151 @@ namespace ModaStore.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("Sizes");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Tag", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Content.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Identity.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUsers");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.Address", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zipcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.DeliveryMethod", b =>
@@ -172,6 +649,10 @@ namespace ModaStore.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShipToAddressId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -182,6 +663,8 @@ namespace ModaStore.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DeliveryMethodId");
+
+                    b.HasIndex("ShipToAddressId");
 
                     b.ToTable("Orders");
                 });
@@ -207,23 +690,193 @@ namespace ModaStore.Infrastructure.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("ProductPicture", b =>
+                {
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PictureId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId", "PictureId");
+
+                    b.HasIndex("PictureId");
+
+                    b.ToTable("ProductPictures");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.CategoryProductType", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Category", "Category")
+                        .WithMany("CategoryProductTypes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.ProductType", "ProductType")
+                        .WithMany("CategoryProductTypes")
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("ProductType");
+                });
+
             modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Product", b =>
                 {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ModaStore.Domain.Entities.Catalog.ProductBrand", "ProductBrand")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ModaStore.Domain.Entities.Catalog.ProductType", "ProductType")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("ProductBrand");
 
                     b.Navigation("ProductType");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductColor", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Color", "Color")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductReview", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("ProductReviews")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Identity.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductSize", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Size", "Size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductTag", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Tag", "Tag")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.RelatedProducts", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("RelatedProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "RelatedProduct")
+                        .WithMany()
+                        .HasForeignKey("RelatedProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("RelatedProduct");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Content.Comment", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Identity.AppUser", "AppUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.Address", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Identity.AppUser", "AppUser")
+                        .WithOne("Address")
+                        .HasForeignKey("ModaStore.Domain.Entities.Order.OrderManagement.Address", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.Order", b =>
@@ -234,47 +887,15 @@ namespace ModaStore.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("ModaStore.Domain.Entities.Order.OrderManagement.Address", "ShipToAddress", b1 =>
-                        {
-                            b1.Property<string>("Id")
-                                .HasColumnType("nvarchar(450)");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("FirstName")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("LastName")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("State")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Zipcode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("Id");
-
-                            b1.ToTable("Orders");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Id");
-                        });
+                    b.HasOne("ModaStore.Domain.Entities.Order.OrderManagement.Address", "ShipToAddress")
+                        .WithMany()
+                        .HasForeignKey("ShipToAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DeliveryMethod");
 
-                    b.Navigation("ShipToAddress")
-                        .IsRequired();
+                    b.Navigation("ShipToAddress");
                 });
 
             modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.OrderItem", b =>
@@ -311,6 +932,87 @@ namespace ModaStore.Infrastructure.Data.Migrations
 
                     b.Navigation("ItemOrdered")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductPicture", b =>
+                {
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Picture", "Picture")
+                        .WithMany("ProductPictures")
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ModaStore.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany("ProductPictures")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Picture");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Category", b =>
+                {
+                    b.Navigation("CategoryProductTypes");
+
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Color", b =>
+                {
+                    b.Navigation("ProductColors");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Picture", b =>
+                {
+                    b.Navigation("ProductPictures");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Product", b =>
+                {
+                    b.Navigation("ProductColors");
+
+                    b.Navigation("ProductPictures");
+
+                    b.Navigation("ProductReviews");
+
+                    b.Navigation("ProductSizes");
+
+                    b.Navigation("ProductTags");
+
+                    b.Navigation("RelatedProducts");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductBrand", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.ProductType", b =>
+                {
+                    b.Navigation("CategoryProductTypes");
+
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Catalog.Tag", b =>
+                {
+                    b.Navigation("ProductTags");
+                });
+
+            modelBuilder.Entity("ModaStore.Domain.Entities.Identity.AppUser", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("ModaStore.Domain.Entities.Order.OrderManagement.Order", b =>

@@ -54,6 +54,17 @@ public static class MappingExtensions
         return new List<Product> { entity }.AsQueryable().ToDto<D>();
     }
     
+    
+    public static ProductToPublishDto ToPDto(this Product entity)
+    {
+        return entity.MapTo<Product, ProductToPublishDto>();
+    }
+    
+    public static Product ToEntity(this ProductToPublishDto dto)
+    {
+        return dto.MapTo<ProductToPublishDto, Product>();
+    }
+    
     #endregion
     
     #region Order
@@ -191,6 +202,25 @@ public static class MappingExtensions
     }
     
     public static SeenProductsList ToEntity(this SeenProductsListDto dto, SeenProductsList destination)
+    {
+        return dto.MapTo(destination);
+    }
+    
+    #endregion
+    
+    #region Picture
+    
+    public static PictureDto ToDto(this Picture entity)
+    {
+        return entity.MapTo<Picture, PictureDto>();
+    }
+    
+    public static Picture ToEntity(this PictureDto dto)
+    {
+        return dto.MapTo<PictureDto, Picture>();
+    }
+    
+    public static Picture ToEntity(this PictureDto dto, Picture destination)
     {
         return dto.MapTo(destination);
     }

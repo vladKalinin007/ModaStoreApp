@@ -53,7 +53,7 @@ public static class SqrsServiceExtensions
         );
         
         services.AddScoped(
-            typeof(IRequestHandler<AddProductCommand, ProductDto>), 
+            typeof(IRequestHandler<AddProductCommand, ProductToPublishDto>), 
             typeof(AddProductCommandHandler)
         );
         

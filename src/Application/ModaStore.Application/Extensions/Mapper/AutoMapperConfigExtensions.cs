@@ -15,12 +15,12 @@ public static class AutoMapperConfigExtensions
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Category, CategoryDto>();
-                cfg.CreateMap<Product, ProductDto>();
-                cfg.CreateMap<ProductDto, Product>();
-                cfg.CreateMap<Basket, BasketDto>();
-                cfg.CreateMap<Order, OrderDto>();
-                
+                // cfg.CreateMap<Category, CategoryDto>();
+                // cfg.CreateMap<Product, ProductDto>();
+                // cfg.CreateMap<ProductDto, Product>();
+                // cfg.CreateMap<Basket, BasketDto>();
+                // cfg.CreateMap<Order, OrderDto>();
+                // cfg.CreateMap<Picture, PictureDto>();
                 
             });
 

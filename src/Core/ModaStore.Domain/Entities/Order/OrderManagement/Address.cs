@@ -1,4 +1,5 @@
 using ModaStore.Domain.Entities.Common;
+using ModaStore.Domain.Entities.Identity;
 
 namespace ModaStore.Domain.Entities.Order.OrderManagement;
 
@@ -25,4 +26,6 @@ public class Address : BaseEntity
     public string City { get; set; }
     public string State { get; set; }
     public string Zipcode { get; set; }
+    public AppUser AppUser { get; set; }
+    public string AppUserId { get; set; }
 }

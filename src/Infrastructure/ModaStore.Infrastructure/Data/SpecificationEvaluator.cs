@@ -29,6 +29,8 @@ public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
         {
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
+        
+        query = spec.Criterias.Aggregate(query, (current, criteria) => current.Where(criteria));
 
         query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 

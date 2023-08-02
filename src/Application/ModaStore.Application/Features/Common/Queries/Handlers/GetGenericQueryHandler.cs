@@ -13,6 +13,7 @@ using ModaStore.Domain.Entities.Common;
 using ModaStore.Domain.Interfaces.Catalog;
 using ModaStore.Domain.Interfaces.Data;
 using ModaStore.Domain.Specifications;
+using ModaStore.Domain.Specifications.Product;
 using ModaStore.Infrastructure.Data;
 
 namespace ModaStore.Application.Features.Common.Queries.Handlers;
@@ -38,28 +39,23 @@ public class GetGenericQueryHandler<D,E> : IRequestHandler<GetGenericQuery<D,E>,
 
     public async Task<IQueryable<D>> Handle(GetGenericQuery<D, E> request, CancellationToken cancellationToken)
     {
-        
+
         if (typeof(E) == typeof(Product))
         {
-
             if (string.IsNullOrEmpty(request.Id))
             {
-                var specs = new ProductsWithTypesAndBrandsSpecification(request.productParams);
-                var countSpec = new ProductWithFiltersForCountSpecification(request.productParams);
-                var products = await _productRepository.GetAllWithSpecAsync(specs);
-                // var totalItems = await _productRepository.CountAsync(countSpec);
-                var productsDto = products.AsQueryable().ToDto<D>();
-                return productsDto;
+                var specs = new ProductSpecification(request.productParams);
+                return _productRepository.GetAllWithSpec(specs).ToDto<D>();
             }
-        
-            var spec = new ProductsWithTypesAndBrandsSpecification(request.Id);
-            Product product = await _productRepository.GetEntityWithSpec(spec);
-            var productDto = product.ToDtoQuery<D>();
-            return productDto;
-            
         }
+        //
+        //     // var spec = new ProductsWithTypesAndBrandsSpecification(request.Id);
+        //     // Product product = await _productRepository.GetEntityWithSpec(spec);
+        //     // var productDto = product.ToDtoQuery<D>();
+        //     // return productDto;
+        //     
+        // }
         
-        // don't write code here
         var query = _dbContext.Set<E>().AsQueryable();
         
         if (string.IsNullOrEmpty(request.Id))

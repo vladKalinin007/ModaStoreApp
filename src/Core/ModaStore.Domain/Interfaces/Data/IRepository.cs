@@ -10,6 +10,7 @@ public interface IRepository<T> where T : BaseEntity
     Task<T> GetEntityWithSpec(ISpecification<T> spec);
     Task<List<T>> GetAllAsync();
     Task<List<T>> GetAllWithSpecAsync(ISpecification<T> spec);
+    IQueryable<T> GetAllWithSpec(ISpecification<T> spec);
     T Insert(T entity);
     Task<T> InsertAsync(T entity);
     T Update(T entity);

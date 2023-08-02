@@ -5,7 +5,8 @@
     "Price": 200,
     "PictureUrl": "images/products/sb-ang1.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Green Angular Board 3000",
@@ -13,7 +14,8 @@
     "Price": 150,
     "PictureUrl": "images/products/sb-ang2.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Core Board Speed Rush 3",
@@ -21,7 +23,8 @@
     "Price": 180,
     "PictureUrl": "images/products/sb-core1.png",
     "ProductBrandId": "f4398c98-dcb6-4ebf-b1cb-d0ca7ba37b04",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Net Core Super Board",
@@ -29,7 +32,8 @@
     "Price": 300,
     "PictureUrl": "images/products/sb-core2.png",
     "ProductBrandId": "f4398c98-dcb6-4ebf-b1cb-d0ca7ba37b04",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "React Board Super Whizzy Fast",
@@ -37,7 +41,8 @@
     "Price": 250,
     "PictureUrl": "images/products/sb-react1.png",
     "ProductBrandId": "8214459a-8511-4d98-a1e6-5f8e19307674",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Typescript Entry Board",
@@ -45,7 +50,8 @@
     "Price": 120,
     "PictureUrl": "images/products/sb-ts1.png",
     "ProductBrandId": "65b1fafe-1f59-4bb1-a3b3-33d81164cb5a",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Core Blue Hat",
@@ -53,7 +59,8 @@
     "Price": 10,
     "PictureUrl": "images/products/hat-core1.png",
     "ProductBrandId": "f4398c98-dcb6-4ebf-b1cb-d0ca7ba37b04",
-    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea"
+    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Green React Woolen Hat",
@@ -61,7 +68,8 @@
     "Price": 8,
     "PictureUrl": "images/products/hat-react1.png",
     "ProductBrandId": "8214459a-8511-4d98-a1e6-5f8e19307674",
-    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea"
+    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Purple React Woolen Hat",
@@ -69,7 +77,8 @@
     "Price": 15,
     "PictureUrl": "images/products/hat-react2.png",
     "ProductBrandId": "8214459a-8511-4d98-a1e6-5f8e19307674",
-    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea"
+    "ProductTypeId": "ce124803-9511-4dcf-8ab9-f2858a6c9bea",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Blue Code Gloves",
@@ -77,7 +86,8 @@
     "Price": 18,
     "PictureUrl": "images/products/glove-code1.png",
     "ProductBrandId": "0585df8a-a3f6-4036-bb06-065aa10ea8aa",
-    "ProductTypeId": "5213ea1b-7d52-462d-9571-fb1642e0fe11"
+    "ProductTypeId": "5213ea1b-7d52-462d-9571-fb1642e0fe11",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Green Code Gloves",
@@ -85,7 +95,8 @@
     "Price": 15,
     "PictureUrl": "images/products/glove-code2.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Purple React Gloves",
@@ -93,7 +104,8 @@
     "Price": 16,
     "PictureUrl": "images/products/glove-react1.png",
     "ProductBrandId": "8214459a-8511-4d98-a1e6-5f8e19307674",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Green React Gloves",
@@ -101,7 +113,8 @@
     "Price": 14,
     "PictureUrl": "images/products/glove-react2.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
+    "ProductTypeId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Redis Red Boots",
@@ -109,7 +122,8 @@
     "Price": 250,
     "PictureUrl": "images/products/boot-redis1.png",
     "ProductBrandId": "304aadb3-0759-4eec-aa27-a90d285856a4",
-    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324"
+    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Core Red Boots",
@@ -117,7 +131,8 @@
     "Price": 189.99,
     "PictureUrl": "images/products/boot-core2.png",
     "ProductBrandId": "f4398c98-dcb6-4ebf-b1cb-d0ca7ba37b04",
-    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324"
+    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Core Purple Boots",
@@ -125,7 +140,8 @@
     "Price": 199.99,
     "PictureUrl": "images/products/boot-core1.png",
     "ProductBrandId": "f4398c98-dcb6-4ebf-b1cb-d0ca7ba37b04",
-    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324"
+    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Angular Purple Boots",
@@ -133,7 +149,8 @@
     "Price": 150,
     "PictureUrl": "images/products/boot-ang2.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324"
+    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   },
   {
     "Name": "Angular Blue Boots",
@@ -141,6 +158,7 @@
     "Price": 180,
     "PictureUrl": "images/products/boot-ang1.png",
     "ProductBrandId": "8a01cf19-8b11-41c5-afc2-63294962f107",
-    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324"
+    "ProductTypeId": "9f1912c6-6e09-4373-9c01-71ae95015324",
+    "CategoryId": "14863eb5-d7f1-41dd-b28b-0a93ec84a8e2"
   }
 ]

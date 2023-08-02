@@ -36,7 +36,7 @@ public class ProductController : BaseODataController
     
     // works with OData
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] ProductDto model)
+    public async Task<IActionResult> Post([FromBody] ProductToPublishDto model)
     {
         model = await _mediator.Send(new AddProductCommand() { Model = model });
         return Ok(model);

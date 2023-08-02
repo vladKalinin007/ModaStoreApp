@@ -2,7 +2,7 @@ using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.Domain.Specifications;
 
-public class ProductWithFiltersForCountSpecification: BaseSpecification<Product>
+public class ProductWithFiltersForCountSpecification: BaseSpecification<Entities.Catalog.Product>
 {
     public ProductWithFiltersForCountSpecification(ProductSpecParams? productParams):
         base(x => 

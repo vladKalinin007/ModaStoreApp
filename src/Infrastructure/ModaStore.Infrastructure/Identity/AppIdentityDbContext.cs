@@ -14,6 +14,12 @@ public class AppIdentityDbContext : IdentityDbContext<AppUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        
+        // Определение отношения один-ко-многим между User и Comment
+        builder.Entity<AppUser>()
+            .HasMany(usr => usr.Comments) // Указание коллекции комментариев для каждого пользователя
+            .WithOne(com => com.AppUser) // Указание ссылки на пользователя для каждого комментария
+            .HasForeignKey(c => c.UserId);
     }
     
     

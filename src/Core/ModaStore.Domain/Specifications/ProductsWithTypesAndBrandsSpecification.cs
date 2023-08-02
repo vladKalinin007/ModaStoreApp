@@ -2,7 +2,7 @@ using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.Domain.Specifications;
 
-public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
+public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Entities.Catalog.Product>
 {
     public ProductsWithTypesAndBrandsSpecification(string id) : base(x => x.Id == id)
     {
