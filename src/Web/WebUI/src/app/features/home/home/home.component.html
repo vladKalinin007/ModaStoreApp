@@ -3,18 +3,19 @@
     <div class="layout">
       <div class="hero__inner">
         <div class="hero__slider">
-          <!--<p-carousel [value]="products">
-            <ng-template>
-              <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-                <div class="mb-3">
-                  <img src="./assets/images/hero1.jpg" class="w-6 shadow-2" />
-                </div>
-              </div>
+          <p-carousel
+            [autoplayInterval]="8000"
+            animationTimeout="1000"
+            [value]="productImage"
+            [numVisible]="1"
+            [numScroll]="1"
+            [showIndicators]="false"
+
+            >
+            <ng-template let-image pTemplate="item">
+              <img src="{{ image.url }}" alt="image" class="w-100" />
             </ng-template>
-          </p-carousel>-->
-          <div class="hero__slider-content">
-            <img src="./assets/images/hero1.jpg" class="hero__slider-content-link" />
-          </div>
+          </p-carousel>
         </div>
       </div>
     </div>
@@ -25,28 +26,43 @@
         <div class="categories__title">
           Categories
         </div>
-        <div class="categories__list">
-
-          <ng-container *ngFor="let category of categories">
-            <div class="categories__item">
-              <a class="categories__item-link" [routerLink]="['/shop/', category.name]" style="background: url(https://solmar.com.ua/upload/ammina.optimizer/jpg-webp/q90/upload/resize_cache/iblock/248/670_759_140cd750bba9870f18aada2478b24840a/AK05934_1.webp) no-repeat center/cover;">
+        <div class="categories__list" [@cascade]="categories.length">
+          <ng-container *ngFor="let category of categories" >
+            <div class="categories__item hero" >
+              <a class="categories__item-link" [routerLink]="['/shop/', category.name]" [style.background-image]="'url(' + category.pictureUrl + ')'">
                 <span class="categories__item-caption">
                 <span class="categories__item-title">
                   {{category.name}}
                 </span>
               </span>
               </a>
-
             </div>
           </ng-container>
         </div>
       </div>
     </div>
   </section>
-  <app-related-products title="New products" />
-  <app-related-products title="Bestsellers" />
-  <app-related-products title="Season" />
-  <app-related-products title="Seen" />
+  <app-related-products
+    title="New products"
+    category="new"
+    [products]="newProducts"
+  />
+  <app-related-products
+    title="Bestsellers"
+    category="bestsellers"
+    [products]="bestSellersProducts"
+  />
+  <app-related-products
+    title="Sale"
+    category="sale"
+    [products]="onSaleProducts"
+  />
+  <!--<ng-container *ngIf="(history$ | async).seenProducts">
+    <app-seen-items
+      [history$]="history$"
+      title="Seen products"
+    />
+  </ng-container>-->
   <section class="reviews">
 
   </section>

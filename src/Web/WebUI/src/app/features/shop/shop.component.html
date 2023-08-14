@@ -7,7 +7,7 @@
           <section class="catalog__aside">
             <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
-                <mat-panel-title>  Categories </mat-panel-title>
+                <mat-panel-title>  Price </mat-panel-title>
               </mat-expansion-panel-header>
                 <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
                 <div class="price-slider__inputs">
@@ -28,13 +28,53 @@
             </mat-expansion-panel>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title>  Categories </mat-panel-title>
+                <mat-panel-title>  Types </mat-panel-title>
               </mat-expansion-panel-header>
 
               <div class="catalog__checkbox-item" *ngFor="let type of types" >
                 <p-triStateCheckbox (click)="onBrandSelected(type.id)"/>
                 {{type.name}}
               </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Seasons </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <!--<div class="catalog__checkbox-item" *ngFor="let category of categories" >
+                &lt;!&ndash;<p-triStateCheckbox (click)="onBrandSelected(type.id)"/>&ndash;&gt;
+                {{category.name}}
+              </div>-->
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Colors </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <!--<div class="catalog__checkbox-item" *ngFor="let category of categories" >
+                &lt;!&ndash;<p-triStateCheckbox (click)="onBrandSelected(type.id)"/>&ndash;&gt;
+                {{category.name}}
+              </div>-->
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Sizes </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <!--<div class="catalog__checkbox-item" *ngFor="let category of categories" >
+                &lt;!&ndash;<p-triStateCheckbox (click)="onBrandSelected(type.id)"/>&ndash;&gt;
+                {{category.name}}
+              </div>-->
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>  Style </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <!--<div class="catalog__checkbox-item" *ngFor="let category of categories" >
+                &lt;!&ndash;<p-triStateCheckbox (click)="onBrandSelected(type.id)"/>&ndash;&gt;
+                {{category.name}}
+              </div>-->
             </mat-expansion-panel>
             <mat-chip-listbox aria-label="Fish selection" multiple>
               <mat-chip-option color="accent">One fish</mat-chip-option>
@@ -72,7 +112,7 @@
               </form>-->
             </div>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" [@fastCascade]="products.length">
               <div class="col" *ngFor="let product of products">
                 <app-product-item [product]="product"/>
               </div>

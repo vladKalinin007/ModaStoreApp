@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IProduct} from "../../../core/models/product";
 import {BasketService} from "../../../features/basket/basket.service";
 import {WishlistService} from "../../../features/wishlist/wishlist.service";
 import {IWishlistItem} from "../../../core/models/customer/wishlistItem";
 import {ActivatedRoute, Router} from "@angular/router";
+import {IProductColor} from "../../../core/models/catalog/product-color";
+import {IProductImage} from "../../../core/models/catalog/product-image";
 
 @Component({
   selector: 'app-product-item',
@@ -16,6 +18,11 @@ export class ProductItemComponent {
   @Input() isFavoritesIconVisible: boolean = true;
   @Input() isCaptionVisible: boolean;
   @Input() categoryName: string;
+  @Output() productClicked: EventEmitter<string> = new EventEmitter<string>();
+
+  productColors: IProductColor[];
+  productImages: IProductImage[];
+  imageIndex: number = 0;
 
   id: string;
 
@@ -25,6 +32,11 @@ export class ProductItemComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) { }
+
+  ngOnInit(): void {
+    this.productColors = this.product.colors;
+    this.productImages = this.product.pictures;
+  }
 
   onProductClicked(productId: string) {
     let categoryName: string = this.activatedRoute.snapshot.paramMap.get('categoryName');
@@ -46,6 +58,10 @@ export class ProductItemComponent {
 
   removeItemFromWishlist() {
     this.wishlistService.removeItemFromWishlist(this.product.id);
+  }
+
+  setImageIndex(index: number) {
+    this.imageIndex = index;
   }
 
 }

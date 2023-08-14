@@ -9,7 +9,6 @@ import {CoreModule} from "./core/core.module";
 import {HomeModule} from "./features/home/home.module";
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
-import {StoreModule} from "@ngrx/store";
 /*import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";*/
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MessageService} from "primeng/api";

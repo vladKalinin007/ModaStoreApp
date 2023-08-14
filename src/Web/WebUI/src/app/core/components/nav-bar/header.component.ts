@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BasketService} from "../../../features/basket/basket.service";
-import {debounceTime, distinctUntilChanged, Observable, of, switchMap} from "rxjs";
+import {debounceTime, delay, distinctUntilChanged, Observable, of, switchMap} from "rxjs";
 import {IBasket} from "../../models/basket";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {BasketComponent} from "../../../features/basket/basket/basket.component";
@@ -17,13 +17,17 @@ import {SearchService} from "../../services/search.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {IProduct} from "../../models/product";
 import {IPagination} from "../../models/pagination";
+import {fastCascade} from "../../../shared/animations/fade-in.animation";
 
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    fastCascade,
+  ]
 })
 export class HeaderComponent implements OnInit {
 

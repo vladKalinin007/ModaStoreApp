@@ -44,6 +44,7 @@ public static class InfrastructureServicesExtensions
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<ISeenProductService, SeenProductService>();
+        services.AddScoped<IPictureService, PictureService>();
         services.AddSingleton<IBasketService, BasketService>();
         services.AddSingleton<IWishlistService, WishlistService>();
         services.AddTransient<ICurrentUserService, CurrentUserService>();

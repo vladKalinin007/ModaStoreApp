@@ -22,31 +22,62 @@ public static class AutoMapperConfig
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Category, CategoryDto>();
-
-            cfg.CreateMap<Picture, PictureDto>();
-            cfg.CreateMap<Size, SizeDto>();
+            
             cfg.CreateMap<Tag, TagDto>();
-            cfg.CreateMap<Color, ColorDto>();
             cfg.CreateMap<ProductReview, ReviewDto>();
             cfg.CreateMap<Product, RelatedProductDto>();
+
+            #region Pictures
+            
+            cfg.CreateMap<Picture, PictureDto>();
+            cfg.CreateMap<PictureDto, Picture>();
             
             cfg.CreateMap<ProductPicture, PictureDto>()
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Picture.Url))
                 .ForMember(dest => dest.PictureType, opt => opt.MapFrom(src => src.Picture.PictureType))
                 .ForMember(dest => dest.PictureTypeId, opt => opt.MapFrom(src => src.Picture.PictureTypeId));
+
+            cfg.CreateMap<PictureDto, ProductPicture>()
+                .ForPath(dest => dest.Picture.Url, opt => opt.MapFrom(src => src.Url))
+                .ForPath(dest => dest.Picture.PictureType, opt => opt.MapFrom(src => src.PictureType))
+                .ForPath(dest => dest.Picture.PictureTypeId, opt => opt.MapFrom(src => src.PictureTypeId));
             
+            #endregion
+                
+            #region Sizes
+            
+            cfg.CreateMap<Size, SizeDto>();
+            cfg.CreateMap<SizeDto, Size>();
+            
+            cfg.CreateMap<ProductSize, SizeDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Size.Name))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SizeId));
+            
+            cfg.CreateMap<SizeDto, ProductSize>()
+                .ForPath(dest => dest.Size.Name, opt => opt.MapFrom(src => src.Name))
+                .ForPath(dest => dest.SizeId, opt => opt.MapFrom(src => src.Id));
+            
+            #endregion
+            
+            #region Colors
+            
+            cfg.CreateMap<Color, ColorDto>();
+            cfg.CreateMap<ColorDto, Color>();
+
             cfg.CreateMap<ProductColor, ColorDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Color.Name))
                 .ForMember(dest => dest.ColorCode, opt => opt.MapFrom(src => src.Color.ColorCode));
             
-            //"Missing map from ModaStore.Domain.Entities.Catalog.RelatedProducts to ModaStore.Application.DTOs.Catalog.RelatedProductDto.
-            //Create using CreateMap<RelatedProducts, RelatedProductDto>."
-
-            cfg.CreateMap<RelatedProducts, RelatedProductDto>()
+            cfg.CreateMap<ColorDto, ProductColor>()
+                .ForPath(dest => dest.Color.Name, opt => opt.MapFrom(src => src.Name))
+                .ForPath(dest => dest.Color.ColorCode, opt => opt.MapFrom(src => src.ColorCode));
+                
+            
+            #endregion
+            
+            cfg.CreateMap<RelatedProducts, ProductDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.RelatedProduct.Name));
             
-            cfg.CreateMap<ProductSize, SizeDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Size.Name));
             
             cfg.CreateMap<ProductTag, TagDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Tag.Name));
@@ -54,22 +85,20 @@ public static class AutoMapperConfig
             cfg.CreateMap<ProductReview, ReviewDto>()
                 .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Rating))
                 .ForMember(dest => dest.Comment, opt => opt.MapFrom(src => src.Comment));
+            
+            
+            #region RelatedProduct
+            
+            cfg.CreateMap<RelatedProductDto, RelatedProducts>()
+                .ForMember(dest => dest.RelatedProductId, opt => opt.MapFrom(src => src.Id));
+            
+            // cfg.CreateMap<RelatedProducts, RelatedProductDto>()
+            //     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.RelatedProductId));
+            
+            #endregion
 
-            cfg.CreateMap<Product, RelatedProductDto>()
-                .ForMember(x => x.ProductBrand, opt => opt.MapFrom(src => src.ProductBrand.Name))
-                .ForMember(x => x.ProductType, opt => opt.MapFrom(src => src.ProductType.Name))
-                .ForMember(x => x.Category, opt => opt.MapFrom(src => src.Category.Name))
-                .ForMember(dest => dest.Pictures,
-                    opt => opt.MapFrom(src => src.ProductPictures.Select(pp => pp.Picture)))
-                .ForMember(dest => dest.PictureUrl,
-                    opt => opt.MapFrom(src => src.ProductPictures.FirstOrDefault().Picture.Url))
-                .ForMember(dest => dest.Colors, opt => opt.MapFrom(src => src.ProductColors.Select(pc => pc.Color)))
-                .ForMember(dest => dest.Sizes, opt => opt.MapFrom(src => src.ProductSizes.Select(ps => ps.Size)))
-                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.ProductTags.Select(pt => pt.Tag)))
-                .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.ProductReviews));
-                
-            
-            
+
+
             #region Product
 
             
@@ -83,42 +112,24 @@ public static class AutoMapperConfig
                 .ForMember(dest => dest.Sizes, opt => opt.MapFrom(src => src.ProductSizes.Select(ps => ps.Size)))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.ProductTags.Select(pt => pt.Tag)))
                 .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.ProductReviews))
-                .ForMember(dest => dest.RelatedProducts, opt => opt.MapFrom(src => src.RelatedProducts));
+                .ForMember(dest => dest.RelatedProducts, opt => opt.MapFrom(src => src.RelatedProducts.Select(rp => rp.RelatedProduct)));
 
             cfg.CreateMap<Product, ProductToPublishDto>()
                 .ForMember(x => x.ProductBrand, opt => opt.MapFrom(src => src.ProductBrand.Name))
                 .ForMember(x => x.ProductType, opt => opt.MapFrom(src => src.ProductType.Name))
-                .ForMember(x => x.Category, opt => opt.MapFrom(src => src.Category.Name));
+                .ForMember(x => x.Category, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(x => x.RelatedProducts, opt => opt.MapFrom(src => src.RelatedProducts.Select(rp => rp.RelatedProduct)));
                 
 
 
             cfg.CreateMap<ProductToPublishDto, Product>()
-                .ForMember(dest => dest.ProductBrand,
-                    opt => opt.MapFrom(src => new ProductBrand { Name = src.ProductBrand }))
+                .ForMember(dest => dest.ProductBrand, opt => opt.MapFrom(src => new ProductBrand { Name = src.ProductBrand }))
                 .ForMember(dest => dest.ProductType,
                     opt => opt.MapFrom(src => new ProductType { Name = src.ProductType }))
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => new Category { Name = src.Category }));
-                // .ForMember(dest => dest.ProductPictures, opt => opt.MapFrom(src => src.Pictures.Select(p => new ProductPicture { Picture = new Picture
-                // {
-                //     Url = p.Url,
-                //     PictureType = p.PictureType,
-                // } })))
-                // .ForMember(dest => dest.ProductColors, opt => opt.MapFrom(src => src.Colors.Select(c => new ProductColor { Color = new Color
-                // {
-                //     Name = c.Name, 
-                //     ColorCode = c.ColorCode
-                // } })))
-                // .ForMember(dest => dest.ProductSizes, opt => opt.MapFrom(src => src.Sizes.Select(s => new ProductSize { Size = new Size
-                // {
-                //     Name = s.Name
-                // } })))
-                // .ForMember(dest => dest.ProductTags, opt => opt.MapFrom(src => src.Tags.Select(t => new ProductTag { Tag = new Tag
-                // {
-                //     Name = t.Name
-                // } })))
-                // .ForMember(dest => dest.ProductReviews, opt => opt.MapFrom(src => src.Reviews))
-                // .ForMember(dest => dest.RelatedProducts, opt => opt.MapFrom(src => src.RelatedProducts));
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => new Category { Name = src.Category }))
+                .ForMember(dest => dest.RelatedProducts, opt => opt.MapFrom(src => src.RelatedProducts));
             
+              
             
             #endregion
 

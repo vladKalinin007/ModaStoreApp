@@ -30,6 +30,11 @@ public class SqlServerRepository<T>: IRepository<T> where T: BaseEntity
         return await ApplySpecification(spec).FirstOrDefaultAsync();
     }
 
+    public IQueryable<T> GetAllQueryAsync()
+    {
+        return _context.Set<T>().AsQueryable();
+    }
+
     public Task<List<T>> GetAllAsync()
     {
         return _context.Set<T>().AsQueryable().ToListAsync();
@@ -60,6 +65,7 @@ public class SqlServerRepository<T>: IRepository<T> where T: BaseEntity
             // var results = await _context.Set<T>().AddAsync(product as T);
             _context.Set<Product>().Add(product);
             await AddForeignKeysAsync(product);
+            await AddRelatedProperties(product);
             await _context.SaveChangesAsync();
             return product as T;
             // return results.Entity;
@@ -94,6 +100,32 @@ public class SqlServerRepository<T>: IRepository<T> where T: BaseEntity
             _context.Entry(product.ProductType).State = EntityState.Unchanged; // не вставлять тип в базу данных
         }
     }
+
+    private async Task AddRelatedProperties(Product product)
+    {
+        foreach (var color in product.Colors)
+        {
+            var existingColor = await _context.Colors.FirstOrDefaultAsync(c => c.Name == color.Name);
+            if (existingColor != null)
+            {
+                color.Id = existingColor.Id;
+                _context.Entry(existingColor).State = EntityState.Detached; // Отсоединяем сущность
+                _context.Entry(color).State = EntityState.Modified; // Помечаем существующую сущность как измененную
+            }
+        }
+    
+        foreach (var size in product.Sizes)
+        {
+            var existingSize = await _context.Sizes.FirstOrDefaultAsync(s => s.Name == size.Name);
+            if (existingSize != null)
+            {
+                size.Id = existingSize.Id;
+                _context.Entry(existingSize).State = EntityState.Detached; // Отсоединяем сущность
+                _context.Entry(size).State = EntityState.Modified; // Помечаем существующую сущность как измененную
+            }
+        }
+    }
+
 
 
     public T Update(T entity)

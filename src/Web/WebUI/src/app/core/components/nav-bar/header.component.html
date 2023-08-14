@@ -62,11 +62,22 @@
             <div class="header__item_left">
               <div class="header__item-icon align-r">
                 <a (click)="openDialog()">
-                  <i class="pi pi-shopping-bag header__icon-internal"
-                     pBadge value="{{(basket$ | async)?.items?.length || null}}"
-                     severity="success"
-                     size="large">
-                  </i>
+                  <ng-container
+                    *ngIf="
+                    (basket$ | async)?.items?.length === 0 ||
+                    (basket$ | async)?.items?.length === undefined ||
+                    (basket$ | async)?.items?.length === null;
+                    else noValueIcon"
+                  >
+                    <i class="pi pi-shopping-bag header__icon-internal" size="large"></i>
+                  </ng-container>
+                  <ng-template #noValueIcon>
+                    <i class="pi pi-shopping-bag header__icon-internal"
+                       pBadge value="{{(basket$ | async)?.items?.length || null}}"
+                       severity="success"
+                       size="large">
+                    </i>
+                  </ng-template>
                 </a>
               </div>
             </div>
@@ -124,10 +135,35 @@
 
             <div class="header__item_left">
               <div class="header__item-icon ">
+                <!--<a (click)="openDialog()">
+                  <ng-container *ngIf="(basket$ | async)?.items.length !== 0; else noValueIcon">
+                    <i class="pi pi-shopping-bag header__icon-internal"
+                       pBadge
+                       value="{{(basket$ | async).items.length}}"
+                       severity="success"
+                       size="large">
+                    </i>
+                  </ng-container>
+                  <ng-template #noValueIcon>
+                    <i class="pi pi-shopping-bag header__icon-internal" size="large"></i>
+                  </ng-template>
+                </a>-->
                 <a (click)="openDialog()">
-                  <i class="pi pi-shopping-bag header__icon-internal" pBadge value="{{(basket$ | async).items.length}}" severity="success"
-                     size="large"></i>
+                  <ng-container *ngIf="(basket$ | async)?.items.length !== 0; else noValueIcon">
+                    <i class="pi pi-shopping-bag header__icon-internal"
+                       pBadge
+                       value="{{(basket$ | async).items.length}}"
+                       severity="success"
+                       size="large">
+                    </i>
+                  </ng-container>
+                  <ng-template #noValueIcon>
+                    <ng-container *ngIf="!(basket$ | async)?.items.length || (basket$ | async)?.items.length === null || (basket$ | async)?.items.length === undefined || (basket$ | async)?.items.length === 0">
+                      <i class="pi pi-shopping-bag header__icon-internal" size="large"></i>
+                    </ng-container>
+                  </ng-template>
                 </a>
+
               </div>
             </div>
 
@@ -137,13 +173,11 @@
         </div>
       </div>
       <!--<ng-container (click)="toggleMenu()">-->
-      <div>
-        <!--<div *ngFor="let result of (searchResults$ | async).data">
-          <div>
-            {{result.name}}
-          </div>
-        </div>-->
-        <app-product-list-item *ngFor="let result of (searchResults$ | async)?.data" [product]="result"></app-product-list-item>
+      <div [@fastCascade]="(searchResults$ | async)?.data?.length">
+        <app-product-list-item
+          *ngFor="let result of (searchResults$ | async)?.data"
+          [product]="result">
+        </app-product-list-item>
       </div>
         <app-nav-modal [isMenuActive]="isMenuActive"></app-nav-modal>
       <!--</ng-container>-->

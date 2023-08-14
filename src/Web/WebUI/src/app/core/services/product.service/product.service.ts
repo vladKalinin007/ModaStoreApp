@@ -38,6 +38,39 @@ export class ProductService {
     );
   }
 
+  //https://localhost:5001/odata/Product?IsBestSeller=true
+  getBestsellers() {
+    const url: string = `${this.baseUrl}Product`;
+    let params: HttpParams = new HttpParams();
+    params = params.append('IsBestSeller', 'true');
+    const options = { observe: 'response' as const, params };
+    return this.http.get<IPagination>(url, options).pipe(
+      map(response => response.body)
+    );
+  }
+
+  //https://localhost:5001/odata/Product?IsNew=true
+  getNewProducts() {
+    const url: string = `${this.baseUrl}Product`;
+    let params: HttpParams = new HttpParams();
+    params = params.append('IsNew', 'true');
+    const options = { observe: 'response' as const, params };
+    return this.http.get<IPagination>(url, options).pipe(
+      map(response => response.body)
+    );
+  }
+
+  //https://localhost:5001/odata/Product?IsOnSale=true
+  getOnSaleProducts() {
+    const url: string = `${this.baseUrl}Product`;
+    let params: HttpParams = new HttpParams();
+    params = params.append('IsOnSale', 'true');
+    const options = { observe: 'response' as const, params };
+    return this.http.get<IPagination>(url, options).pipe(
+      map(response => response.body)
+    );
+  }
+
   getProduct(id: string) {
     const url: string = `${this.baseUrl}product/${id}`;
 

@@ -1,11 +1,13 @@
 <div class="catalog-item">
   <div class="catalog-item__layout">
     <div class="catalog-item__image">
-      <a routerLink="/shop/{{product.id}}">
+      <a routerLink="/shop/{{categoryName}}/{{product.id}}">
         <img routerLink="/shop/{{product.id}}"
-             src="{{product.pictureUrl}}"
+             src="{{productImages[imageIndex]?.url}}"
              alt="{{product.name}}"
              class="catalog-item__pic"
+             (mouseenter)="setImageIndex(1)"
+             (mouseleave)="setImageIndex(0)"
         >
       </a>
       <div class="catalog-item__like" >
@@ -15,30 +17,38 @@
         </ng-template>
       </div>
       <div class="catalog-item__labels">
-        <div class="item-label item-label_blue"> New </div>
-        <div class="item-label item-label_orange"> Bestseller </div>
-        <div class="item-label item-label_red"> -40% </div>
+        <ng-container *ngIf="product.isNew">
+          <div class="item-label item-label_blue"> New</div>
+        </ng-container>
+        <ng-container *ngIf="product.isBestSeller">
+          <div class="item-label item-label_orange"> Bestseller</div>
+        </ng-container>
+        <ng-container *ngIf="product.oldPrice !== null && product.oldPrice > 0">
+          <div class="item-label item-label_red"> -{{ product.oldPrice | discount: product.price }} </div>
+        </ng-container>
       </div>
     </div>
     <div class="catalog-item__caption">
       <a class="catalog-item__name"
-         (click)="onProductClicked(product.id)"
+         routerLink="/shop/{{categoryName}}/{{product.id}}"
       >
-        {{product.name}}
+        {{product.name | shorten: 35}}
       </a>
       <div class="detail-palette">
         <div class="detail-palette__links">
-          <span class="detail-palette__link">
-          </span>
-          <span class="detail-palette__link">
-          </span>
-          <span class="detail-palette__link">
-          </span>
+          <ng-container *ngIf="productColors && productColors.length > 0">
+            <span class="detail-palette__link" *ngFor="let color of productColors" [ngStyle]="{ 'background': color.colorCode }"></span>
+          </ng-container>
         </div>
       </div>
       <div class="catalog-item__price">
-        <div class="catalog-item__new-price">{{product.price}} $</div>
-        <div class="catalog-item__old-price">{{product.price}} $</div>
+        <ng-container *ngIf="product.oldPrice !== null && product.oldPrice > 0; else price">
+          <div class="catalog-item__new-price">{{product.price}} $</div>
+          <div class="catalog-item__old-price">{{product.oldPrice}} $</div>
+        </ng-container>
+        <ng-template #price>
+          <div class="catalog-item__new-price">{{product.price}} $</div>
+        </ng-template>
       </div>
       <div class="catalog-item__sizes-btn">
         <div class="catalog-item__sizes">

@@ -9,6 +9,7 @@
     "@ngrx/store": "^16.0.1",
     "@stripe/stripe-js": "^1.54.0",
     "@types/angular": "^1.8.5",
+    "mdb-angular-ui-kit": "^5.0.0",
     "ngx-stripe": "^16.1.1",
     "reflect-metadata": "^0.1.13",
     "stripe": "^12.9.0",

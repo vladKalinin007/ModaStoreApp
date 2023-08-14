@@ -1,7 +1,6 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IProduct} from "../../../core/models/product";
 import {ShopService} from "../shop.service";
-import {IPagination} from "../../../core/models/pagination";
 import {ActivatedRoute} from "@angular/router";
 import {BreadcrumbService} from "xng-breadcrumb";
 import {BasketService} from "../../basket/basket.service";
@@ -12,6 +11,12 @@ import {HistoryService} from "../../../shared/services/history.service";
 import {WishlistService} from "../../wishlist/wishlist.service";
 import {Observable} from "rxjs";
 import {ISeenProductList} from "../../../core/models/customer/seenProductList";
+import {IProductImage} from "../../../core/models/catalog/product-image";
+import {IProductReview} from "../../../core/models/catalog/product-review";
+import {IProductColor} from "../../../core/models/catalog/product-color";
+import {IProductSize} from "../../../core/models/catalog/product-size";
+import {IProductRelated} from "../../../core/models/catalog/product-related";
+import {SliderImage} from "../../../core/models/sliderImage";
 
 @Component({
   selector: 'app-product-details',
@@ -25,55 +30,16 @@ export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   products: IProduct[];
   history$: Observable<ISeenProductList>
-
+  sliderImage: SliderImage[];
+  productImages: IProductImage[];
+  productReviews: IProductReview[];
+  productColors: IProductColor[];
+  productSizes: IProductSize[];
+  relatedProducts: IProductRelated[];
 
   shopParams: ShopParams = new ShopParams();
-  ratingValue: number;
+  ratingValue: number = 2;
   sidebarVisible: boolean;
-  images: any[] = [
-    {
-      previewImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/12/sirenevoe-plate-trapeciya-s-cvetochnym-printom-58847-1679824328-1.jpg',
-      thumbnailImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/12/sirenevoe-plate-trapeciya-s-cvetochnym-printom-58847-1679824328-1.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1'
-    },
-    {
-      previewImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/08/beloe-plate-trapeciya-s-cvetochnym-printom-58845-1680510135-1.jpg',
-      thumbnailImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/08/beloe-plate-trapeciya-s-cvetochnym-printom-58845-1680510135-1.jpg',
-      alt: 'Description for Image 2',
-      title: 'Title 2'
-    },
-    {
-      previewImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683010716-1.jpg',
-      thumbnailImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683010716-1.jpg',
-      alt: 'Description for Image 3',
-      title: 'Title 3'
-    },
-    {
-      previewImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683095599-4.jpg',
-      thumbnailImageSrc:
-        'https://cdn.dressa.com.ua/ostrov-cache/sylius_extra_large/fd/plate-na-uzkih-bretelyah-s-cvetochnym-printom-beloe-59103-1683095599-4.jpg',
-      alt: 'Description for Image 4',
-      title: 'Title 4'
-    },
-  ];
-
-  value: number;
-
-  paymentOptions: any[] = [
-    { name: '42', value: 1 },
-    { name: '44', value: 2 },
-    { name: '46', value: 3 },
-    { name: '48', value: 4 },
-  ];
-
 
   constructor(
     private shopService: ShopService,
@@ -91,15 +57,16 @@ export class ProductDetailsComponent implements OnInit {
     this.getProductById();
     this.getProductList();
     this.history$ = this.historyService.history$;
+
   }
 
   getProductById() {
     const id : string = this.activateRoute.snapshot.paramMap.get('id');
-    console.log("id =", id);
     this.productService.getProduct(id).subscribe({
       next: (response) => {
         this.product = response;
-        console.log("response =", response);
+        console.log("SIZES", this.product);
+        this.toSliderImages();
         this.addProductToViewsHistory(response)
         this.bcService.set('@productDetails', this.product.name);
       },
@@ -110,19 +77,26 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
+  toSliderImages() {
+    this.sliderImage = this.product.pictures.map(picture => {
+      return {
+        previewImageSrc: picture.url,
+        thumbnailImageSrc: picture.url,
+        alt: 'alt',
+        title: 'title'
+      };
+    });
+  }
 
   addProductToViewsHistory(response: IProduct) {
-    console.log("HISTORY RESPONSE: ", response);
     this.historyService.addItemToProductsViewsHistory(response);
   }
 
   addProductToBasket() {
-    console.log("clicked")
     this.basketService.addItemToBasket(this.product);
   }
 
   addItemToWishList() {
-    console.log("clicked")
     this.wishlistService.addItemToWishlist(this.product);
   }
 

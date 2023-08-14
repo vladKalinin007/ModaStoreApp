@@ -33,5 +33,5 @@ public class ProductDto : BaseDto
     public ICollection<ReviewDto>? Reviews { get; set; }
     public ICollection<ColorDto>? Colors { get; set; }
     public ICollection<SizeDto>? Sizes { get; set; }
-    public ICollection<RelatedProductDto>? RelatedProducts { get; set; }
+    public ICollection<ProductDto>? RelatedProducts { get; set; }
 }

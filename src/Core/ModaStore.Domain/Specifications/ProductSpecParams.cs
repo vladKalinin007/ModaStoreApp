@@ -5,7 +5,7 @@ public class ProductSpecParams
     private const int MaxPageSize = 50;
     public int PageIndex { get; set; } = 1;
     
-    private int _pageSize = 6;
+    private int _pageSize = 9;
     public int PageSize
     {
         get => _pageSize;
@@ -24,6 +24,7 @@ public class ProductSpecParams
     public string? Tag { get; set; }
     public bool? IsBestSeller { get; set; }
     public bool? IsNew { get; set; }
+    public bool? IsOnSale { get; set;  }
     public decimal? MinPrice { get; set; }
     public decimal? MaxPrice { get; set; }
     

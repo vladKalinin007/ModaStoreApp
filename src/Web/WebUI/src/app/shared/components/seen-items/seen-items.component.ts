@@ -12,6 +12,7 @@ import {ISeenProductList} from "../../../core/models/customer/seenProductList";
 export class SeenItemsComponent implements OnInit {
 
   @Input() title: string;
+
   history$: Observable<ISeenProductList>
 
 

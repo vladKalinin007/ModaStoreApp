@@ -6,7 +6,7 @@ import { PagerComponent } from './components/pager/pager.component';
 import { CarouselModule } from 'primeng/carousel';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import {RouterLink, RouterModule} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenuModule} from "@angular/material/menu";
@@ -52,6 +52,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MaterialModule} from "../../material.module";
 import { ProductListItemComponent } from './components/product-list-item/product-list-item.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { ReviewComponent } from './components/review/review.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import { ProductListItemComponent } from './components/product-list-item/product
     SeenItemsComponent,
     SeenItemComponent,
     ProductListItemComponent,
+    DiscountPipe,
+    ShortenPipe,
+    ReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -109,9 +115,11 @@ import { ProductListItemComponent } from './components/product-list-item/product
     MatSlideToggleModule,
     ToastModule,
     MatSidenavModule,
+    /*MdbCarouselModule,*/
     MatListModule,
-    MaterialModule
-/*    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')*/
+    MaterialModule,
+    FormsModule,
+    /*    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')*/
   ],
     exports: [
         PaginationModule,
@@ -160,7 +168,8 @@ import { ProductListItemComponent } from './components/product-list-item/product
         SeenItemsComponent,
         MatSidenavModule,
         MatListModule,
-        ProductListItemComponent
+        ProductListItemComponent,
+        ReviewComponent
     ]
 })
 export class SharedModule { }

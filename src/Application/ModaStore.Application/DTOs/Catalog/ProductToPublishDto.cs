@@ -28,4 +28,10 @@ public class ProductToPublishDto
     public string? PantLength { get; set; }
     public string? PantStyle { get; set; }
     public string? FitType { get; set; }
+    public ICollection<PictureDto>? Pictures { get; set; }
+    public ICollection<ColorDto>? Colors { get; set; }
+    public ICollection<SizeDto>? Sizes { get; set; }
+    public ICollection<ReviewDto>? Reviews { get; set; }
+    public ICollection<RelatedProductDto>? RelatedProducts { get; set; }
+    
 }

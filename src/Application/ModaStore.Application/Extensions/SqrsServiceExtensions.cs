@@ -8,6 +8,8 @@ using ModaStore.Application.DTOs.Order;
 using ModaStore.Application.DTOs.Order.OrderManagement;
 using ModaStore.Application.Features.Catalog.Category.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Category.Commands.Models;
+using ModaStore.Application.Features.Catalog.Pictures.Queries.Handlers;
+using ModaStore.Application.Features.Catalog.Pictures.Queries.Models;
 using ModaStore.Application.Features.Catalog.Product.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Product.Commands.Models;
 using ModaStore.Application.Features.Catalog.Product.Queries.Handlers;
@@ -228,6 +230,15 @@ public static class SqrsServiceExtensions
         services.AddScoped(
             typeof(IRequestHandler<DeleteSeenProductsCommand, bool>), 
             typeof(DeleteSeenProductsCommandHandler)
+        );
+        
+        #endregion
+        
+        #region Pictures 
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetPicturesByPictureTypeQuery, IQueryable<PictureDto>>), 
+            typeof(GetPicturesByPictureTypeQueryHandler)
         );
         
         #endregion

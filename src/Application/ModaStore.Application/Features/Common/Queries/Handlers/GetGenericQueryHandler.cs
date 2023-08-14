@@ -47,6 +47,14 @@ public class GetGenericQueryHandler<D,E> : IRequestHandler<GetGenericQuery<D,E>,
                 var specs = new ProductSpecification(request.productParams);
                 return _productRepository.GetAllWithSpec(specs).ToDto<D>();
             }
+            
+            var spec = new ProductSpecification(request.Id);
+            var result = _productRepository.GetAllWithSpec(spec);
+            return result.ToDto<D>();
+            // var spec = new ProductsWithTypesAndBrandsSpecification(request.Id);
+            // Product product = await _productRepository.GetEntityWithSpec(spec);
+            // var productDto = product.ToDtoQuery<D>();
+            // return productDto;
         }
         //
         //     // var spec = new ProductsWithTypesAndBrandsSpecification(request.Id);
@@ -57,7 +65,7 @@ public class GetGenericQueryHandler<D,E> : IRequestHandler<GetGenericQuery<D,E>,
         // }
         
         var query = _dbContext.Set<E>().AsQueryable();
-        
+
         if (string.IsNullOrEmpty(request.Id))
         {
             var dtoQuery = query.ToDto<D>();        

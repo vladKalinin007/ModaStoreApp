@@ -7,11 +7,16 @@ import {IType} from "../../core/models/productType";
 import {ShopParams} from "../../core/models/shopParams";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../core/services/product.service/product.service";
+import {fastCascade} from "../../shared/animations/fade-in.animation";
+import {ICategory} from "../../core/models/category";
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  styleUrls: ['./shop.component.scss'],
+  animations: [
+    fastCascade,
+  ]
 })
 export class ShopComponent implements OnInit {
 
@@ -19,6 +24,7 @@ export class ShopComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
+  categories: ICategory[];
   headerTitle: string;
   shopParams: ShopParams = new ShopParams();
    totalCount: number;
@@ -95,6 +101,22 @@ export class ShopComponent implements OnInit {
           console.log(error);
         }
       });
+  }
+
+  getCategories() {
+
+  }
+
+  getSizes() {
+
+  }
+
+  getColors() {
+
+  }
+
+  getSeasons() {
+
   }
 
   onBrandSelected(brandId: string) {
