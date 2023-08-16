@@ -11,6 +11,7 @@ public interface IProductService
     Task InsertProduct(Product product);
     Task UpdateProduct(Product product);
     Task DeleteProduct(Product product);
+    Task<ProductAttributes> GetAttributes();
     
     #endregion
 }

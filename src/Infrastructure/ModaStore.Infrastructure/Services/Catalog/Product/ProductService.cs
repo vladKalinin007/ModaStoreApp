@@ -1,3 +1,4 @@
+using ModaStore.Domain.Entities.Catalog;
 using ModaStore.Domain.Interfaces.Catalog;
 using ModaStore.Domain.Interfaces.Data;
 
@@ -35,5 +36,44 @@ public class ProductService : IProductService
     public Task DeleteProduct(Domain.Entities.Catalog.Product product)
     {
         return _productRepository.DeleteAsync(product);
+    }
+    
+    public async Task<ProductAttributes> GetAttributes()
+    {
+        var products = await _productRepository.GetAllAsync();
+        
+        var uniqueMaterials = products
+            .Where(p => !string.IsNullOrEmpty(p.Material))
+            .Select(p => p.Material)
+            .Distinct()
+            .ToList();
+
+        var uniqueStyles = products
+            .Where(p => !string.IsNullOrEmpty(p.Style))
+            .Select(p => p.Style)
+            .Distinct()
+            .ToList();
+
+        var uniqueSeasons = products
+            .Where(p => !string.IsNullOrEmpty(p.Season))
+            .Select(p => p.Season)
+            .Distinct()
+            .ToList();
+
+        var uniquePatterns = products
+            .Where(p => !string.IsNullOrEmpty(p.Pattern))
+            .Select(p => p.Pattern)
+            .Distinct()
+            .ToList();
+        
+        var attributes = new ProductAttributes
+        {
+            Materials = uniqueMaterials,
+            Styles = uniqueStyles,
+            Seasons = uniqueSeasons,
+            Patterns = uniquePatterns
+        };
+        
+        return attributes;
     }
 }

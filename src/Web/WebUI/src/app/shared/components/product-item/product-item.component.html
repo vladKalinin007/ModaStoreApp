@@ -1,14 +1,23 @@
 <div class="catalog-item">
   <div class="catalog-item__layout">
     <div class="catalog-item__image">
-      <a routerLink="/shop/{{categoryName}}/{{product.id}}">
-        <img routerLink="/shop/{{product.id}}"
+      <a href="/shop/{{product.category}}/{{product.id}}">
+        <!--<img routerLink="/shop/{{product.id}}"
              src="{{productImages[imageIndex]?.url}}"
              alt="{{product.name}}"
              class="catalog-item__pic"
              (mouseenter)="setImageIndex(1)"
              (mouseleave)="setImageIndex(0)"
-        >
+        >-->
+        <div class="catalog-item__pic-container">
+          <img routerLink="/shop/{{product.id}}"
+               src="{{productImages[imageIndex]?.url}}"
+               alt="{{product.name}}"
+               class="catalog-item__pic"
+               (mouseenter)="setImageIndex(1)"
+               (mouseleave)="setImageIndex(0)"
+          >
+        </div>
       </a>
       <div class="catalog-item__like" >
         <i *ngIf="isFavoritesIconVisible; else notVisible"  (click)="addItemToWishlist()" class="pi pi-heart catalog-item__like-icon"></i>
@@ -29,9 +38,7 @@
       </div>
     </div>
     <div class="catalog-item__caption">
-      <a class="catalog-item__name"
-         routerLink="/shop/{{categoryName}}/{{product.id}}"
-      >
+      <a class="catalog-item__name" href="/shop/{{product.category}}/{{product.id}}">
         {{product.name | shorten: 35}}
       </a>
       <div class="detail-palette">

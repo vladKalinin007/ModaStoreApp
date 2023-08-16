@@ -92,4 +92,16 @@ export class ProductService {
     console.log("it works")
     return this.http.get<IProduct[]>(url);
   }
+
+  getSizes() {
+    return this.http.get<string[]>(this.baseUrl + 'product/size');
+  }
+
+  getColors() {
+    return this.http.get<string[]>(this.baseUrl + 'product/color');
+  }
+
+  getMaterials() {
+    return this.http.get<string[]>(this.baseUrl + 'product/material');
+  }
 }

@@ -272,7 +272,6 @@
 
     <ng-container *ngIf="(history$ | async)?.seenProducts">
       <app-seen-items
-        [history$]="history$"
         title="Seen products"
       />
     </ng-container>

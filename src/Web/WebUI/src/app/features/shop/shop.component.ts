@@ -1,14 +1,16 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {IProduct} from "../../core/models/product";
 import {ShopService} from "./shop.service";
 import {IPagination} from "../../core/models/pagination";
 import {IBrand} from "../../core/models/brand";
 import {IType} from "../../core/models/productType";
 import {ShopParams} from "../../core/models/shopParams";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ProductService} from "../../core/services/product.service/product.service";
 import {fastCascade} from "../../shared/animations/fade-in.animation";
 import {ICategory} from "../../core/models/category";
+import {CategoryService} from "../../core/services/category.service/category.service";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-shop',
@@ -29,10 +31,12 @@ export class ShopComponent implements OnInit {
   shopParams: ShopParams = new ShopParams();
    totalCount: number;
   rangeValues: number[] = [0, 1000];
+  isSideBarHidden: boolean;
 
 
   constructor(
     private shopService: ShopService,
+    private categoryService: CategoryService,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -42,7 +46,10 @@ export class ShopComponent implements OnInit {
     this.loadProducts()
     this.getProducts();
     this.getBrands();
+    this.getCategories();
     this.getTypes();
+  /*  console.log("shop component init")
+    this.updateIsSideBarHidden();*/
   }
 
   loadProducts() {
@@ -104,15 +111,42 @@ export class ShopComponent implements OnInit {
   }
 
   getCategories() {
+    this.categoryService.getCategories()
+      .subscribe({
+        next: (response: ICategory[]) => {
+          this.categories = response;
+          this.updateSideBarVisibility(response);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
 
+  private updateSideBarVisibility(categories: ICategory[]): void {
+    const currentRoute: string = this.activatedRoute.snapshot.paramMap.get('categoryName');
+
+    const isCategoryFound = categories.some(category => category.name === currentRoute);
+
+    if (!isCategoryFound) {
+      this.isSideBarHidden = true;
+    }
   }
 
   getSizes() {
-
+    this.productService.getSizes().subscribe({
+      next: (response: string[]) => {
+        console.log(response);
+      }
+    })
   }
 
   getColors() {
-
+    this.productService.getColors().subscribe({
+      next: (response: string[]) => {
+        console.log(response);
+      }
+    })
   }
 
   getSeasons() {

@@ -29,6 +29,7 @@ using ModaStore.Domain.Interfaces.Data;
 using ModaStore.Infrastructure.Data.SqlServer;
 using ModaStore.Application.Features.Customer.Queries.Models;
 using ModaStore.Application.Features.Customer.Queries.Handlers;
+using ModaStore.Domain.Entities.Order.Review;
 
 
 namespace ModaStore.Application.Extensions;
@@ -239,6 +240,43 @@ public static class SqrsServiceExtensions
         services.AddScoped(
             typeof(IRequestHandler<GetPicturesByPictureTypeQuery, IQueryable<PictureDto>>), 
             typeof(GetPicturesByPictureTypeQueryHandler)
+        );
+        
+        #endregion
+        
+        #region Attributes
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetProductAttributesListsQuery, ProductAttributesDto>), 
+            typeof(GetProductAttributesListsQueryHandler)
+            
+        );
+        
+        #endregion
+        
+        #region Colors
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetGenericQuery<ColorDto, Color>, IQueryable<ColorDto>>), 
+            typeof(GetGenericQueryHandler<ColorDto, Color>)
+        );
+        
+        #endregion
+        
+        #region Sizes
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetGenericQuery<SizeDto, Size>, IQueryable<SizeDto>>), 
+            typeof(GetGenericQueryHandler<SizeDto, Size>)
+        );
+        
+        #endregion
+        
+        #region Reviews
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetGenericQuery<ReviewDto, Review>, IQueryable<ReviewDto>>), 
+            typeof(GetGenericQueryHandler<ReviewDto, Review>)
         );
         
         #endregion

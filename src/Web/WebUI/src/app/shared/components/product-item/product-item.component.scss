@@ -24,6 +24,10 @@
     position: relative;
     min-height: 376px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
       color: currentColor;
       &:after {
@@ -32,10 +36,23 @@
     }
   }
 
+  &__pic-container {
+    max-height: 414px;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
   &__pic {
     /*max-width: 276px;*/
     max-height: 414px;
-
+    //max-height: 100%;
+    width: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   &__like {

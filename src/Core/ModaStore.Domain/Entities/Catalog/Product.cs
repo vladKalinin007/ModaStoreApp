@@ -69,7 +69,6 @@ namespace ModaStore.Domain.Entities.Catalog;
         public string CategoryId { get; set; }
 
         // One to many
-        // public ICollection<Comment> Comments { get; set; }
         public ICollection<ProductReview> ProductReviews { get; set; }
         public int TotalRating => ProductReviews?.Sum(pr => pr.Rating) ?? 0;
         public ICollection<RelatedProducts> RelatedProducts { get; set; }

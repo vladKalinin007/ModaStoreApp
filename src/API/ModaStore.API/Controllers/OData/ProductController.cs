@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModaStore.Application.DTOs;
 using ModaStore.Application.DTOs.Catalog;
 using ModaStore.Application.Features.Catalog.Product.Commands.Models;
+using ModaStore.Application.Features.Catalog.Product.Queries.Models;
 using ModaStore.Application.Features.Common.Queries.Models;
 using ModaStore.Domain.Entities.Catalog;
 using ModaStore.Domain.Specifications;
@@ -62,4 +63,35 @@ public class ProductController : BaseODataController
         return Ok();
         
     }
+    
+    //Colors
+    [HttpGet("Colors")]
+    public async Task<IActionResult> GetColors()
+    {
+        return Ok(await _mediator.Send(new GetGenericQuery<ColorDto, Color>()));
+    }
+    
+    //Sizes
+    [HttpGet("Sizes")]
+    public async Task<IActionResult> GetSizes()
+    {
+        return Ok(await _mediator.Send(new GetGenericQuery<SizeDto, Size>()));
+    }
+    
+    
+    //Reviews
+    [HttpGet("Reviews")]
+    public async Task<IActionResult> GetReviews()
+    {
+        return Ok(await _mediator.Send(new GetGenericQuery<ReviewDto, ProductReview>()));
+    }
+    
+    //Attributes
+    [HttpGet("Attributes")]
+    public async Task<IActionResult> GetAttributes()
+    {
+        return Ok(await _mediator.Send(new GetProductAttributesListsQuery()));
+    }
+    
+
 }

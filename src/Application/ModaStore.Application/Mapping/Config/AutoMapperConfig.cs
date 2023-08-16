@@ -22,6 +22,7 @@ public static class AutoMapperConfig
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Category, CategoryDto>();
+            cfg.CreateMap<ProductAttributes, ProductAttributesDto>();
             
             cfg.CreateMap<Tag, TagDto>();
             cfg.CreateMap<ProductReview, ReviewDto>();

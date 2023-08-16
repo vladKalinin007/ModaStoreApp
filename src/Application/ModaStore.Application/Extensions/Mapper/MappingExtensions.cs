@@ -226,4 +226,23 @@ public static class MappingExtensions
     }
     
     #endregion
+    
+    #region ProductAttributes
+    
+    public static ProductAttributesDto ToDto(this ProductAttributes entity)
+    {
+        return entity.MapTo<ProductAttributes, ProductAttributesDto>();
+    }
+    
+    public static ProductAttributes ToEntity(this ProductAttributesDto dto)
+    {
+        return dto.MapTo<ProductAttributesDto, ProductAttributes>();
+    }
+    
+    public static ProductAttributes ToEntity(this ProductAttributesDto dto, ProductAttributes destination)
+    {
+        return dto.MapTo(destination);
+    }
+    
+    #endregion
 }

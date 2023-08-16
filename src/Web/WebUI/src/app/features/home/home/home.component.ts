@@ -9,6 +9,8 @@ import {IProductImage} from "../../../core/models/catalog/product-image";
 import {HistoryService} from "../../../shared/services/history.service";
 import {cascade, fadeIn} from "../../../shared/animations/fade-in.animation";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Observable} from "rxjs";
+import {ISeenProductList} from "../../../core/models/customer/seenProductList";
 
 
 
@@ -30,7 +32,8 @@ export class HomeComponent implements OnInit {
   productImage: IProductImage[];
   product: IProduct;
   categories: ICategory[];
-  /*history$: Observable<ISeenProductList>*/
+
+  history$: Observable<ISeenProductList>
   shopParams: ShopParams = new ShopParams();
 
   constructor(
@@ -45,10 +48,10 @@ export class HomeComponent implements OnInit {
     // this.getProducts();
     this.loadProduct();
     this.getCategories();
-    /*this.getRecentlyViewedProducts()*/
+    this.getRecentlyViewedProducts()
     this.getNewProducts();
     this.getBestSellersProducts();
-    /*this.getOnSaleProducts();*/
+    this.getOnSaleProducts();
   }
 
 
@@ -132,7 +135,7 @@ export class HomeComponent implements OnInit {
   }
 
   getRecentlyViewedProducts() {
-    /*this.history$ = this.historyService.history$;*/
+    this.history$ = this.historyService.history$;
   }
 
   getLastReviews() {

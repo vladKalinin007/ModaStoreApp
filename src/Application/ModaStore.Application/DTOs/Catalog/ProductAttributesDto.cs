@@ -1,8 +1,8 @@
 using ModaStore.Domain.Entities.Common;
 
-namespace ModaStore.Domain.Entities.Catalog;
+namespace ModaStore.Application.DTOs.Catalog;
 
-public class ProductAttributes : BaseEntity
+public class ProductAttributesDto : BaseDto
 {
     public List<string> Materials { get; set; }
     public List<string> Styles { get; set; }

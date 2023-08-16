@@ -57,12 +57,11 @@
     category="sale"
     [products]="onSaleProducts"
   />
-  <!--<ng-container *ngIf="(history$ | async).seenProducts">
+  <ng-container *ngIf="(history$ | async).seenProducts">
     <app-seen-items
-      [history$]="history$"
-      title="Seen products"
+      title="Viewed products"
     />
-  </ng-container>-->
+  </ng-container>
   <section class="reviews">
 
   </section>
