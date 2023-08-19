@@ -8,6 +8,9 @@ import {IProduct} from "../../models/product";
 import {IBrand} from "../../models/brand";
 import {IType} from "../../models/productType";
 import {Observable} from "rxjs";
+import {IProductColor} from "../../models/catalog/product-color";
+import {IProductSize} from "../../models/catalog/product-size";
+import {IProductAttribute} from "../../models/catalog/i-product-attribute";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +41,6 @@ export class ProductService {
     );
   }
 
-  //https://localhost:5001/odata/Product?IsBestSeller=true
   getBestsellers() {
     const url: string = `${this.baseUrl}Product`;
     let params: HttpParams = new HttpParams();
@@ -49,7 +51,6 @@ export class ProductService {
     );
   }
 
-  //https://localhost:5001/odata/Product?IsNew=true
   getNewProducts() {
     const url: string = `${this.baseUrl}Product`;
     let params: HttpParams = new HttpParams();
@@ -60,7 +61,6 @@ export class ProductService {
     );
   }
 
-  //https://localhost:5001/odata/Product?IsOnSale=true
   getOnSaleProducts() {
     const url: string = `${this.baseUrl}Product`;
     let params: HttpParams = new HttpParams();
@@ -93,15 +93,15 @@ export class ProductService {
     return this.http.get<IProduct[]>(url);
   }
 
-  getSizes() {
-    return this.http.get<string[]>(this.baseUrl + 'product/size');
+  getSizes(): Observable<IProductSize[]> {
+    return this.http.get<IProductSize[]>(this.baseUrl + 'Product/Sizes');
   }
 
-  getColors() {
-    return this.http.get<string[]>(this.baseUrl + 'product/color');
+  getColors(): Observable<IProductColor[]> {
+    return this.http.get<IProductColor[]>(this.baseUrl + 'Product/Colors');
   }
 
-  getMaterials() {
-    return this.http.get<string[]>(this.baseUrl + 'product/material');
+  getAttributes(): Observable<IProductAttribute> {
+    return this.http.get<IProductAttribute>(this.baseUrl + 'Product/Attributes');
   }
 }

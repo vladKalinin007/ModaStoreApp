@@ -11,6 +11,9 @@ import {fastCascade} from "../../shared/animations/fade-in.animation";
 import {ICategory} from "../../core/models/category";
 import {CategoryService} from "../../core/services/category.service/category.service";
 import {filter} from "rxjs";
+import {IProductColor} from "../../core/models/catalog/product-color";
+import {IProductSize} from "../../core/models/catalog/product-size";
+import {IProductAttribute} from "../../core/models/catalog/i-product-attribute";
 
 @Component({
   selector: 'app-shop',
@@ -27,11 +30,27 @@ export class ShopComponent implements OnInit {
   brands: IBrand[];
   types: IType[];
   categories: ICategory[];
+  colors: IProductColor[];
+  sizes: IProductSize[];
+  attributes: IProductAttribute;
+  materials: string[];
   headerTitle: string;
   shopParams: ShopParams = new ShopParams();
    totalCount: number;
-  rangeValues: number[] = [0, 1000];
+  rangeValues: number[] = [0, 800];
+  priceChangeTimeout: number;
   isSideBarHidden: boolean;
+
+  selectedBrand: string | null = null;
+  selectedType: string | null = null;
+  selectedCategory: string | null = null;
+  selectedColor: string | null = null;
+  selectedSize: string | null = null;
+  selectedMaterial: string | null = null;
+  selectedStyle: string | null = null;
+  selectedSeason: string | null = null;
+  selectedPattern: string | null = null;
+
 
 
   constructor(
@@ -43,13 +62,19 @@ export class ShopComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setCategory()
     this.loadProducts()
     this.getProducts();
     this.getBrands();
     this.getCategories();
     this.getTypes();
-  /*  console.log("shop component init")
-    this.updateIsSideBarHidden();*/
+    this.getSizes();
+    this.getColors();
+    this.getAttributes();
+  }
+
+  setCategory(): void {
+    this.shopParams.category = this.activatedRoute.snapshot.paramMap.get('categoryName') ?? '';
   }
 
   loadProducts() {
@@ -85,10 +110,6 @@ export class ShopComponent implements OnInit {
       .subscribe({
         next: (response: IBrand[]) => {
           this.brands = [
-            {
-              id: "0",
-              name: 'All'
-            },
             ...response
           ];
         },
@@ -98,8 +119,8 @@ export class ShopComponent implements OnInit {
       });
   }
 
-  getTypes() {
-    this.shopService.getTypes()
+  getTypes(): void {
+    this.shopService.getTypes(this.shopParams.category)
       .subscribe({
         next: (response: IType[]) => {
           this.types = response;
@@ -133,40 +154,114 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  getSizes() {
+  getSizes(): void {
     this.productService.getSizes().subscribe({
-      next: (response: string[]) => {
-        console.log(response);
+      next: (response: IProductSize[]) => {
+        this.sizes = response;
+      },
+      error: (error) => {
+        console.log(error);
       }
     })
   }
 
-  getColors() {
+  getColors(): void {
     this.productService.getColors().subscribe({
-      next: (response: string[]) => {
-        console.log(response);
+      next: (response: IProductColor[]) => {
+        this.colors = response;
+      },
+      error: (error) => {
+        console.log(error);
       }
     })
   }
 
-  getSeasons() {
+  getAttributes(): void {
+    this.productService.getAttributes().subscribe({
+      next: (response: IProductAttribute) => {
+        console.log("attributes", response)
+        this.attributes = response;
+        console.log("this.attributes", this.attributes)
 
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
-  onBrandSelected(brandId: string) {
-    console.log(brandId);
-    this.shopParams.brandId = brandId;
+  onBrandSelected(brandId: string): void {
+    console.log(this.shopParams)
+    this.selectedBrand = this.selectedBrand === brandId ? null : brandId;
+    this.shopParams.brandId = this.selectedBrand;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
-  onProductClicked(productId: string) {
-    const categoryName: string = this.activatedRoute.snapshot.paramMap.get('categoryName');
-    this.router.navigate(['shop', categoryName, productId]);
+
+  onColorSelected(colorId: string): void {
+    this.selectedColor = this.selectedColor === colorId ? null : colorId;
+    this.shopParams.colorId = this.selectedColor;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
   }
 
+  onSizeSelected(sizeId: string): void {
+    this.selectedSize = this.selectedSize === sizeId ? null : sizeId;
+    this.shopParams.sizeId = this.selectedSize;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  onMaterialSelected(material: string) {
+    console.log(this.shopParams)
+    this.selectedMaterial = this.selectedMaterial === material ? null : material;
+    this.shopParams.material = this.selectedMaterial;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  onSeasonSelected(season: string) {
+    console.log(this.shopParams)
+    this.selectedSeason = this.selectedSeason === season ? null : season;
+    this.shopParams.season = this.selectedSeason;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  onPatternSelected(pattern: string) {
+    console.log(this.shopParams)
+    this.selectedPattern = this.selectedPattern === pattern ? null : pattern;
+    this.shopParams.pattern = this.selectedPattern;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  onStyleSelected(style: string) {
+    console.log(this.shopParams)
+    this.selectedStyle = this.selectedStyle === style ? null : style;
+    this.shopParams.style = this.selectedStyle;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  onPriceSelected(): void {
+    if (this.priceChangeTimeout) {
+      clearTimeout(this.priceChangeTimeout);
+    }
+
+    this.priceChangeTimeout = setTimeout(() => {
+      this.shopParams.minPrice = this.rangeValues[0].toString();
+      this.shopParams.maxPrice = this.rangeValues[1].toString();
+      this.shopParams.pageNumber = 1;
+      this.getProducts();
+    }, 2000);
+  }
+
+
   onTypeSelected(typeId: string) {
-    this.shopParams.typeId = typeId;
+    this.selectedType = this.selectedType === typeId ? null : typeId;
+    this.shopParams.typeId = this.selectedType;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }

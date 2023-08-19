@@ -14,6 +14,8 @@ using ModaStore.Application.Features.Catalog.Product.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Product.Commands.Models;
 using ModaStore.Application.Features.Catalog.Product.Queries.Handlers;
 using ModaStore.Application.Features.Catalog.Product.Queries.Models;
+using ModaStore.Application.Features.Catalog.ProductType.Queries.Commands;
+using ModaStore.Application.Features.Catalog.ProductType.Queries.Models;
 using ModaStore.Application.Features.Common.Queries.Handlers;
 using ModaStore.Application.Features.Common.Queries.Models;
 using ModaStore.Application.Features.Customer.Commands.Handlers;
@@ -92,6 +94,11 @@ public static class SqrsServiceExtensions
         services.AddScoped(
             typeof(IRequestHandler<GetGenericQuery<ProductTypeDto, ProductType>, IQueryable<ProductTypeDto>>), 
             typeof(GetGenericQueryHandler<ProductTypeDto, ProductType>)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetTypesByCategoryQuery, IQueryable<ProductTypeDto>>), 
+            typeof(GetTypesByCategoryQueryHandler)
         );
         
         // services.AddScoped(

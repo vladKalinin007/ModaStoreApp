@@ -22,7 +22,6 @@
       <Folder Include="DTOs\Order\Shipping" />
       <Folder Include="Exeptions" />
       <Folder Include="Features\Catalog\ProductBrand\Commands\Handlers" />
-      <Folder Include="Features\Catalog\ProductType" />
       <Folder Include="Features\Catalog\Product\Commands\Validators" />
       <Folder Include="Features\Common\Commands" />
       <Folder Include="Features\Customer\Validators" />

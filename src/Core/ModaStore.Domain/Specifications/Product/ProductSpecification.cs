@@ -18,17 +18,20 @@ public class ProductSpecification : BaseSpecification<Product>
     }
     
     // Multiple products
-    public ProductSpecification(ProductSpecParams? productParams): base(x => 
-       (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) 
-    && (string.IsNullOrEmpty(productParams.BrandId) || x.ProductBrandId == productParams.BrandId) 
-    && (string.IsNullOrEmpty(productParams.TypeId) || x.ProductTypeId == productParams.TypeId)
-    && (string.IsNullOrEmpty(productParams.CategoryId) || x.CategoryId == productParams.CategoryId)
+    public ProductSpecification(ProductSpecParams? productParams): 
+        base(x => 
+               (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) 
+            && (string.IsNullOrEmpty(productParams.BrandId) || x.ProductBrandId == productParams.BrandId) 
+            && (string.IsNullOrEmpty(productParams.TypeId) || x.ProductTypeId == productParams.TypeId)
+            && (string.IsNullOrEmpty(productParams.CategoryId) || x.CategoryId == productParams.CategoryId) 
+           && (string.IsNullOrEmpty(productParams.Category) || x.Category.Name == productParams.Category)
+           && (string.IsNullOrEmpty(productParams.ColorId) || x.ProductColors.Any(c => c.ColorId == productParams.ColorId))
+           && (string.IsNullOrEmpty(productParams.SizeId) || x.ProductSizes.Any(s => s.SizeId == productParams.SizeId))
                
                 
         )
         
 {
-    // INCLUDES {}
     AddInclude(x => x.ProductType);
     AddInclude(x => x.ProductBrand);
     AddInclude(x => x.Category);
@@ -75,11 +78,11 @@ public class ProductSpecification : BaseSpecification<Product>
     {
         AddCriterias(x => x.ProductType.Name == productParams.Type);
     }
-    
-    if (productParams?.Size != null)
+
+    if (productParams?.SizeId != null)
     {
         AddCriterias(x => x.ProductSizes
-            .Any(ps => ps.ProductId == x.Id || ps.Size.Name == productParams.Size));
+            .Any(ps => ps.ProductId == x.Id || ps.SizeId == productParams.SizeId));
     }
 
     if (productParams?.IsNew != null)
@@ -91,11 +94,36 @@ public class ProductSpecification : BaseSpecification<Product>
     {
         AddCriterias(x => x.IsBestSeller == productParams.IsBestSeller);
     }
-    
-    if (productParams?.Color != null)
+
+    if (productParams?.ColorId != null)
     {
-        AddCriterias(x => x.ProductColors
-            .Any(pc => pc.ProductId == x.Id || pc.Color.Name == productParams.Color));
+            AddCriterias(x => x.ProductColors
+            .Any(pc => pc.ProductId == x.Id || pc.ColorId == productParams.ColorId));
+    }
+    
+    if (productParams?.Season != null)
+    {
+        AddCriterias(x => x.Season == productParams.Season);
+    }
+    
+    if (productParams?.Pattern != null)
+    {
+        AddCriterias(x => x.Pattern == productParams.Pattern);
+    }
+    
+    if (productParams?.Style != null)
+    {
+        AddCriterias(x => x.Style == productParams.Style);
+    }
+    
+    if (productParams?.Material != null)
+    {
+        AddCriterias(x => x.Material == productParams.Material);
+    }
+    
+    if (productParams?.MinPrice != null && productParams?.MaxPrice != null)
+    {
+        AddCriterias(x => x.Price >= productParams.MinPrice && x.Price <= productParams.MaxPrice);
     }
 }
 }

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ModaStore.Application.DTOs.Catalog;
+using ModaStore.Application.Features.Catalog.ProductType.Queries.Models;
 using ModaStore.Application.Features.Common.Queries.Models;
 using ModaStore.Domain.Entities.Catalog;
 
@@ -27,6 +28,14 @@ public class ProductTypeController : BaseODataController
     public async Task<IActionResult> Get(string key)
     {
         return Ok(await _mediator.Send(new GetGenericQuery<ProductTypeDto, ProductType>(key)));
+    }
+    
+    [HttpGet("Category")]
+    public async Task<IActionResult> GetByCategory(string key)
+    {
+        var result = await _mediator.Send(new GetTypesByCategoryQuery() { Category = key });
+        
+        return Ok(result);
     }
     
     // public async Task<IActionResult> Post([FromBody] ProductTypeDto model)

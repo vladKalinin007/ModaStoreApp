@@ -19,9 +19,13 @@ public class ProductSpecParams
     public string? Sort { get; set; }
     public string? CategoryId { get; set; }
     public string? Category { get; set; }
-    public string? Color { get; set; }
-    public string? Size { get; set; }
+    public string? ColorId { get; set; }
+    public string? SizeId { get; set; }
     public string? Tag { get; set; }
+    public string? Material { get; set; }
+    public string? Style { get; set; }
+    public string? Pattern { get; set; }
+    public string? Season { get; set; }
     public bool? IsBestSeller { get; set; }
     public bool? IsNew { get; set; }
     public bool? IsOnSale { get; set;  }
