@@ -13,6 +13,7 @@ import { AccountComponent } from './account/account.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import {MatSliderModule} from "@angular/material/slider";
 import {MaterialModule} from "../../../material.module";
+import { SeenComponent } from './seen/seen.component';
 
 
 
@@ -26,6 +27,7 @@ import {MaterialModule} from "../../../material.module";
     OrdersComponent,
     AccountComponent,
     UserInfoComponent,
+    SeenComponent,
   ],
   imports: [
     FeaturesModule,

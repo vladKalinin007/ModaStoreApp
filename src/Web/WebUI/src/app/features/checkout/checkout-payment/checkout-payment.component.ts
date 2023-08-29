@@ -8,6 +8,9 @@ import {IOrder, IOrderToCreate} from "../../../core/models/order";
 import {NavigationExtras, Router} from "@angular/router";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import {ConfirmationService, MessageService} from "primeng/api";
 
 
 declare var Stripe;
@@ -15,7 +18,8 @@ declare var Stripe;
 @Component({
   selector: 'app-checkout-payment',
   templateUrl: './checkout-payment.component.html',
-  styleUrls: ['./checkout-payment.component.scss']
+  styleUrls: ['./checkout-payment.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -24,6 +28,9 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
   @ViewChild('cardNumber', {static: true}) cardNumberElement: ElementRef;
   @ViewChild('cardExpiry', {static: true}) cardExpiryElement: ElementRef;
   @ViewChild('cardCvc', {static: true}) cardCvcElement: ElementRef;
+
+  @Output() stripeEmitter = new EventEmitter<any>();
+  @Output() cardNumberEmitter = new EventEmitter<any>();
 
   basket$: Observable<IBasket>;
 
@@ -48,6 +55,8 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
     private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private _formBuilder: FormBuilder
   ) { }
 
@@ -72,6 +81,8 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     this.cardCvc = elements.create('cardCvc');
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
     this.cardCvc.addEventListener('change', this.cardHandler);
+
+    this.stripeEmitter.emit(this.stripe);
   }
 
   ngOnDestroy() {
@@ -112,12 +123,23 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
     return this.basketService.createPaymentIntent()
       .subscribe({
         next: (response) => {
-          this.toastr.success('Payment intent created');
-          this.submitOrder();
+          this.messageService.add(
+            { 
+              severity: 'success', 
+              summary: 'Information is confirmed', 
+              detail: 'Payment intent has been successfully created' 
+            }
+          );
+          this.cardNumberEmitter.emit(this.cardNumber)
         },
         error: (error) => {
           console.log(error);
-          this.toastr.error(error.message);
+          this.messageService.add(
+            { 
+              severity: 'warn', 
+              summary: 'Error', 
+              detail: 'Payment intent has not been created' }
+            );
         }
       })
   }
@@ -125,6 +147,7 @@ export class CheckoutPaymentComponent implements OnInit, AfterViewInit, OnDestro
   async submitOrder() {
 
     try {
+
       const basket = this.basketService.getCurrentBasketValue();
       const createdOrder = await this.createOrder(basket);
       const paymentResult = await this.confirmPaymentWithStripe(basket);

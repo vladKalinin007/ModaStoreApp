@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   basket$: Observable<IBasket>;
   wishlist$: Observable<IWishlist>;
+  products$: Observable<IProduct[]>
   currentUser$: Observable<IUser>;
   searchResults$: Observable<IPagination>;
 
@@ -64,6 +65,7 @@ export class HeaderComponent implements OnInit {
     this.basket$ = this.basketService.basket$;
     this.currentUser$ = this.accountService.currentUser$;
     this.wishlist$ = this.wishlistService.wishlist$;
+    this.products$ = this.wishlistService.products$;
     this.checkIfCheckoutPage();
 
     this.searchResults$ = this.searchForm.get('search').valueChanges.pipe(
@@ -122,7 +124,7 @@ export class HeaderComponent implements OnInit {
     dialogConfig.scrollStrategy = this.overlay.scrollStrategies.noop();
     dialogConfig.hasBackdrop = true;
     dialogConfig.disableClose = false
-    dialogConfig.panelClass = 'custom-dialog-class';
+    /*dialogConfig.panelClass = 'custom-dialog-class';*/
     dialogConfig.restoreFocus = true;
     dialogConfig.closeOnNavigation = true;
 

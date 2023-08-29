@@ -7,7 +7,7 @@ public class OrderToReturnDto : BaseDto
 {
     public string BuyerEmail { get; set; }
     public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
-    public Address ShipToAddress { get; set; }
+    public AddressDto ShipToAddress { get; set; }
     public string DeliveryMethod { get; set; }
     public decimal ShippingPrice { get; set; }
     public IReadOnlyList<OrderItemDto> OrderItems { get; set; }

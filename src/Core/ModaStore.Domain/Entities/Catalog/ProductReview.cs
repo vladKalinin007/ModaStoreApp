@@ -5,13 +5,12 @@ namespace ModaStore.Domain.Entities.Catalog;
 
 public class ProductReview : BaseEntity
 {
-    public int Rating { get; set; } // Свойство для хранения рейтинга (звездочек) от пользователя
-    public string Comment { get; set; } // Опциональный комментарий пользователя к отзыву
+    public int Rating { get; set; } 
+    public string Comment { get; set; } 
+    
+    public string UserId { get; set; } 
+    public AppUser User { get; set; } 
 
-    // Navigation properties
-    public string UserId { get; set; } // Идентификатор пользователя, который оставил отзыв
-    public AppUser User { get; set; } // Если у вас есть класс ApplicationUser для представления пользователей в системе
-
-    public string ProductId { get; set; } // Идентификатор продукта, к которому относится отзыв
+    public string ProductId { get; set; } 
     public Product Product { get; set; }
 }

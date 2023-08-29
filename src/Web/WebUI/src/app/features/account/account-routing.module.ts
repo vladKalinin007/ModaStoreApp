@@ -8,6 +8,7 @@ import {WalletComponent} from "./wallet/wallet.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
 import {UserInfoComponent} from "./user-info/user-info.component";
 import {AccountComponent} from "./account/account.component";
+import {SeenComponent} from "./seen/seen.component";
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
         component: LoginComponent
       },
       {
-        path: 'register', component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent
       },
       {
         path: 'settings',
@@ -34,8 +36,8 @@ const routes: Routes = [
         component: UserInfoComponent
       },
       {
-        path: 'wallet',
-        component: WalletComponent
+        path: 'seen',
+        component: SeenComponent
       },
       {
         path: 'reviews',

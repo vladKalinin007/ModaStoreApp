@@ -8,10 +8,10 @@ import {IProductReview} from "../../../core/models/catalog/product-review";
 })
 export class ReviewComponent implements OnInit {
 
-  @Input()
-  review: IProductReview;
-
-  rating: number;
+  @Input() review: IProductReview;
+  @Input() isFeaturedReview: boolean;
+  @Input() isReviewList: boolean;
+  @Input() rating: number;
 
   constructor() { }
 

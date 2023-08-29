@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModaStore.Domain.Interfaces.Authentication.Security;
 using ModaStore.Domain.Interfaces.Catalog;
+using ModaStore.Domain.Interfaces.Customer;
 using ModaStore.Domain.Interfaces.Customer.Basket;
+using ModaStore.Domain.Interfaces.Customer.Management;
 using ModaStore.Domain.Interfaces.Customer.Wishlist;
 using ModaStore.Domain.Interfaces.Data;
 using ModaStore.Domain.Interfaces.Identity.Authentication;
@@ -14,7 +16,9 @@ using ModaStore.Infrastructure.Data.SqlServer;
 using ModaStore.Infrastructure.Identity;
 using ModaStore.Infrastructure.Services.Catalog;
 using ModaStore.Infrastructure.Services.Catalog.Product;
+using ModaStore.Infrastructure.Services.Customer;
 using ModaStore.Infrastructure.Services.Customer.Basket;
+using ModaStore.Infrastructure.Services.Customer.CustomerManagement;
 using ModaStore.Infrastructure.Services.Customer.Wishlist;
 using ModaStore.Infrastructure.Services.Identity.Authentication;
 using ModaStore.Infrastructure.Services.Order.OrderManagement;
@@ -45,6 +49,8 @@ public static class InfrastructureServicesExtensions
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<ISeenProductService, SeenProductService>();
         services.AddScoped<IPictureService, PictureService>();
+        services.AddScoped<IAddressService, AddressService>();
+        services.AddScoped<IReviewService, ReviewService>();
         services.AddSingleton<IBasketService, BasketService>();
         services.AddSingleton<IWishlistService, WishlistService>();
         services.AddTransient<ICurrentUserService, CurrentUserService>();
@@ -61,11 +67,11 @@ public static class InfrastructureServicesExtensions
             return ConnectionMultiplexer.Connect(configurationOptions);
         });
         
-        // SqlServer.Identity
-        services.AddDbContext<AppIdentityDbContext>(options =>
-        {
-            options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
-        });
+        // // SqlServer.Identity
+        // services.AddDbContext<AppIdentityDbContext>(options =>
+        // {
+        //     options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+        // });
         
         // SqlServer.Store
         services.AddDbContext<StoreContext>(options =>

@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ModaStore.API.Controllers.OData;
 
-public class PaymentController : ODataController
+public class PaymentController : BaseODataController
 {
     private readonly IMediator _mediator;
     
@@ -18,7 +18,7 @@ public class PaymentController : ODataController
     }
     
     [HttpPost("{basketId}")]
-    public async Task<IActionResult> Post([FromBody] string basketId)
+    public async Task<IActionResult> Post(string basketId)
     {
         return Ok(await _mediator.Send(new CreateOrUpdatePaymentIntentCommand(basketId)));
     }

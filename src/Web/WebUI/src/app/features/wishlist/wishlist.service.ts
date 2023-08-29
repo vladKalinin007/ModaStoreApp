@@ -6,6 +6,10 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {IWishlistItem} from "../../core/models/customer/wishlistItem";
 import {IProduct} from "../../core/models/product";
+import { ProductService } from '../../core/services/product.service/product.service';
+import { forkJoin } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +18,91 @@ export class WishlistService {
 
   public baseUrl: string = environment.apiUrl;
 
-  public wishlistSource: BehaviorSubject<IWishlist> = new BehaviorSubject<IWishlist>(null);
-  public wishlist$: Observable<IWishlist> = this.wishlistSource.asObservable();
+  private readonly _products$ = new BehaviorSubject<IProduct[]>([]);
+  private readonly _wishlist$ = new BehaviorSubject<IWishlist>(null);
+
+  public wishlist$: Observable<IWishlist> = this._wishlist$.asObservable();
+  public products$: Observable<IProduct[]> = this._products$.asObservable();
 
 
-  constructor(
-    private http: HttpClient
-    ) { }
+  constructor(private http: HttpClient, private productService: ProductService) {
+
+    console.log("WISHLIST SERVICE CONSTRUCTOR init");
+      
+      const wishlistId: string = localStorage.getItem('wishlist_id');
+
+      if (wishlistId) {
+
+        this.getWishlist(wishlistId).subscribe({
+          next: (response: IProduct[]) => {
+            console.log("WISHLIST SERVICE CONSTRUCTOR next", response);
+            this._products$.next(response);
+            console.log("WISHLIST SERVICE COSTRUCTOR value", this._products$.value);
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
+
+      }
+
+  }
+
+  addProductToWishlist(product: IProduct) {
+    const currentProducts = this._products$.value;
+    const isInWishlist = currentProducts.some(item => item.id === product.id);
+
+    if (!isInWishlist) {
+      this._products$.next([...currentProducts, product]);
+    }
+  }
+
+  removeProductFromWishlist(product: IProduct) {
+    const currentProducts: IProduct[] = this._products$.value;
+    const isInWishlist: boolean = currentProducts.some(item => item.id === product.id);
+
+    if (isInWishlist) {
+      const updatedProducts: IProduct[] = currentProducts.filter(item => item.id !== product.id);
+      const wishlistId: string = localStorage.getItem('wishlist_id');
+      const url: string = this.baseUrl + 'wishlist/' + wishlistId;
+      this.http.put(url, updatedProducts);
+      this._products$.next(updatedProducts);
+    }
+  }
+
+  
+  isInWishlist(productsToCheck: IProduct[]): IProduct[] {
+    const currentProducts = this._products$.value;
+    const products = productsToCheck.map(product => {
+      const isInWishlist = currentProducts.some(item => item.id === product.id);
+      return {...product, isInWishlist};
+    });
+    this._products$.next(products);
+    return products;
+  }
+
+  wishlistedProducts(productsToCheck: IProduct[]) {
+    const currentProducts = this.getCurrentProductsValue();
+    const products = productsToCheck.map(product => {
+      const isInWishlist = currentProducts.some(item => item.id === product.id);
+      return {...product, isInWishlist};
+    });
+    this._products$.next(products);
+  }
+
+  inWishlist(id: string): boolean {
+    const currentProducts = this._products$.value;
+    const isInWishlist = currentProducts.some(item => item.id === id);
+    return isInWishlist;
+  }
 
 
   getCurrentWishlistValue(): IWishlist {
-    return this.wishlistSource.value;
+    return this._wishlist$.value;
+  }
+
+  getCurrentProductsValue(): IProduct[] {
+    return this._products$.value;
   }
 
   createLocalWishlist(): IWishlist {
@@ -34,27 +112,54 @@ export class WishlistService {
   }
 
   deleteLocalWishlist(id: string) {
-    this.wishlistSource.next(null);
+    this._products$.next(null);
     localStorage.removeItem('wishlist_id');
   }
 
+
   getWishlist(id: string) {
     const url: string = this.baseUrl + 'wishlist/' + id;
-    return this.http.get(url)
+    return this.http.get<IWishlist>(url)
     .pipe(
-      map((wishlist: IWishlist) => {
-        this.wishlistSource.next(wishlist);
-      }
-    ));
+      switchMap(wishlist => {
+        this._wishlist$.next(wishlist);
+        const productIds: string[] = wishlist.wishlistItems.map(item => item.id);
+        const productObservables = productIds.map(productId =>
+          this.productService.getProduct(productId)
+        );
+        return forkJoin(productObservables);
+      })
+    );
+    
   }
 
   addItemToWishlist(product: IProduct) {
+    const currentProducts = this._products$.value;
+    const isInWishlist = currentProducts.some(item => item.id === product.id);
+
+    if (!isInWishlist) {
+      this._products$.next([...currentProducts, product]);
+    }
+    
     const wishlistItem: IWishlistItem = this.toWishlistItem(product);
-    console.log(`addItemToWishlist.wishlistItem =, ${wishlistItem}`)
     const wishlist: IWishlist = this.getCurrentWishlistValue() ?? this.createLocalWishlist();
     wishlist.wishlistItems = this.addOrUpdateWishlistItems(wishlist.wishlistItems, wishlistItem);
     this.setWishlist(wishlist);
   }
+
+  removeItemFromWishlist(product: IProduct) {
+
+    const newProducts = this._products$.value.filter(item => item.id !== product.id);
+    this._products$.next(newProducts);
+
+    const wishlist: IWishlist = this.getCurrentWishlistValue();
+    const wishlistItem: IWishlistItem = wishlist.wishlistItems.find(item => item.id === product.id);
+    wishlist.wishlistItems = wishlist.wishlistItems.filter(item => item.id !== product.id);
+    // wishlist.wishlistItems = this.addOrUpdateWishlistItems(wishlist.wishlistItems, wishlistItem);
+    
+    this.setWishlist(wishlist);
+  }
+
 
   private addOrUpdateWishlistItems(wishlistItems: IWishlistItem[], wishlistItem: IWishlistItem): IWishlistItem[] {
   const index = wishlistItems.findIndex((item: IWishlistItem) => item.id === wishlistItem.id);
@@ -83,10 +188,9 @@ export class WishlistService {
 
   setWishlist(wishlist: IWishlist) {
     const url = this.baseUrl + 'Wishlist';
-    console.log("url:", url);
     return this.http.post(url, wishlist).subscribe({
       next: (response: IWishlist) => {
-        this.wishlistSource.next(response);
+        this._wishlist$.next(response);
         console.log(response);
       },
       error: (error: any) => {
@@ -95,11 +199,6 @@ export class WishlistService {
     })
   }
 
-
-  removeItemFromWishlist(id: string) {
-    const url = this.baseUrl + 'wishlist/' + id;
-    return this.http.delete(url);
-  }
 
   deleteWishlist(id: string) {
     return this.http.delete(this.baseUrl + 'wishlist?id=' + id);

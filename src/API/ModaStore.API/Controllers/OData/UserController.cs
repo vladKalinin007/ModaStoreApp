@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ModaStore.Application.DTOs.Catalog;
 using ModaStore.Application.DTOs.Customers;
 using ModaStore.Application.DTOs.Identity;
 using ModaStore.Application.DTOs.Order;
@@ -19,7 +20,7 @@ public class UserController : BaseODataController
     }
     
     [HttpGet]
-    public async Task<IActionResult> Get(string key)
+    public async Task<IActionResult> Get()
     {
         return Ok(await _mediator.Send(new GetUserQuery()));
     }
@@ -48,6 +49,18 @@ public class UserController : BaseODataController
     public async Task<IActionResult> UpdateAddress([FromBody] AddressDto address)
     {
         return Ok(await _mediator.Send(new UpdateUserAddressCommand() { Address = address }));
+    }
+    
+    [HttpGet("Reviews")]
+    public async Task<IActionResult> GetReviews()
+    {
+        return Ok(await _mediator.Send(new GetUserReviewsQuery()));
+    }
+    
+    [HttpPost("Reviews")]
+    public async Task<IActionResult> AddReview([FromBody] ReviewDto review)
+    {
+        return Ok(await _mediator.Send(new AddReviewCommand(review)));
     }
     
     [HttpGet("Emailexists")]

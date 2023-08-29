@@ -1,0 +1,12 @@
+<!--<app-empty placeholderMessage="You havent seen anything yet" placeholderIcon="visibility_off"/>-->
+
+<ng-container *ngIf="(history$ | async)?.seenProducts">
+  <ng-container *ngFor="let seenProduct of (history$ | async).seenProducts">
+    <app-basket-summary [items]="seenProduct" [AmountInfoHidden]="true" [isBasket]="false"/>
+    <!--seenProduct-->
+    <!--<app-seen-item [seenProduct]="seenProduct"/>-->
+  </ng-container>
+</ng-container>
+<ng-template #empty>
+  <app-empty placeholderMessage="You havent seen anything yet" placeholderIcon="visibility_off"/>
+</ng-template>

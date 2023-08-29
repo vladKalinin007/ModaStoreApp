@@ -34,11 +34,16 @@
               <span class="checkout-block__title_informer"> 4 </span>
               Payment
             </legend>
-            <app-checkout-payment [checkoutForm]="checkoutForm"/>
+            <app-checkout-payment 
+              [checkoutForm]="checkoutForm" 
+              (stripeEmitter)="setStripe($event)"
+              (cardNumberEmitter)="setCardNumber($event)"
+            >
+            </app-checkout-payment>
           </fieldset>
         </main>
         <aside class="checkout-form__sidebar">
-          <app-order-totals/>
+          <app-order-totals [checkoutForm]="checkoutForm" [stripe]="stripe" [cardNumber]="cardNumber"/>
         </aside>
       </form>
     </div>

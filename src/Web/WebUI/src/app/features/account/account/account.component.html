@@ -6,7 +6,7 @@
           <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
-          <span>Vladyslav Kalinin</span>
+          <span>{{(currentUser$ | async)?.email}}</span>
         </mat-toolbar>
       </p>
       <mat-nav-list>
@@ -16,7 +16,7 @@
             <span>Information</span>
           </span>
         </a>
-        <a mat-list-item routerLink="/account/orders">
+        <a mat-list-item routerLink="/account/seen">
           <span class="list-item">
             <mat-icon class="list-item__icon">visibility</mat-icon>
             <span>Seen</span>
@@ -28,7 +28,7 @@
             <span>Orders</span>
           </span>
         </a>
-        <a mat-list-item routerLink="/account/user-information">
+        <a mat-list-item routerLink="/account/reviews">
           <span class="list-item">
             <mat-icon class="list-item__icon">mark_chat_read</mat-icon>
             <span>Reviews</span>
@@ -40,7 +40,7 @@
             <span>Settings</span>
           </span>
         </a>
-        <a mat-list-item routerLink="/account/user-information">
+        <a (click)="confirmLogout()" mat-list-item>
           <span class="list-item">
             <mat-icon class="list-item__icon">logout</mat-icon>
             <span>Logout</span>

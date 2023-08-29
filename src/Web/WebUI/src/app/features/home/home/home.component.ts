@@ -11,6 +11,9 @@ import {cascade, fadeIn} from "../../../shared/animations/fade-in.animation";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Observable} from "rxjs";
 import {ISeenProductList} from "../../../core/models/customer/seenProductList";
+import {WishlistService} from "../../wishlist/wishlist.service";
+import {map} from "rxjs/operators";
+import {combineLatest} from "rxjs";
 
 
 
@@ -27,13 +30,15 @@ export class HomeComponent implements OnInit {
 
   products: IProduct[];
   newProducts: IProduct[];
-  bestSellersProducts: IProduct[];
+  bestSellersProducts: IProduct[] 
   onSaleProducts: IProduct[];
   productImage: IProductImage[];
   product: IProduct;
   categories: ICategory[];
 
+  wishedProducts$: Observable<IProduct[]>;
   history$: Observable<ISeenProductList>
+
   shopParams: ShopParams = new ShopParams();
 
   constructor(
@@ -41,20 +46,19 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     private productService: ProductService,
     private historyService: HistoryService,
+    private wishlistService: WishlistService
   ) {}
 
   ngOnInit() {
-    this.getCarouselPictures()
-    // this.getProducts();
+    this.getCarouselPictures();
     this.loadProduct();
     this.getCategories();
     this.getRecentlyViewedProducts()
     this.getNewProducts();
     this.getBestSellersProducts();
     this.getOnSaleProducts();
+
   }
-
-
 
   getCategories() {
     this.homeService.getCategories()
@@ -69,11 +73,8 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.products = response.data;
-          console.log("HomeComponent.getProducts.RESPONSE", response.data);
-
         },
         error: (error) => {
-          console.log("NO PRODUCT FOR CAROUSEL");
           console.log(error);
         }
       });
@@ -84,10 +85,8 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.bestSellersProducts = response.data;
-          console.log("HomeComponent.getBestSellersProducts.RESPONSE", response.data);
         },
         error: (error) => {
-          console.log("NO PRODUCT FOR CAROUSEL");
           console.log(error);
         }
       });
@@ -98,10 +97,8 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.onSaleProducts = response.data;
-          console.log("HomeComponent.getOnSaleProducts.RESPONSE", response.data);
         },
         error: (error) => {
-          console.log("NO PRODUCT FOR CAROUSEL");
           console.log(error);
         }
       });
@@ -112,13 +109,15 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.newProducts = response.data;
-          console.log("HomeComponent.getNewProducts.RESPONSE", response.data);
         },
         error: (error) => {
-          console.log("NO PRODUCT FOR CAROUSEL");
           console.log(error);
         }
       });
+  }
+
+  private markWishlistibility(products: IProduct[]): IProduct[] {
+    return this.wishlistService.isInWishlist(products);
   }
 
   loadProduct() {

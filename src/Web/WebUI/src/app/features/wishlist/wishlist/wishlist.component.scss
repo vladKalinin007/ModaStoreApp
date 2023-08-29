@@ -12,5 +12,16 @@
     display: flex;
     flex-wrap: wrap;
     margin: -4rem -.5rem 0;
+    margin-bottom: 10rem;
+  }
+
+  &__item {
+
+    &_w25 {
+      width: 25%;
+    }
+    
+    // margin: 4rem .5rem 0;
+    // padding: 0 1rem;
   }
 }

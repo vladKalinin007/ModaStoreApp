@@ -1,3 +1,11 @@
+<!--<&lt;!&ndash;div class="orders">
+  <ng-container *ngIf="orders">
+    <app-basket-summary *ngFor="let orderItems of orders" [items]="orderItems" [isBasket]="false"/>
+  </ng-container>
+</div>&ndash;&gt;-->
 <div class="orders">
-  <app-basket-summary [isBasket]=false />
+  <ng-container *ngIf="orders">
+    <app-basket-summary *ngFor="let order of orders" [items]="order.orderItems" [isBasket]="false"></app-basket-summary>
+  </ng-container>
 </div>
+

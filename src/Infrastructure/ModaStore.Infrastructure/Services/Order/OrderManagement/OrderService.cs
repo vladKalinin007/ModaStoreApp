@@ -1,5 +1,6 @@
 using ModaStore.Domain.Entities.Customer.Basket;
 using ModaStore.Domain.Entities.Order.OrderManagement;
+using ModaStore.Domain.Interfaces.Customer.Basket;
 using ModaStore.Domain.Interfaces.Data;
 using ModaStore.Domain.Interfaces.Order.OrderManagement;
 using ModaStore.Domain.Interfaces.Order.Payment;
@@ -10,19 +11,14 @@ namespace ModaStore.Infrastructure.Services.Order.OrderManagement;
 
 public class OrderService : IOrderService
 {
-    private readonly IRepository<Basket> _basketRepository;
+    private readonly IBasketService _basketService;
     private readonly IRepository<OrderEntity> _orderRepository;
     private readonly IRepository<DeliveryMethod> _deliveryRepository;
     private readonly IPaymentService _paymentService;
     
-    public OrderService(
-        IRepository<Basket> basketRepository,
-        IRepository<OrderEntity> orderRepository,
-        IRepository<DeliveryMethod> deliveryRepository,
-        IPaymentService paymentService
-        )
+    public OrderService(IBasketService basketService, IRepository<OrderEntity> orderRepository, IRepository<DeliveryMethod> deliveryRepository, IPaymentService paymentService)
     {
-        _basketRepository = basketRepository;
+        _basketService = basketService;
         _orderRepository = orderRepository;
         _deliveryRepository = deliveryRepository;
         _paymentService = paymentService;
@@ -30,7 +26,7 @@ public class OrderService : IOrderService
     
     public async Task<OrderEntity> CreateOrderAsync(string buyerEmail, string deliveryMethodId, string basketId, Address shippingAddress)
     {
-        var basket = await _basketRepository.GetByIdAsync(basketId);
+        var basket = await _basketService.GetBasketAsync(basketId);
         
         var items = new List<OrderItem>();
 

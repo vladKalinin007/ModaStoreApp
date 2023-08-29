@@ -20,7 +20,6 @@ import {RatingModule} from "primeng/rating";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {GalleriaModule} from "primeng/galleria";
 import {BadgeModule} from "primeng/badge";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SpeedDialModule} from "primeng/speeddial";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {ToggleButtonModule} from "primeng/togglebutton";
@@ -43,8 +42,6 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { SubscribeBlockComponent } from '../core/components/subscribe-block/subscribe-block.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ToastModule } from 'primeng/toast';
-import { StripeModule } from "stripe-angular";
-import { NgxStripeModule } from 'ngx-stripe';
 import { RelatedProductsComponent } from './components/related-products/related-products/related-products.component';
 import { SeenItemsComponent } from './components/seen-items/seen-items.component';
 import {SeenItemComponent} from './components/seen-items/seen-item/seen-item.component';
@@ -55,6 +52,7 @@ import { ProductListItemComponent } from './components/product-list-item/product
 import { DiscountPipe } from './pipes/discount.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { ReviewComponent } from './components/review/review.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +77,7 @@ import { ReviewComponent } from './components/review/review.component';
     DiscountPipe,
     ShortenPipe,
     ReviewComponent,
+    EmptyComponent
   ],
   imports: [
     CommonModule,
@@ -115,61 +114,60 @@ import { ReviewComponent } from './components/review/review.component';
     MatSlideToggleModule,
     ToastModule,
     MatSidenavModule,
-    /*MdbCarouselModule,*/
     MatListModule,
     MaterialModule,
-    FormsModule,
-    /*    NgxStripeModule.forRoot('pk_test_51N2dxoAoGAOX0ZrldcpNA9P3tDlCWnSlv1S1dHfEcuqRxdJ6d4td8X0bINRoEOAF1vq99FvWIcQaRqj6NYSA5iZ200jX0tZYRh')*/
+    FormsModule
   ],
-    exports: [
-        PaginationModule,
-        PagingHeaderComponent,
-        PagerComponent,
-        CarouselModule,
-        OrderTotalsComponent,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatMenuModule,
-        TextInputComponent,
-        BasketSummaryComponent,
-        CheckoutOptionContainerComponent,
-        MatDialogModule,
-        SliderModule,
-        RatingModule,
-        RadioButtonModule,
-        GalleriaModule,
-        BadgeModule,
-        SpeedDialModule,
-        SelectButtonModule,
-        ToggleButtonModule,
-        OverlayPanelModule,
-        TabViewModule,
-        InputMaskModule,
-        AccordionModule,
-        TriStateCheckboxModule,
-        CarouselModule,
-        TagModule,
-        SidebarModule,
-        DropdownModule,
-        MatRadioModule,
-        MatStepperModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSlideToggleModule,
-        ProductItemsCarouselComponent,
-        NavigationBarComponent,
-        SubscribeBlockComponent,
-        ButtonComponent,
-        ToastModule,
-        /*    NgxStripeModule,*/
-        ProductItemComponent,
-        RelatedProductsComponent,
-        SeenItemsComponent,
-        MatSidenavModule,
-        MatListModule,
-        ProductListItemComponent,
-        ReviewComponent
-    ]
+  exports: [
+    PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent,
+    CarouselModule,
+    OrderTotalsComponent,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    TextInputComponent,
+    BasketSummaryComponent,
+    CheckoutOptionContainerComponent,
+    MatDialogModule,
+    SliderModule,
+    RatingModule,
+    RadioButtonModule,
+    GalleriaModule,
+    BadgeModule,
+    SpeedDialModule,
+    SelectButtonModule,
+    ToggleButtonModule,
+    OverlayPanelModule,
+    TabViewModule,
+    InputMaskModule,
+    AccordionModule,
+    TriStateCheckboxModule,
+    CarouselModule,
+    TagModule,
+    SidebarModule,
+    DropdownModule,
+    MatRadioModule,
+    MatStepperModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    ProductItemsCarouselComponent,
+    NavigationBarComponent,
+    SubscribeBlockComponent,
+    ButtonComponent,
+    ToastModule,
+    ProductItemComponent,
+    RelatedProductsComponent,
+    SeenItemsComponent,
+    MatSidenavModule,
+    MatListModule,
+    ProductListItemComponent,
+    ReviewComponent,
+    EmptyComponent,
+    SeenItemComponent
+  ]
 })
 export class SharedModule { }

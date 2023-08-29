@@ -3,16 +3,14 @@ import {Observable} from "rxjs";
 import {IBasket, IBasketItem, IBasketTotals} from "../../../core/models/basket";
 import {BasketService} from "../basket.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {BasketState} from "../reducers/basket.state";
-import {Store} from "@ngrx/store";
-import {BasketActions} from "../basket.actions";
 import {WishlistService} from "../../wishlist/wishlist.service";
 import {IWishlist} from "../../../core/models/customer/wishlist";
+import {cascade, fadeIn} from "../../../shared/animations/fade-in.animation";
 
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+  styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent implements OnInit {
 
@@ -56,15 +54,5 @@ export class BasketComponent implements OnInit {
   decrementItemQuantity(item: IBasketItem): void {
     this.basketService.decrementItemQuantity(item);
   }
-
- /* incrementItemQuantity(item: IBasketItem): void {
-    this.store$.dispatch(BasketActions.incrementItemQuantity())
-  }
-
-  decrementItemQuantity(item: IBasketItem): void {
-    this.store.dispatch(decrementItemQuantity({ item })); // Используйте действие decrementItemQuantity и передайте элемент
-  }*/
-
-
 
 }

@@ -6,6 +6,7 @@ using ModaStore.Application.DTOs.Customers;
 using ModaStore.Application.DTOs.Identity;
 using ModaStore.Application.DTOs.Order;
 using ModaStore.Application.DTOs.Order.OrderManagement;
+using ModaStore.Application.DTOs.Shipping;
 using ModaStore.Application.Features.Catalog.Category.Commands.Handlers;
 using ModaStore.Application.Features.Catalog.Category.Commands.Models;
 using ModaStore.Application.Features.Catalog.Pictures.Queries.Handlers;
@@ -31,6 +32,14 @@ using ModaStore.Domain.Interfaces.Data;
 using ModaStore.Infrastructure.Data.SqlServer;
 using ModaStore.Application.Features.Customer.Queries.Models;
 using ModaStore.Application.Features.Customer.Queries.Handlers;
+using ModaStore.Application.Features.Identity.User.Commands.Handlers;
+using ModaStore.Application.Features.Identity.User.Commands.Models;
+using ModaStore.Application.Features.Identity.User.Queries.Handlers;
+using ModaStore.Application.Features.Identity.User.Queries.Models;
+using ModaStore.Application.Features.Order.OrderManagement.Queries.Handlers;
+using ModaStore.Application.Features.Order.OrderManagement.Queries.Models;
+using ModaStore.Application.Features.Order.Payment.Commands.Handlers;
+using ModaStore.Application.Features.Order.Payment.Commands.Models;
 using ModaStore.Domain.Entities.Order.Review;
 
 
@@ -40,6 +49,12 @@ public static class SqrsServiceExtensions
 {
     public static IServiceCollection AddSqrsServices(this IServiceCollection services)
     {
+        
+        services.AddScoped(
+            typeof(IRequestHandler<CreateOrUpdatePaymentIntentCommand, Basket>),
+            typeof(CreateOrUpdatePaymentIntentCommandHandler)
+        );
+        
         #region Products
 
         services.AddScoped(
@@ -60,6 +75,25 @@ public static class SqrsServiceExtensions
         services.AddScoped(
             typeof(IRequestHandler<AddProductCommand, ProductToPublishDto>), 
             typeof(AddProductCommandHandler)
+        );
+        
+        #endregion
+        
+        #region Reviews
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetUserReviewsQuery, List<ReviewDto>>), 
+            typeof(GetUserReviewsQueryHandler)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetGenericQuery<ReviewDto, Review>, IQueryable<ReviewDto>>), 
+            typeof(GetGenericQueryHandler<ReviewDto, Review>)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<AddReviewCommand, ReviewDto>), 
+            typeof(AddReviewCommandHandler)
         );
         
         #endregion
@@ -202,6 +236,17 @@ public static class SqrsServiceExtensions
             typeof(CreateOrderCommandHandler)
         );
         
+        services.AddScoped(
+            typeof(IRequestHandler<GetGenericQuery<DeliveryMethodDto, DeliveryMethod>, IQueryable<DeliveryMethodDto>>), 
+            typeof(GetGenericQueryHandler<DeliveryMethodDto, DeliveryMethod>)
+        );
+        //GetOrdersForUserQueryHandler
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetOrdersForUserQuery, List<OrderToReturnDto>>), 
+            typeof(GetOrdersForUserQueryHandler)
+        );
+        
         #endregion
         
         #region Identity
@@ -215,6 +260,27 @@ public static class SqrsServiceExtensions
             typeof(IRequestHandler<LoginCommand, UserDto>), 
             typeof(LoginCommandHandler)
         );
+        
+        #endregion
+        
+        #region Address
+        
+        services.AddScoped(
+            typeof(IRequestHandler<GetUserAddressQuery, AddressDto>), 
+            typeof(GetUserAddressQueryHandler)
+        );
+        
+        services.AddScoped(
+            typeof(IRequestHandler<UpdateUserAddressCommand, AddressDto>), 
+            typeof(UpdateUserAddressCommandHandler)
+        );
+
+        services.AddScoped(
+            typeof(IRequestHandler<CheckEmailExistsQuery, bool>), 
+            typeof(CheckEmailExistsQueryHandler)
+        );
+        
+        
         
         #endregion
         
@@ -241,6 +307,15 @@ public static class SqrsServiceExtensions
         );
         
         #endregion
+        
+        #region User
+
+        services.AddScoped(
+            typeof(IRequestHandler<GetUserQuery, UserDto>), 
+            typeof(GetUserQueryHandler)
+        );
+        
+        #endregion 
         
         #region Pictures 
         

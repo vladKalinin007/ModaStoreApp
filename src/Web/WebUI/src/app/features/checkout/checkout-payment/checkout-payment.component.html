@@ -1,26 +1,15 @@
+<p-toast></p-toast>
 <div class="payment-form">
   <div class="payment-form__title">
     Select your payment method
   </div>
   <div class="payment-form__body">
-    <div class="payment-form__tabs">
-      <mat-radio-group aria-label="Select an option" class="example-radio-group" >
-        <mat-radio-button value="1" (change)="radioButtonChange($event)"> Payment on delivery </mat-radio-button>
-        <mat-radio-button value="2"(change)="radioButtonChange($event)"> Online </mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <<!--ng-container *ngIf="isOnlineSelected">-->
       <div class="payment-form__payment-info">
         <div class="payment-source">
           <div class="payment-source__inner">
             <div class="payment-source__options">
               <div class="service">
-                <div class="service__item">
-                  <i class="fa fa-cc-visa fa-lg text-success"></i>
-                </div>
-                <div class="service__item">
-                  <i class="fa fa-brands fa-cc-paypal fa-lg" style="color: #6c9ef4;"></i>
-                </div>
+        
                 <div class="service__item">
                   <i class="fa fa-brands fa-cc-stripe fa-lg" style="color: #b782d3;"></i>
                 </div>
@@ -41,78 +30,52 @@
                     </svg>
                   </div>
                 </div>
-                <!--<form>
-                  <div class="payment-card__row">
-                    <div #cardNumber class="payment-card__number">
-                      <label class="payment-card__item-name">Card Number</label>
-                      <p-inputMask formControlName="cardNumber"  mask="****-****-****-****" placeholder="1234-1234-1234-1234"/>
-                      &lt;!&ndash;<app-text-input label="Card Number" [mask]="'1234-1234-1234-1234'"></app-text-input>&ndash;&gt;
-                    </div>
+                <!------------------------------->
+                <form class="payment-card__form" [formGroup]="checkoutForm">
+                  <div class="form-group payment-card__field">
+                    <label for="cardNumber">Card Number</label>
+                    <div 
+                      #cardNumber 
+                      class="form-control py-3"
+                      formControlName="cardNumber"
+                    ></div>
+                    <ng-container *ngIf="cardErrors">
+                      <span class="text-danger">{{cardErrors}}</span>
+                    </ng-container>
+                  </div>
+
+                  <div class="form-group payment-card__field" formGroupName="paymentForm">
+                    <app-text-input [label]="'Card holder'" formControlName="nameOnCard"></app-text-input>
                   </div>
 
                   <div class="payment-card__row">
-                    <div  class="payment-card__row-item" formGroupName="paymentForm">
-                      <label class="payment-card__item-name">Full Name</label>
-                      <p-inputMask formControlName="nameOnCard"/>
-
+                    <div class="form-group payment-card__field">
+                      <label for="cardCvc">Card expiry</label>
+                      <div 
+                        #cardExpiry 
+                        class="form-control py-3" 
+                        [formControlName]="cardExpiry"
+                        >
+                      </div>
                       <ng-container *ngIf="cardErrors">
-                        <span>{{cardErrors}}</span>
+                        <span class="text-danger">{{cardErrors}}</span>
                       </ng-container>
-
                     </div>
-                    <div class="payment-card__row">
-                      <div #cardCvc class="payment-card__row-item">
-                        <label class="payment-card__item-name">CVV Code</label>
-                        <p-inputMask formControlName="cardCvc" mask="***" placeholder="323"/>
-
-                        <ng-container *ngIf="cardErrors">
-                          <span>{{cardErrors}}</span>
-                        </ng-container>
-
-                      </div>
-                      <div #cardExpiry class="payment-card__row-item">
-                        <label class="payment-card__item-name">Expiry date</label>
-                        <p-inputMask formControlName="cardExpiry" mask="**/**" placeholder="99/99" slotChar="mm/yy"/>
-
-                        <ng-container *ngIf="cardErrors">
-                          <span>{{cardErrors}}</span>
-                        </ng-container>
+                    <div class="form-group payment-card__field payment-card__field_ml12">
+                      <label for="cardExpiry">cardCvc</label>
+                      <div 
+                        #cardCvc 
+                        class="form-control py-3"
+                        [formControlName]="cardCvc"
+                        >
                       </div>
                     </div>
                   </div>
-                  <button type="button" (click)="createPaymentIntent()">
-                    Intent
-                  </button>
-                  <button type="button" (click)="submitOrder()">
-                    Submit
-                  </button>
-                </form>-->
-                <form [formGroup]="checkoutForm">
-                  <div class="form-group col-12" formGroupName="paymentForm">
-                    <app-text-input [label]="'Name on card'" formControlName="nameOnCard"></app-text-input>
+                  <div class="payment-card__confirmation">
+                    <app-button (click)="createPaymentIntent()" [buttonName]="'Confirm data'" [buttonStyle]="'btn btn_color_light btn_size_medium basket-list__checkout-button'"></app-button>
                   </div>
-                  <div class="form-group col-6">
-                    <div #cardNumber class="form-control py-3"></div>
-                    <ng-container *ngIf="cardErrors">
-                      <span class="text-danger">{{cardErrors}}</span>
-                    </ng-container>
-                  </div>
-                  <div class="form-group col-3">
-                    <div #cardExpiry class="form-control py-3"></div>
-                    <ng-container *ngIf="cardErrors">
-                      <span class="text-danger">{{cardErrors}}</span>
-                    </ng-container>
-                  </div>
-                  <div class="form-group col-3">
-                    <div #cardCvc class="form-control py-3"></div>
-                  </div>
-                  <button type="button" (click)="createPaymentIntent()">
-                    Intent
-                  </button>
-                  <button type="button" (click)="submitOrder()">
-                    Submit
-                  </button>
                 </form>
+                <!------------------------------->
               </div>
             </div>
           </div>

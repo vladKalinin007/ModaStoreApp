@@ -1,1 +1,8 @@
-<p>reviews works!</p>
+<ng-container *ngIf="reviews; else empty">
+  <ng-container *ngFor="let review of reviews">
+    <app-review [review]="review"></app-review>
+  </ng-container>
+</ng-container>
+<ng-template #empty>
+  <app-empty placeholderMessage="No reviews" placeholderIcon="chat_error"></app-empty>
+</ng-template>

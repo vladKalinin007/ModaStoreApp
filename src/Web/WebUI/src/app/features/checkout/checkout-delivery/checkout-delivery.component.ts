@@ -74,8 +74,16 @@ export class CheckoutDeliveryComponent implements OnInit {
   }
 
   onSelectionChange(selectedValue: IDeliveryMethod) {
+    console.log(selectedValue)
     this.setShippingPrice(selectedValue);
   }
+
+  /*onSelectionChange(selectedMethod: IDeliveryMethod) {
+    console.log("trigger")
+    this.selectedDeliveryMethod = selectedMethod; // This line may not be necessary, as ngModel handles it.
+    this.setShippingPrice(selectedMethod);
+  }*/
+
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.basketService.setShippingPrice(deliveryMethod);

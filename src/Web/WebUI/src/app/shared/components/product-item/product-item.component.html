@@ -19,8 +19,34 @@
           >
         </div>
       </a>
-      <div class="catalog-item__like" >
-        <i *ngIf="isFavoritesIconVisible; else notVisible"  (click)="addItemToWishlist()" class="pi pi-heart catalog-item__like-icon"></i>
+      <div class="catalog-item__like">
+        <!-- <i *ngIf="isFavoritesIconVisible; else notVisible"  
+        (click)="addItemToWishlist()" 
+        class="pi pi-heart catalog-item__like-icon"
+        [ngClass]="{'pi pi-heart-fill': product.isInWishlist}"
+        ></i> -->
+        <ng-container *ngIf="!product.isInWishlist; else iwl">
+          <mat-icon 
+            [ngStyle]="{'color': '#555555'}"
+            (click)="addItemToWishlist()"
+            class="catalog-item__like-icon" 
+            color="primary" 
+            *ngIf="isFavoritesIconVisible; else notVisible" 
+            [ngClass]="{'favorite': isInWishlist}"> favorite_border
+          </mat-icon>
+        </ng-container>
+        <ng-template #iwl>
+          <mat-icon 
+            [ngStyle]="{'color': '#ec5c5d'}"
+            (click)="removeItemFromWishlist()"
+            class="catalog-item__like-icon" 
+            color="primary" 
+            *ngIf="isFavoritesIconVisible; else notVisible" 
+            [ngClass]="{'favorite': isInWishlist}"> favorite
+          </mat-icon>
+        </ng-template>
+        
+        
         <ng-template #notVisible>
           <i (click)="removeItemFromWishlist()" class="pi pi-times catalog-item__times-icon"></i>
         </ng-template>

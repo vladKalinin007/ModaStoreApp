@@ -1,19 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../account/account.service";
 import {IBasket} from "../../../core/models/basket";
 import {BasketService} from "../../basket/basket.service";
-import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnChanges {
 
   checked = false;
   disabled = false;
+
+  stripe: any;
+  cardNumber: any;
 
   checkoutForm: FormGroup;
 
@@ -26,6 +28,12 @@ export class CheckoutComponent implements OnInit {
     this.createCheckoutForm();
     this.getDeliveryMethodValue();
     this.getAddressFormValues();
+  }
+
+  ngOnChanges(): void {
+    console.log('this.checkoutForm', this.checkoutForm);
+    console.log('this.stripe', this.stripe);
+    console.log('this.cardNumber', this.cardNumber);
   }
 
   createCheckoutForm() {
@@ -77,5 +85,12 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  setStripe(stripe: any): void {
+    this.stripe = stripe;
+  }
+
+  setCardNumber(cardNumber: any): void {
+    this.cardNumber = cardNumber;
+  }
 
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using ModaStore.Domain.Entities.Identity;
+using ModaStore.Infrastructure.Data;
 using ModaStore.Infrastructure.Identity;
 
 namespace ModaStore.API.Extensions;
@@ -15,7 +16,8 @@ public static class IdentityServiceExtensions
         {
             opt.Password.RequireNonAlphanumeric = false;
         })
-            .AddEntityFrameworkStores<AppIdentityDbContext>() 
+            // .AddEntityFrameworkStores<AppIdentityDbContext>() 
+            .AddEntityFrameworkStores<StoreContext>()
             .AddSignInManager<SignInManager<AppUser>>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

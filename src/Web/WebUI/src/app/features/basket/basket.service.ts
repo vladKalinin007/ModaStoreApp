@@ -21,8 +21,8 @@ export class BasketService {
   public basketTotal$: Observable<IBasketTotals> = this.basketTotalSource.asObservable();
 
   public shipping: number = 0;
-  
-  private shippingSource: Subject<number> = new Subject<number>();
+
+  private shippingSource: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public shipping$ = this.shippingSource.asObservable();
 
 
@@ -34,8 +34,7 @@ export class BasketService {
 
 
   createPaymentIntent() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post(this.baseUrl + 'payment/' + this.getCurrentBasketValue().id, {}, {headers})
+    return this.http.post(this.baseUrl + 'Payment/' + this.getCurrentBasketValue().id, {})
       .pipe(
         map((basket: IBasket) => {
           this.basketSource.next(basket);
@@ -44,7 +43,7 @@ export class BasketService {
       )
   }
 
-    setShippingPrice(deliveryMethod: IDeliveryMethod) {
+  setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
     this.shippingSource.next(this.shipping);
     const basket: IBasket = this.getCurrentBasketValue();
@@ -92,14 +91,18 @@ export class BasketService {
   }
 
   removeItemFromBasket(item: IBasketItem) {
-    const basket = this.getCurrentBasketValue();
+
+    const basket: IBasket = this.getCurrentBasketValue();
+
     if (basket.items.some(x => x.id === item.id)) {
       basket.items = basket.items.filter(i => i.id !== item.id);
-      if (basket.items.length > 0) {
-        this.setBasket(basket);
-      } else {
-        this.deleteBasket(basket);
-      }
+      this.setBasket(basket);
+      // if (basket.items.length > 0) {
+      //   this.setBasket(basket);
+      // } else {
+      //   // this.deleteBasket(basket);
+      //   this.setBasket(basket);
+      // }
     }
   }
 

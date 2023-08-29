@@ -3,6 +3,7 @@ import {BasketService} from "../../../features/basket/basket.service";
 import {IBasket, IBasketItem} from "../../../core/models/basket";
 import {Observable} from "rxjs";
 import {IOrderItem} from "../../../core/models/order";
+import {ISeenProduct} from "../../../core/models/customer/seen-product";
 
 @Component({
   selector: 'app-basket-summary',
@@ -17,8 +18,9 @@ export class BasketSummaryComponent implements OnInit {
   @Output() increment: EventEmitter<IBasketItem> = new EventEmitter<IBasketItem>();
   @Output() remove: EventEmitter<IBasketItem> = new EventEmitter<IBasketItem>();
   @Input() isBasket: boolean = true;
-  @Input() items: IBasketItem[] | IOrderItem[] = [];
+  @Input() items: IBasketItem[] | IOrderItem[] | ISeenProduct[];
   @Input() isOrder: boolean = false;
+  @Input() AmountInfoHidden: boolean;
 
 
   constructor(private basketService: BasketService) { }

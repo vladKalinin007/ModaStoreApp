@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from "./features/basket/basket.service";
 import {AccountService} from "./features/account/account.service";
-import {MenuItem, MessageService} from "primeng/api";
+import {MenuItem} from "primeng/api";
 import {NavigationEnd, Router} from "@angular/router";
 import {WishlistService} from "./features/wishlist/wishlist.service";
 import {HistoryService} from "./shared/services/history.service";
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AppComponent implements OnInit {
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBasket();
+    this.loadCurrentUser();
     this.loadWishlist();
     this.addItemsToSpeedDial();
     this.updateComponentVisibility();

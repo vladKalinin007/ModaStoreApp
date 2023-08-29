@@ -9,8 +9,6 @@ import {ICategory} from "../../models/category";
 })
 export class CategoryService {
 
-  // Напиши мне тут rxjs свойства, на которые будут подписываться компоненты
-
   baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }

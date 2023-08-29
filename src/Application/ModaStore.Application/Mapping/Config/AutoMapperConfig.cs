@@ -4,6 +4,7 @@ using ModaStore.Application.DTOs.Customers;
 using ModaStore.Application.DTOs.Identity;
 using ModaStore.Application.DTOs.Order;
 using ModaStore.Application.DTOs.Order.OrderManagement;
+using ModaStore.Application.DTOs.Shipping;
 using ModaStore.Domain.Entities.Catalog;
 using ModaStore.Domain.Entities.Customer.Basket;
 using ModaStore.Domain.Entities.Customer.Wishlist;
@@ -23,10 +24,20 @@ public static class AutoMapperConfig
         {
             cfg.CreateMap<Category, CategoryDto>();
             cfg.CreateMap<ProductAttributes, ProductAttributesDto>();
-            
+            cfg.CreateMap<DeliveryMethod, DeliveryMethodDto>();
             cfg.CreateMap<Tag, TagDto>();
-            cfg.CreateMap<ProductReview, ReviewDto>();
             cfg.CreateMap<Product, RelatedProductDto>();
+
+            #region Reviews
+            
+            cfg.CreateMap<ProductReview, ReviewDto>();
+            cfg.CreateMap<ReviewDto, ProductReview>()
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => src.Rating))
+                .ForMember(dest => dest.Comment, opt => opt.MapFrom(src => src.Comment));
+
+            #endregion
+            
 
             #region Pictures
             

@@ -1,6 +1,8 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using ModaStore.Application.DTOs.Catalog;
 using ModaStore.Application.Mapping.Config;
+using ModaStore.Domain.Entities.Catalog;
 
 namespace ModaStore.Application.Extensions;
 
@@ -10,5 +12,7 @@ public static class IQueryableExtensions
     {
         return source.ProjectTo<TDestination>(AutoMapperConfig.Mapper.ConfigurationProvider);
     }
+    
+    
 }
 

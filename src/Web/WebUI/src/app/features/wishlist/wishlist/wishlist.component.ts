@@ -7,6 +7,11 @@ import {map} from "rxjs/operators";
 import {IProduct} from "../../../core/models/product";
 import { BasketService } from '../../basket/basket.service';
 import {IBasket} from "../../../core/models/basket";
+import { ProductService } from '../../../core/services/product.service/product.service';
+import { switchMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { of } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 
 @Component({
@@ -17,22 +22,14 @@ import {IBasket} from "../../../core/models/basket";
 export class WishlistComponent implements OnInit {
 
   products$: Observable<IProduct[]>;
+  wishlistProducts: IProduct[] = [];
 
-  constructor(private wishlistService: WishlistService) {}
+  constructor(private wishlistService: WishlistService,
+              private productService: ProductService) {}
 
-  ngOnInit() {
-    this.products$ = this.wishlistService.wishlist$.pipe(
-      map(wishlist => wishlist.wishlistItems.map(item => ({
-        id: item.id,
-        name: item.name,
-        description: item.description,
-        price: item.price,
-        pictureUrl: item.pictureUrl,
-        productType: item.productType,
-        productBrand: item.productBrand
-      } as IProduct)))
-    );
+
+  ngOnInit(): void {
+    this.products$ = this.wishlistService.products$;
   }
-
-
+  
 }

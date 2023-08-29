@@ -6,6 +6,6 @@ namespace ModaStore.Domain.Interfaces.Order.Payment;
 public interface IPaymentService
 {
     Task<Basket> CreateOrUpdatePaymentIntent(string basketId);
-    Task<OrderEntity> UpdateOrderPaymentSucceeded(string paymentIntentId);
-    Task<OrderEntity> UpdateOrderPaymentFailed(string paymentIntentId);
+    // Task<OrderEntity> UpdateOrderPaymentSucceeded(string paymentIntentId);
+    // Task<OrderEntity> UpdateOrderPaymentFailed(string paymentIntentId);
 }

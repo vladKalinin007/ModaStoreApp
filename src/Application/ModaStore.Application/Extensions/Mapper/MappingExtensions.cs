@@ -3,6 +3,7 @@ using ModaStore.Application.DTOs.Customers;
 using ModaStore.Application.DTOs.Identity;
 using ModaStore.Application.DTOs.Order;
 using ModaStore.Application.DTOs.Order.OrderManagement;
+using ModaStore.Application.DTOs.Shipping;
 using ModaStore.Domain.Entities.Catalog;
 using ModaStore.Domain.Entities.Customer.Basket;
 using ModaStore.Domain.Entities.Customer.Wishlist;
@@ -26,6 +27,36 @@ public static class MappingExtensions
     }
     
     public static Category ToEntity(this CategoryDto dto, Category destination)
+    {
+        return dto.MapTo(destination);
+    }
+    
+    #endregion
+    
+    #region Review
+    
+    public static ReviewDto ToDto(this ProductReview entity)
+    {
+        return entity.MapTo<ProductReview, ReviewDto>();
+    }
+    
+    // public static Task<List<ReviewDto>> ToDtoList(this Task<List<ProductReview>> entity)
+    // {
+    //     return entity.MapTo<Task<List<ProductReview>>, Task<List<ReviewDto>>>();
+    // }
+    public static async Task<List<ReviewDto>> ToDtoList(this Task<List<ProductReview>> entity)
+    {
+        var productReviews = await entity;
+        var reviewDtos = productReviews.Select(pr => pr.ToDto()).ToList();
+        return reviewDtos;
+    }
+    
+    public static ProductReview ToEntity(this ReviewDto dto)
+    {
+        return dto.MapTo<ReviewDto, ProductReview>();
+    }
+    
+    public static ProductReview ToEntity(this ReviewDto dto, ProductReview destination)
     {
         return dto.MapTo(destination);
     }
@@ -221,6 +252,25 @@ public static class MappingExtensions
     }
     
     public static Picture ToEntity(this PictureDto dto, Picture destination)
+    {
+        return dto.MapTo(destination);
+    }
+    
+    #endregion
+    
+    #region DeliveryMethods
+    
+    public static DeliveryMethodDto ToDto(this DeliveryMethod entity)
+    {
+        return entity.MapTo<DeliveryMethod, DeliveryMethodDto>();
+    }
+    
+    public static DeliveryMethod ToEntity(this DeliveryMethodDto dto)
+    {
+        return dto.MapTo<DeliveryMethodDto, DeliveryMethod>();
+    }
+    
+    public static DeliveryMethod ToEntity(this DeliveryMethodDto dto, DeliveryMethod destination)
     {
         return dto.MapTo(destination);
     }

@@ -45,4 +45,5 @@ export interface IProduct {
   reviews: IProductReview[];
   sizes: IProductSize[];
   relatedProducts: IProduct[];
+  isInWishlist: boolean;
 }

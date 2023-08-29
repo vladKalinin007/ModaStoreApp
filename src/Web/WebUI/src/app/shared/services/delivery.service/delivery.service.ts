@@ -17,6 +17,7 @@ export class DeliveryService {
   public shipping: number = 0;
   private shippingSource: Subject<number> = new Subject<number>();
   public shipping$ = this.shippingSource.asObservable();
+  deliveryMethodId: string;
 
   constructor(
     private basketService: BasketService,
@@ -24,6 +25,7 @@ export class DeliveryService {
   ) { }
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
+    this.deliveryMethodId = deliveryMethod.id;
     this.shipping = deliveryMethod.price;
     this.shippingSource.next(this.shipping);
     const basket: IBasket = this.basketService.getCurrentBasketValue();

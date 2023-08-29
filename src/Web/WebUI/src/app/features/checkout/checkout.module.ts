@@ -10,6 +10,7 @@ import { CheckoutReviewComponent } from './checkout-review/checkout-review.compo
 import { CheckoutSuccessComponent } from './checkout-success/checkout-success.component';
 import {FeaturesModule} from "../features.module";
 import { CheckoutUserInfoComponent } from './checkout-user-info/checkout-user-info.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -24,9 +25,10 @@ import { CheckoutUserInfoComponent } from './checkout-user-info/checkout-user-in
     CheckoutSuccessComponent,
     CheckoutUserInfoComponent,
   ],
-  imports: [
-    FeaturesModule,
-    CheckoutRoutingModule,
-  ]
+    imports: [
+        FeaturesModule,
+        CheckoutRoutingModule,
+        FormsModule,
+    ]
 })
 export class CheckoutModule { }

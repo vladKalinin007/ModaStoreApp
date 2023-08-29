@@ -3,15 +3,14 @@
     <h4 class="basket__heading"> Basket </h4>
     <div class="basket__close">
       <a (click)="closeDialog()" class="basket__close-tab">
-        <i class="pi pi-times"></i>
+        <i class="pi pi-times basket__close-tab-icon"></i>
       </a>
     </div>
   </div>
   <div class="basket__layout">
-    <ng-container *ngIf="(basket$ | async).items">
+    <ng-container *ngIf="(basket$ | async)?.items.length > 0; else empty">
       <div class="basket__content">
         <div class="basket-list">
-          <h5 class="basket-list__seller-heading"> Seller: kalinin007 </h5>
           <div *ngFor="let item of (basket$ | async).items">
             <div class="basket-list__item">
               <div class="basket-product">
@@ -56,52 +55,27 @@
                     </div>
                   </div>
                   <a class="product-action__delete">
-                    <i (click)="removeBasketItem(item)" class="pi pi-trash"></i>
+                    <i (click)="removeBasketItem(item)" class="pi pi-trash product-action__delete-icon"></i>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-          <!--<a routerLink="/checkout" class="basket-list__checkout">-->
-            <!--<button (click)="closeDialog()" class="basket-list__checkout-button">
-              Checkout order {{(basketTotal$ | async).total}} $
-            </button>-->
-            <div class="basket-list__checkout-button">
-              <app-button
-                routerLink="/checkout"
-                (click)="closeDialog()"
-                buttonName="Checkout {{(basketTotal$ | async).total}} $"
-                buttonStyle="btn btn_color_light btn_size_medium basket-list__checkout-button"
-              />
-            </div>
-          <!--</a>-->
-        </div>
-      </div>
-      <div>
-        <ng-container *ngIf="(wishlist$ | async).wishlistItems">
-          <ng-container *ngFor="let item of (wishlist$ | async).wishlistItems">
-            {{item.id}}
-            {{item.price}}
-            {{item.name}}
-            {{item.pictureUrl}}
-            {{item.description}}
-          </ng-container>
-        </ng-container>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="(basket$ | async).items.length === 0">
-      <div class="basket__content">
-        <div class="basket-list">
-          <h5 class="basket-list__seller-heading"> Your basket is empty </h5>
+          <div class="basket-list__checkout-button">
+            <app-button
+              routerLink="/checkout"
+              (click)="closeDialog()"
+              buttonName="Checkout {{(basketTotal$ | async).total | currency : 'USD' : 'symbol' : '1.2-2' }}"
+              buttonStyle="btn btn_color_light btn_size_medium basket-list__checkout-button"
+            />
+          </div>
         </div>
       </div>
     </ng-container>
+    <ng-template #empty>
+      <app-empty [placeholderMessage]="'Your basket is empty'" [placeholderIcon]="'remove_shopping_cart'" [@fadeIn]="(basket$ | async)?.items.length"></app-empty>
+    </ng-template>
   </div>
 </div>
 
 
-<!--<app-basket-summary
-        (decrement) = "decrementItemQuantity($event)"
-        (increment) = "incrementItemQuantity($event)"
-        (remove) = "removeBasketItem($event)"
-      />-->

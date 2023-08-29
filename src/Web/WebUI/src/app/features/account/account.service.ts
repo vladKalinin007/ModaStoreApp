@@ -6,6 +6,7 @@ import {IUser} from "../../core/models/user";
 import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {IAddress} from "../../core/models/address";
+import {IProductReview} from "../../core/models/catalog/product-review";
 
 @Injectable({
   providedIn: 'root'
@@ -21,28 +22,29 @@ export class AccountService {
     private router: Router,
   ) { }
 
-  loadCurrentUser(token: string): Observable<void> {
+  loadCurrentUser(token: string) {
+
+    console.log("triggered0")
 
     if (token === null) {
       this.currentUserSource.next(null);
       return of(null);
     }
 
-    let headers = new HttpHeaders();
-
-    headers = headers.set('Authorization', `Bearer ${token}`);
-
-    return this.httpClient.get(this.baseUrl + 'account', {headers})
+    return this.httpClient.get(this.baseUrl + 'User')
       .pipe(map((user: IUser) => {
+        console.log("triggered")
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
+          console.log("triggered2")
+          console.log(user)
         }
       }));
   }
 
   login(values: any) {
-    return this.httpClient.post(this.baseUrl + 'account/login', values).pipe(
+    return this.httpClient.post(this.baseUrl + 'authentication/login', values).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -59,7 +61,7 @@ export class AccountService {
   }
 
   register(values: any) {
-    return this.httpClient.post(this.baseUrl + 'account/register', values).pipe(
+    return this.httpClient.post(this.baseUrl + 'authentication/register', values).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -70,23 +72,27 @@ export class AccountService {
   }
 
   checkEmailExists(email: string) {
-    return this.httpClient.get(this.baseUrl + 'account/emailexists?email=' + email);
+    return this.httpClient.get(this.baseUrl + 'User/Emailexists?email=' + email);
   }
 
   getUserAddress(): Observable<IAddress> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.httpClient.get<IAddress>(this.baseUrl + 'account/address', {headers});
+   /* const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);*/
+    return this.httpClient.get<IAddress>(this.baseUrl + 'User/Address');
     /*return this.httpClient.get<IAddress>(this.baseUrl + 'account/address');*/
   }
 
   updateUserAddress(address: IAddress): Observable<IAddress> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address, {headers});
+    /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);*/
+    return this.httpClient.put<IAddress>(this.baseUrl + 'User/Address', address);
     /*return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address);*/
   }
 
   createUserAddress(address: IAddress): Observable<IAddress> {
     return this.httpClient.post<IAddress>(this.baseUrl + 'account/address', address);
+  }
+
+  getUserReviews(): Observable<IProductReview[]> {
+    return this.httpClient.get<IProductReview[]>(this.baseUrl + 'User/Reviews');
   }
 
 

@@ -1,3 +1,5 @@
+@import "src/app/features/checkout/checkout/checkout.component.scss";
+
 :host ::ng-deep .p-inputtext {
   font-size: 1.4rem;
   width: 100%;
@@ -21,10 +23,35 @@
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   width: 100%;
-  padding: 1.2rem;
+  padding: 1.6rem;
 
   &__inner {
 
+  }
+
+  &__form {
+    margin: 0 1.2rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+  &__field {
+    width: 100%;
+    margin-bottom: 1.2rem;
+
+    &.payment-card__field_ml12 {
+      margin-left: 1.2rem;
+    }
+  }
+
+  &__confirmation {
+    display: flex;
+    justify-content: flex-end;
   }
 
   &__header {

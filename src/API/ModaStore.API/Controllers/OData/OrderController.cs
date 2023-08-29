@@ -3,8 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ModaStore.API.Extensions;
 using ModaStore.Application.DTOs.Order;
+using ModaStore.Application.DTOs.Shipping;
+using ModaStore.Application.Features.Common.Queries.Models;
 using ModaStore.Application.Features.Order.OrderManagement.Queries.Models;
 using ModaStore.Application.Features.Order.OrderManagement.Commands.Models;
+using ModaStore.Domain.Entities.Order.OrderManagement;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace ModaStore.API.Controllers.OData;
@@ -36,7 +39,7 @@ public class OrderController : BaseODataController
     public async Task<IActionResult> Get()
     {
         var email = HttpContext.User.RetrieveEmailFromPrincipal();
-        var orders = await _mediator.Send(new GetOrdersForUserQuery(email));
+        var orders = await _mediator.Send(new GetOrdersForUserQuery());
         return Ok(orders);
         
     }
@@ -69,7 +72,7 @@ public class OrderController : BaseODataController
     [HttpGet("deliveryMethods")]
     public async Task<IActionResult> GetDeliveryMethods()
     {
-        var deliveryMethods = await _mediator.Send(new GetDeliveryMethodsQuery());
+        var deliveryMethods = await _mediator.Send(new GetGenericQuery<DeliveryMethodDto, DeliveryMethod>());
         return Ok(deliveryMethods);
     }
 }
