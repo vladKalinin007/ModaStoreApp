@@ -28,7 +28,7 @@
         </div>
         <div class="categories__list" [@cascade]="categories?.length">
           <ng-container *ngFor="let category of categories" >
-            <div class="categories__item hero" gradientShadow>
+            <div class="categories__item hero">
               <a class="categories__item-link" [routerLink]="['/shop/', category.name]" [style.background-image]="'url(' + category.pictureUrl + ')'">
                 <span class="categories__item-caption">
                 <span class="categories__item-title">
