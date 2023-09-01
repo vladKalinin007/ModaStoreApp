@@ -13,13 +13,10 @@ export class AccountComponent implements OnInit {
 
   currentUser$: Observable<IUser>;
 
-  constructor(
-    private accountService: AccountService,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {
-    console.log('confirmationService:', confirmationService);
-    console.log('messageService:', messageService);
+  constructor(private accountService: AccountService,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
+
   }
 
 
@@ -32,8 +29,6 @@ export class AccountComponent implements OnInit {
   }
 
   confirmLogout(): void {
-    console.log('confirm logout')
-
     this.confirmationService.confirm({
       message: 'Are you sure you want to log out?',
       header: 'Confirmation',
@@ -55,5 +50,4 @@ export class AccountComponent implements OnInit {
       }
     });
   }
-
 }

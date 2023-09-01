@@ -53,6 +53,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { ReviewComponent } from './components/review/review.component';
 import { EmptyComponent } from './components/empty/empty.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { GradientShadowDirective } from './directives/gradient-shadow/gradient-shadow.directive';
 
 @NgModule({
   declarations: [
@@ -77,12 +79,13 @@ import { EmptyComponent } from './components/empty/empty.component';
     DiscountPipe,
     ShortenPipe,
     ReviewComponent,
-    EmptyComponent
+    EmptyComponent,
+    GradientShadowDirective,
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
-    /*BrowserAnimationsModule,*/
+    ConfirmDialogModule,
     RouterLink,
     ReactiveFormsModule,
     MatSelectModule,
@@ -167,7 +170,9 @@ import { EmptyComponent } from './components/empty/empty.component';
     ProductListItemComponent,
     ReviewComponent,
     EmptyComponent,
-    SeenItemComponent
+    SeenItemComponent,
+    ConfirmDialogModule,
+    GradientShadowDirective,
   ]
 })
 export class SharedModule { }

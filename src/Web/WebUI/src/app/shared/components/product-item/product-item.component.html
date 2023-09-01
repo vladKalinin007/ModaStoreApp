@@ -20,11 +20,6 @@
         </div>
       </a>
       <div class="catalog-item__like">
-        <!-- <i *ngIf="isFavoritesIconVisible; else notVisible"  
-        (click)="addItemToWishlist()" 
-        class="pi pi-heart catalog-item__like-icon"
-        [ngClass]="{'pi pi-heart-fill': product.isInWishlist}"
-        ></i> -->
         <ng-container *ngIf="!product.isInWishlist; else iwl">
           <mat-icon 
             [ngStyle]="{'color': '#555555'}"
@@ -45,8 +40,6 @@
             [ngClass]="{'favorite': isInWishlist}"> favorite
           </mat-icon>
         </ng-template>
-        
-        
         <ng-template #notVisible>
           <i (click)="removeItemFromWishlist()" class="pi pi-times catalog-item__times-icon"></i>
         </ng-template>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HistoryService} from "../../../shared/services/history.service";
 import {Observable} from "rxjs";
 import {ISeenProductList} from "../../../core/models/customer/seenProductList";
+import {IProduct} from "../../../core/models/product";
 
 @Component({
   selector: 'app-seen',
@@ -10,14 +11,14 @@ import {ISeenProductList} from "../../../core/models/customer/seenProductList";
 })
 export class SeenComponent implements OnInit {
 
-    history$: Observable<ISeenProductList>
+    seenProducts$: Observable<IProduct[]>
 
     constructor(private historyService: HistoryService) {
 
     }
 
     ngOnInit(): void {
-      this.history$ = this.historyService.history$;
+      this.seenProducts$ = this.historyService.product$;
     }
 
 }

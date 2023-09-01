@@ -14,6 +14,7 @@ import { NavModalComponent } from './components/nav-modal/nav-modal/nav-modal.co
 import { SearchModalComponent } from './components/search-modal/search-modal.component';
 import {ModalComponent} from "./components/modal/modal.component";
 import { ComponentComponent } from './components/component/component.component';
+import { AuthenticationComponent } from '../features/account/components/authentication/authentication.component';
 /*import {MaterialModule} from "../../material.module";*/
 
 
@@ -31,7 +32,8 @@ import { ComponentComponent } from './components/component/component.component';
     NavModalComponent,
     ModalComponent,
     SearchModalComponent,
-    ComponentComponent],
+    ComponentComponent,
+    ],
   imports: [
     CommonModule,
     RouterModule,

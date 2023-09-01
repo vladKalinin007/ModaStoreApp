@@ -28,6 +28,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, UserDto>
         
         var password = request.Model.Password;
         
+        user.UserName = request.Model.Email;
+        
         var result = await _userManager.CreateAsync(user, password);
 
         if (!result.Succeeded)

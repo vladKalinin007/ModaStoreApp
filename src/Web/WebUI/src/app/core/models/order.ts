@@ -9,7 +9,7 @@ export interface IOrderToCreate {
 
 export class OrderToCreate {
 
-  constructor(basketId: string, deliveryMethodId: string, shipToAddress: IAddress) { 
+  constructor(basketId: string, deliveryMethodId: string, shipToAddress: IAddress) {
     this.basketId = basketId;
     this.deliveryMethodId = deliveryMethodId;
     this.shipToAddress = shipToAddress;
@@ -47,6 +47,7 @@ export class Order {
 }
 
 export interface IOrderItem {
+  id: string;
   productId: string;
   productName: string;
   pictureUrl: string;

@@ -28,7 +28,7 @@
         </div>
         <div class="categories__list" [@cascade]="categories?.length">
           <ng-container *ngFor="let category of categories" >
-            <div class="categories__item hero" >
+            <div class="categories__item hero" gradientShadow>
               <a class="categories__item-link" [routerLink]="['/shop/', category.name]" [style.background-image]="'url(' + category.pictureUrl + ')'">
                 <span class="categories__item-caption">
                 <span class="categories__item-title">
@@ -57,6 +57,13 @@
     category="sale"
     [products]="onSaleProducts"
   />
+  <ng-container *ngIf="(seenProducts$ | async).reverse() as SeenProducts">
+    <app-related-products
+      title="Seen products"
+      category="sale"
+      [products]="SeenProducts"
+    />
+  </ng-container>
   <ng-container *ngIf="(history$ | async)?.seenProducts">
     <app-seen-items
       title="Viewed products"

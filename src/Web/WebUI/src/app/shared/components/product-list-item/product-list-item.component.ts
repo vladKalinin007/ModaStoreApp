@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IProduct} from "../../../core/models/product";
 import {fastCascade} from "../../animations/fade-in.animation";
+import {IOrderItem} from "../../../core/models/order";
 
 @Component({
   selector: 'app-product-list-item',

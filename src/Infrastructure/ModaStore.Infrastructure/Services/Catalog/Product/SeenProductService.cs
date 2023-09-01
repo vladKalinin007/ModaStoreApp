@@ -27,6 +27,17 @@ public class SeenProductService : ISeenProductService
     public async Task<SeenProductsList> GetSeenProductsAsync(string seenProductsId)
     {
         var data = await _database.StringGetAsync(seenProductsId);
+        
+        if (data.IsNullOrEmpty)
+        {
+            // create new
+            var seenProducts = new SeenProductsList()
+            {
+                Id = Guid.NewGuid().ToString(),
+            };
+            var created = await CreateSeenProductsAsync(seenProducts);
+            return created;
+        }
         return await Task.FromResult(DeserializeSeenProducts(data));
     }
 

@@ -87,15 +87,18 @@ export class AppComponent implements OnInit {
   loadCurrentUser(): void {
     const token: string = localStorage.getItem('token');
 
-    this.accountService.loadCurrentUser(token)
-      .subscribe({
-      next: () => console.log('LOADED USER', token),
-      error: error => console.log(error)
-    });
+    if (token) {
+      this.accountService.loadCurrentUser(token).subscribe({
+        next: () => console.log('initialized user'),
+        error: error => console.log("user is not initialized: ", error)
+      })
+    }
   }
 
   loadBasket(): void {
+    console.log("BASKET TEST. app.loadBasket() called");
     const basketId: string = localStorage.getItem('basket_id');
+
     if (basketId) {
       this.basketService.getBasket(basketId).subscribe({
         next: () => console.log('initialized basket'),
@@ -105,8 +108,8 @@ export class AppComponent implements OnInit {
   }
 
   loadWishlist(): void {
-    const wishlistId = localStorage.getItem('wishlist_id');
-    console.log('wishlistId: ', wishlistId)
+    const wishlistId: string = localStorage.getItem('wishlist_id');
+
     if (wishlistId) {
       this.wishlistService.getWishlist(wishlistId).subscribe({
         next: () => console.log('initialized wishlist'),
@@ -116,13 +119,17 @@ export class AppComponent implements OnInit {
   }
 
   loadProductViewsHistory(): void {
-    const viewsHistoryId: string = localStorage.getItem('views_history_id');
-    if (viewsHistoryId) {
-      this.historyService.getItemsFromProductsViewsHistory(viewsHistoryId).subscribe({
+
+    const views_history_id: string = localStorage.getItem('views_history_id');
+
+    if (views_history_id) {
+
+      this.historyService.getItemsFromProductsViewsHistory().subscribe({
         next: () => console.log('initialized history'),
         error: error => console.log(error)
       })
+
     }
   }
-}
+  }
 

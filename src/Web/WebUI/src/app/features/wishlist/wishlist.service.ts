@@ -27,25 +27,20 @@ export class WishlistService {
 
   constructor(private http: HttpClient, private productService: ProductService) {
 
-    console.log("WISHLIST SERVICE CONSTRUCTOR init");
-      
       const wishlistId: string = localStorage.getItem('wishlist_id');
 
       if (wishlistId) {
 
         this.getWishlist(wishlistId).subscribe({
           next: (response: IProduct[]) => {
-            console.log("WISHLIST SERVICE CONSTRUCTOR next", response);
             this._products$.next(response);
-            console.log("WISHLIST SERVICE COSTRUCTOR value", this._products$.value);
           },
           error: (error: any) => {
             console.log(error);
           }
-        });
-
+        }
+          );
       }
-
   }
 
   addProductToWishlist(product: IProduct) {
@@ -70,7 +65,7 @@ export class WishlistService {
     }
   }
 
-  
+
   isInWishlist(productsToCheck: IProduct[]): IProduct[] {
     const currentProducts = this._products$.value;
     const products = productsToCheck.map(product => {
@@ -130,7 +125,7 @@ export class WishlistService {
         return forkJoin(productObservables);
       })
     );
-    
+
   }
 
   addItemToWishlist(product: IProduct) {
@@ -140,7 +135,7 @@ export class WishlistService {
     if (!isInWishlist) {
       this._products$.next([...currentProducts, product]);
     }
-    
+
     const wishlistItem: IWishlistItem = this.toWishlistItem(product);
     const wishlist: IWishlist = this.getCurrentWishlistValue() ?? this.createLocalWishlist();
     wishlist.wishlistItems = this.addOrUpdateWishlistItems(wishlist.wishlistItems, wishlistItem);
@@ -156,7 +151,7 @@ export class WishlistService {
     const wishlistItem: IWishlistItem = wishlist.wishlistItems.find(item => item.id === product.id);
     wishlist.wishlistItems = wishlist.wishlistItems.filter(item => item.id !== product.id);
     // wishlist.wishlistItems = this.addOrUpdateWishlistItems(wishlist.wishlistItems, wishlistItem);
-    
+
     this.setWishlist(wishlist);
   }
 

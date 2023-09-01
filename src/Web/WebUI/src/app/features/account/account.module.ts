@@ -14,6 +14,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import {MatSliderModule} from "@angular/material/slider";
 import {MaterialModule} from "../../../material.module";
 import { SeenComponent } from './seen/seen.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 
 
 
@@ -28,6 +29,7 @@ import { SeenComponent } from './seen/seen.component';
     AccountComponent,
     UserInfoComponent,
     SeenComponent,
+    AuthenticationComponent,
   ],
   imports: [
     FeaturesModule,

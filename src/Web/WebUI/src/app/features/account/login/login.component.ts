@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../account.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login',
@@ -11,35 +12,42 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  returnUrl: string;
+  @Output() loginMode: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private accountService: AccountService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private dialogRef: MatDialogRef<LoginComponent>,
   ) {}
 
-  ngOnInit() {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
+  ngOnInit(): void {
     this.createLoginForm();
   }
 
-  createLoginForm() {
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  createLoginForm(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.accountService.login(this.loginForm.value).subscribe({
       next: () => {
-        console.log('User logged in');
-        this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl("/shop/dresses");
       },
       error: (error) => {
         console.log(error);
       }
     });
     }
+
+  toggleLoginMode(): void {
+    this.loginMode.emit(false);
+  }
 }

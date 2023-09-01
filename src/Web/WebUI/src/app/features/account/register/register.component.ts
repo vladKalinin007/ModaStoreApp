@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AsyncValidatorFn, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../account.service";
 import {Router} from "@angular/router";
 import {of, switchMap, timer} from "rxjs";
 import {map} from "rxjs/operators";
 import {MessageService} from "primeng/api";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-register',
@@ -16,16 +17,22 @@ export class RegisterComponent implements OnInit {
 
   errors: string[] = [];
   registerForm: FormGroup;
+  @Output() registerMode = new EventEmitter<boolean>();
 
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogRef: MatDialogRef<RegisterComponent>,
   ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
+  }
+
+  toggleRegisterMode(): void {
+    this.registerMode.emit(false);
   }
 
   createRegisterForm(): void {
@@ -41,8 +48,10 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     this.accountService.register(this.registerForm.value).subscribe({
       next: () => {
-        this.router.navigateByUrl('/shop');
-        console.log("work")
+        console.log("on submit work before ")
+        this.router.navigateByUrl('/');
+        this.closeDialog();
+        console.log("on submit work after")
       },
       error: (error) => {
         console.log(error);
@@ -50,6 +59,10 @@ export class RegisterComponent implements OnInit {
         console.log("On Submit doesn't work")
       }
     })
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
   validateEmailNottaken(): AsyncValidatorFn {

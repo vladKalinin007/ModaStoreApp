@@ -18,6 +18,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {IProduct} from "../../models/product";
 import {IPagination} from "../../models/pagination";
 import {fastCascade} from "../../../shared/animations/fade-in.animation";
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import {AuthenticationComponent} from "../../../features/account/components/authentication/authentication.component";
 
 
 @Component({
@@ -27,7 +29,8 @@ import {fastCascade} from "../../../shared/animations/fade-in.animation";
   encapsulation: ViewEncapsulation.None,
   animations: [
     fastCascade,
-  ]
+  ],
+  providers: [ConfirmationService, MessageService]
 })
 export class HeaderComponent implements OnInit {
 
@@ -36,7 +39,6 @@ export class HeaderComponent implements OnInit {
   products$: Observable<IProduct[]>
   currentUser$: Observable<IUser>;
   searchResults$: Observable<IPagination>;
-
 
   isMenuActive: boolean = false;
   isSearchActive: boolean = false;
@@ -54,7 +56,9 @@ export class HeaderComponent implements OnInit {
     private accountService: AccountService,
     private wishlistService: WishlistService,
     private searchService: SearchService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
     this.searchForm = this.formBuilder.group({
       search: ['']
@@ -66,8 +70,36 @@ export class HeaderComponent implements OnInit {
     this.currentUser$ = this.accountService.currentUser$;
     this.wishlist$ = this.wishlistService.wishlist$;
     this.products$ = this.wishlistService.products$;
+    this.setSearchObservable();
     this.checkIfCheckoutPage();
+  }
 
+  exit(): void {
+
+    this.confirmationService.confirm({
+    message: 'Are you sure that you want to log out?',
+    header: 'Confirmation',
+    icon: 'pi pi-exclamation-triangle',
+
+    accept: () => {
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        this.logout();
+    },
+
+    reject: (type: any) => {
+        switch (type) {
+            case ConfirmEventType.REJECT:
+                this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+            break;
+            case ConfirmEventType.CANCEL:
+                this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+            break;
+        }
+      }
+    });
+  }
+
+  setSearchObservable() {
     this.searchResults$ = this.searchForm.get('search').valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -81,26 +113,10 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-
   openLoginModal() {
-    this.dialog.open(LoginComponent, {
+    this.dialog.open(AuthenticationComponent, {
       width: '415px',
-      height: '570px',
-    })
-  }
-
-  openWishlistModal()  {
-    this.dialog.open(WishlistComponent, {
-      width: '1180px',
-      height: '675px',
-    })
-  }
-
-  openMenuModal () {
-    this.dialog.open(NavModalComponent, {
-      width: '1180px',
-      height: '715px',
-      hasBackdrop: false
+      height: '600px'
     })
   }
 
@@ -134,15 +150,6 @@ export class HeaderComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-
-  closeDialog(): void {
-    const dialogRef = this.dialog.getDialogById('my-dialog-id');
-    if (dialogRef) {
-      dialogRef.close();
-    }
-  }
-
-
 
   logout() {
     this.accountService.logout();

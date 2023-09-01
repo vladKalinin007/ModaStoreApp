@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   products: IProduct[];
   newProducts: IProduct[];
-  bestSellersProducts: IProduct[] 
+  bestSellersProducts: IProduct[]
   onSaleProducts: IProduct[];
   productImage: IProductImage[];
   product: IProduct;
@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
 
   wishedProducts$: Observable<IProduct[]>;
   history$: Observable<ISeenProductList>
+  seenProducts$: Observable<IProduct[]>;
 
   shopParams: ShopParams = new ShopParams();
 
@@ -135,6 +136,8 @@ export class HomeComponent implements OnInit {
 
   getRecentlyViewedProducts() {
     this.history$ = this.historyService.history$;
+    this.seenProducts$ = this.historyService.product$;
+    console.log("SEEN PRODUCTS:", this.seenProducts$);
   }
 
   getLastReviews() {

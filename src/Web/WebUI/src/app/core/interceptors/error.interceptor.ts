@@ -16,14 +16,16 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-/*      delay(1000),*/
       catchError(error => {
         if (error)  {
           if (error.status === 400) {
             if (error.error.errors) {
               throw error.error;
+              console.log(error.error);
             } else {
               this.toastr.error(error.error.message, error.error.statusCode);
+              console.log(error.error.message);
+              
             }
           }
           if (error.status === 401) {

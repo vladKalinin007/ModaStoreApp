@@ -58,6 +58,7 @@ export class BasketService {
 }
 
   getBasket(id: string) {
+    console.log("BASKET TEST. basket.service.getBasket() called");
     const url: string = this.baseUrl + 'basket/' + id;
 
     return this.http.get(url)
@@ -137,12 +138,13 @@ export class BasketService {
   }
 
   deleteBasket(basket: IBasket) {
-    return this.http.delete(this.baseUrl + 'basket?id=' + basket.id)
+    return this.http.delete(this.baseUrl + 'Basket/' + basket.id)
       .subscribe({
         next: () => {
+          console.log("BASKET TEST. basket.service.deleteBasket() called")
+          localStorage.removeItem('basket_id');
           this.basketSource.next(null);
           this.basketTotalSource.next(null);
-          localStorage.removeItem('basket_id');
         },
         error: error => {
           console.log(error);

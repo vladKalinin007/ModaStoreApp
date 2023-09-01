@@ -139,24 +139,45 @@
 
   &__price {
     text-align: center;
+    border-radius: 8px;
+    box-shadow: 0.4px 2px 4px #e8e8fe;
+    padding: 0.6rem;
+    margin-right: 1.2rem;
+    min-width: 8rem;
   }
 
   &__quantity {
     text-align: center;
+    border-radius: 8px;
+    box-shadow: 0.4px 2px 4px #cfefe3;
+    padding: 0.6rem;
+    margin-right: 1.2rem;
+    min-width: 8rem;
+    transition: ease-in-out 0.5s;
+    &:hover {
+      box-shadow: 0.4px 2px 6px #baedda;
+    }
   }
 
   &__sum {
     text-align: center;
+    border-radius: 8px;
+    box-shadow: 0.4px 2px 4px #fce8e8;
+    padding: 0.6rem;
+    margin-right: 1.2rem;
+    min-width: 8rem;
   }
 
   &__value {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    margin-right: -8px;
     margin-top: 8px;
     font-weight: 500;
-    min-width: 75px;
+  }
+
+  &__indecrease {
+    cursor: pointer;
   }
 
   &__price-val {

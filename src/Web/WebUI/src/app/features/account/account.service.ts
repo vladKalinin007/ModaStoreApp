@@ -13,50 +13,67 @@ import {IProductReview} from "../../core/models/catalog/product-review";
 })
 export class AccountService {
 
-  baseUrl: string = environment.apiUrl;
-  private currentUserSource: ReplaySubject<IUser> = new ReplaySubject<IUser>(1);
-  currentUser$: Observable<IUser> = this.currentUserSource.asObservable();
+  private baseUrl: string = environment.apiUrl;
+  // private _currentUserSource: ReplaySubject<IUser> = new ReplaySubject<IUser>(1);
+  private _currentUserSource: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null);
+  public currentUser$: Observable<IUser> = this._currentUserSource.asObservable();
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-  ) { }
+  ) {
+    // this.getUser();
+  }
+
+  // getUser(){
+  //   console.log("getUser() called");
+  //   this.httpClient.get<IUser>(this.baseUrl + 'User').subscribe({
+  //     next: (user: IUser) => {
+  //       if (user) {
+  //         console.log("getUser() user", user);
+  //         this._currentUserSource.next(user);
+  //         console.log("getUser() currentUser$ in method", this.currentUser$);
+  //       }
+  //     },
+  //     error: (error: any) => {
+  //       console.log("getUser() ERROR LOADING USER")
+  //       console.log(error);
+  //     }
+  //   })
+  // }
+
 
   loadCurrentUser(token: string) {
-
-    console.log("triggered0")
-
     if (token === null) {
-      this.currentUserSource.next(null);
+      this._currentUserSource.next(null);
       return of(null);
     }
 
-    return this.httpClient.get(this.baseUrl + 'User')
-      .pipe(map((user: IUser) => {
-        console.log("triggered")
+    // отправляем запрос к API для получения данных пользователя
+    return this.httpClient.get(this.baseUrl + 'User').pipe(
+      map((user: IUser) => {
         if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-          console.log("triggered2")
-          console.log(user)
+          this._currentUserSource.next(user);
+          console.log("currentUser$ in method", this.currentUser$);
         }
-      }));
+      })
+    );
   }
 
   login(values: any) {
     return this.httpClient.post(this.baseUrl + 'authentication/login', values).pipe(
       map((user: IUser) => {
         if (user) {
+          this._currentUserSource.next(user);
           localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
         }
       }
     ));
   }
 
-  logout() {
+  logout(): void {
+    this._currentUserSource.next(null);
     localStorage.removeItem('token');
-    this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
   }
 
@@ -64,8 +81,8 @@ export class AccountService {
     return this.httpClient.post(this.baseUrl + 'authentication/register', values).pipe(
       map((user: IUser) => {
         if (user) {
+          this._currentUserSource.next(user);
           localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
         }
       }
     ));
@@ -76,15 +93,11 @@ export class AccountService {
   }
 
   getUserAddress(): Observable<IAddress> {
-   /* const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);*/
     return this.httpClient.get<IAddress>(this.baseUrl + 'User/Address');
-    /*return this.httpClient.get<IAddress>(this.baseUrl + 'account/address');*/
   }
 
   updateUserAddress(address: IAddress): Observable<IAddress> {
-    /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);*/
     return this.httpClient.put<IAddress>(this.baseUrl + 'User/Address', address);
-    /*return this.httpClient.put<IAddress>(this.baseUrl + 'account/address', address);*/
   }
 
   createUserAddress(address: IAddress): Observable<IAddress> {
@@ -94,6 +107,4 @@ export class AccountService {
   getUserReviews(): Observable<IProductReview[]> {
     return this.httpClient.get<IProductReview[]>(this.baseUrl + 'User/Reviews');
   }
-
-
 }

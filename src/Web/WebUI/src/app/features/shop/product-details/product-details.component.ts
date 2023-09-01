@@ -101,7 +101,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProductsFromViewsHistory(id: string) {
-    this.historyService.getItemsFromProductsViewsHistory(id).subscribe({
+    this.historyService.getItemsFromProductsViewsHistory().subscribe({
       next: (response) => {
         console.log("getProductsFromViewsHistory.response =", response);
       },
