@@ -34,15 +34,6 @@ export class HistoryService {
     localStorage.removeItem('views_history_id');
   }
 
-  // getItemsFromProductsViewsHistory(id: string) {
-  //   const url: string = this.baseUrl + 'SeenProduct/' + id;
-  //   return this.http.get(url).pipe(
-  //     map((viewedProductsList: ISeenProductList) => {
-  //       this.historySource.next(viewedProductsList);
-  //     }
-  //   ));
-  // }
-
   getItemsFromProductsViewsHistory(): Observable<IProduct[]> {
 
     const id = localStorage.getItem('views_history_id');
@@ -88,7 +79,7 @@ export class HistoryService {
     this.setProductsViewsHistory(seenProductList);
   }
 
-  private addOrUpdateViewedProducts(viewedProducts: ISeenProduct[], viewedProduct: ISeenProduct): ISeenProduct[] {
+  addOrUpdateViewedProducts(viewedProducts: ISeenProduct[], viewedProduct: ISeenProduct): ISeenProduct[] {
     const index = viewedProducts.findIndex((item: ISeenProduct) => item.id === viewedProduct.id);
     if (index === -1) {
       viewedProducts.push(viewedProduct);
@@ -99,11 +90,11 @@ export class HistoryService {
   }
 
 
-  private toViewedProduct(product: IProduct): ISeenProduct {
+  toViewedProduct(product: IProduct): ISeenProduct {
     return { ...product };
   }
 
-  private getCurrentProductsViewsHistoryValue(): ISeenProductList {
+  getCurrentProductsViewsHistoryValue(): ISeenProductList {
     return this.historySource.value;
   }
 }
