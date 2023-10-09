@@ -33,28 +33,9 @@ AutoMapperConfig.Initialize();
 
 var app = builder.Build();
 
-// using (var scope = app.Services.CreateScope ())
-// {
-//     var services = scope.ServiceProvider;
-//     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-//     
-//     try
-//     {
-//         var context = services.GetRequiredService<StoreContext>();
-//         await context.Database.MigrateAsync();
-//         await StoreContextSeed.SeedAsync(context, loggerFactory);
-//         
-//         var userManager = services.GetRequiredService<UserManager<AppUser>>();
-//         var identityContext = services.GetRequiredService<AppIdentityDbContext>();
-//         await identityContext.Database.MigrateAsync();
-//         await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
-//     }
-//     catch (Exception ex)
-//     {
-//         var logger = loggerFactory.CreateLogger<Program>();
-//         logger.LogError(ex, "An error occured during migrations");
-//     }
-// }
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
 #endregion
 
@@ -62,10 +43,23 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/swagger");
+        return;
+    }
+
+    await next();
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDocumentation();
 }
+
+app.UseSwaggerDocumentation();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
