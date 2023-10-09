@@ -64,10 +64,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
-    
+    app.UseSwaggerDocumentation();
 }
-
-app.UseSwaggerDocumentation();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 

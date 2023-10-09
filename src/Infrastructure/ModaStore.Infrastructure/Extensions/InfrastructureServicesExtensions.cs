@@ -66,14 +66,8 @@ public static class InfrastructureServicesExtensions
             var configurationOptions = ConfigurationOptions.Parse(redisConnectionString, true);
             return ConnectionMultiplexer.Connect(configurationOptions);
         });
-        
-        // // SqlServer.Identity
-        // services.AddDbContext<AppIdentityDbContext>(options =>
-        // {
-        //     options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
-        // });
-        
-        // SqlServer.Store
+
+        // SQL SERVER
         services.AddDbContext<StoreContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
